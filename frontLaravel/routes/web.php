@@ -15,11 +15,16 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('principal.content');
 });
 
 Route::resource('tasks',TaskController::class);
 
 
-
+Route::get('/login',function(){
+    return view('Login.login');
+});
+Route::get('/cita',function() {
+    return view('Cita.Agendar');
+});
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
-class taskController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
