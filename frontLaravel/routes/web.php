@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('principal.content');
 });
 
-Route::resource('tasks',TaskController::class);
+//Route::resource('tasks',TaskController::class);
+Route::post('create','/App\Http\Controller\TaskController@store')->name('task.store');
 
 
 Route::get('/login',function(){
