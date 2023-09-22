@@ -25,47 +25,125 @@
     
 
 
-      <div class="-mx-3 flex flex-wrap">
+      <div class=" flex flex-wrap">
       <div class="mb-5 flex">
-  <div class="w-1/2 mr-4">
-    <label
-      for="fName"
-      class="mb-3 block text-base font-medium text-[#07074D]"
-    >
-      Nombre
-    </label>
-    <input
-      type="text"
-      name="fName"
-      id="fName"
-      placeholder="First Name"
-      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-    />
-  </div>
-  <div class="w-1/2">
-    <label
-      for="lName"
-      class="mb-3 block text-base font-medium text-[#07074D]"
-    >
-      Apellidos
-    </label>
-    <input
-      type="text"
-      name="lName"
-      id="lName"
-      placeholder="Last Name"
-      class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-    />
-  </div>
-</div>
+      <div class="w-1/2 mr-4">
+        <label
+          for="fName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Nombre
+        </label>
+        <input
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="Nombre"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="w-1/2">
+        <label
+          for="lName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Apellidos
+        </label>
+        <input
+          type="text"
+          name="lName"
+          id="lName"
+          placeholder="Apellidos"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            />
+          </div>
+        </div>
+          </div>
+      <div>
+      <label
+          for="fName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >Codigo</label>
+        <input
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="Codigo de estudiante"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
 
+    </div>
+   
+    <div>
+      <label
+          for="fName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >Correo</label>
+        <input
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="Institucional o personal"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+
+    </div>
+    <div class="mb-5 flex">
+      <div class="w-1/2 mr-4">
+        <label
+          for="fName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Edad
+        </label>
+        <input
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="Solo numeros"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+      </div>
+      <div class="w-1/2">
+        <label
+          for="lName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Telefono
+        </label>
+        <input
+          type="text"
+          name="lName"
+          id="lName"
+          placeholder="Celular o casa"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            />
+          </div>
+        </div>
+    
+   
+      <div class="mb-5">
+        <label
+          for="guest"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >
+        Describa de manera breve cual es el motivo por el cual solicita apoyo del programa de psicología
+        </label>
+        <textarea
+          type="text"
+          name="guest"
+          id="guest"
+          placeholder="Describa brevemente la situación por la cual está atravesando."
+          rows="4" 
+          class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+          ></textarea>
       </div>
       <div class="mb-5">
         <label
           for="guest"
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
-          ¿Por que quiere una cita con un psicologo?
+        ¿Qué esperas de las sesiones de acompañamiento? (¿Cuáles son tus expectativas?)
         </label>
         <textarea
           type="text"
@@ -111,6 +189,34 @@
           </div>
         </div>
       </div>
+      <div>
+      <label
+          
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana) </label>
+        <input
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="First Name"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+
+    </div>
+
+    <div>
+      <label
+          for="fName"
+          class="mb-3 block text-base font-medium text-[#07074D]"
+        >VISO DE CONFIDENCIALIDAD La universidad de Guadalajara (en adelante U de G), con domicilio en Avenida Juárez 976, colonia Centro, código postal44100, en Guadalajara, Jalisco, hace de su conocimiento que se coonsiderará como información confidencial aquella quese encuentre contemplada en los artículos 3, fracción IX y X de la LPDPPSOEMJ; 21 de la LTAIPEJM; LineamientosCuadragésimo Octavo y Cuadragésimo Noveno de los lineamientos de clasificación; lineamientos Décimo Sexto, Décimoséptimo y Quincuagésimo octavo de los lineamientos de protección, así como aquellos datos de una persona físicaidentificada o identificable y la inherente a las personas jurídicas, los cuales podrán ser sometidos a tratamiento y seránúnica y exclusivamente utilizados para los fines que fueron proporcionados, de acuerdo con las finalidades yatribuciones establecidas en los artículos 1,5 y de la Ley Orgánica, así como 2 y 3 del Estatuto General, ambaslegislaciones de la U de G, de forma, para la prestación de los servicios que la misma ofrece conforme a las facultades yprerrogativas de la entidad universitaria correspondiente y estarán a resguardo y protección de la misma.Usted puede consultar nuestro aviso de privacidad integral en la siguiente página web:http://www.transparencia.udg.mx/aviso-confidencialidad-integral *Estoy de acuerdo con el aviso de confidencialidad:
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="First Name"
+          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
+
+    </div>
 
       <div class="mb-5">
         <label class="mb-3 block text-base font-medium text-[#07074D]">
