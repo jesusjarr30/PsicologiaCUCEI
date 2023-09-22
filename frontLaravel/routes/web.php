@@ -29,3 +29,7 @@ Route::get('/cita',function() {
     return view('Cita.Agendar');
 });
 
+Route::get('/developers',function() {
+    return view('Desarrolladores/developers');
+});
+
