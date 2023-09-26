@@ -30,13 +30,13 @@ Route::get('/cita',function() {
 });
 
 //links part
-Route::get('/Links/Developers',[LinksController::class, 'desarrolladores']);
+Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->name("des");
 Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe']);
 Route::get('/Links/Servicios',[LinksController::class, 'servicios']);
 Route::get('/Links/Registrate',[LinksController::class, 'Registrate']);
 
 Route::get('/developers',function() {
-    return view('Desarrolladores/developers');
+    return view('Links.developers');
 });
 
 

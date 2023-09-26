@@ -11,7 +11,7 @@ class LinksController extends Controller
         return "Aqui va la descripcion de el producto";
     }
     public function desarrolladores(){
-        return view('Links.Developers');
+        return view('Links.developers');
     }
     public function servicios(){
         return "aqui va la parte de servicos que se ofrecen";
