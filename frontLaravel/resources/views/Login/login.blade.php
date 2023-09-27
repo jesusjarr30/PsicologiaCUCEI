@@ -7,21 +7,26 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-        <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
 
-
+        <link rel="stylesheet" href="{{ asset('css/login/login.css') }}">
         <!-- Styles -->
         <style>
+            body {
+        margin: 0;
+        background: rgb(6, 182, 212);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
            
         </style>
     </head>
-    <body >
-    <div class="flex w-full h-screen">
-        <div class="w-full flex items-center justify-center lg:w-1/2">
-        <div class="bg-white px-8 py-10 rounded-3xl border-2 border-gray-200">
+    <body class="antialiased body">
+    {{-- div principal --}}
+        <div class="flex w-full h-screen">
+            {{-- div izquierdo --}}
+            <div class="w-full flex items-center justify-center lg:w-1/2 ">
+                
+                <div class="bg-white px-8 py-10 rounded-3xl border-2 border-gray-200">
             <h1 class="text-4xl font-semibold">Bienvenidos</h1>
             <div class="mt-8">
                 <div>
@@ -51,19 +56,26 @@
                 </button>
             </div>
             <div class="mt-8 flex justify-between items-center">
-                <p class='font-medium text-base'>¿No tienes una Cuenta?</p>
-                <button class="ml-2 font-medium text-base text-blue-500">Registrate</button>
+                <p class='font-medium text-base'>¿No tienes una Cuenta? Contacta a tu administrador</p>
+                
             </div>
         </div>
 
-        <div class="hidden relative lg:flex h-full w-1/2 items-center justify-center bg-gray-200">
+            </div>
+            {{-- div derecho --}}
+
+
+            <div class="hidden relative lg:flex h-full w-1/2 items-center justify-center bg-gray-200">
             <div class="w-80 h-80 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-bounce">
                 <div class="flex items-center justify-center h-full">
-                    <img class="h-50 w-50 animate-bounce" src="tu-imagen.png" alt="">
+                    <img class="h-40 w-40 animate-bounce" src="{{ asset('Imagenes/login-icons/cerebroLogin.png') }}">
                 </div>
             </div>
         </div>
-    </div>
+            
+
+        </div>
+    
 </body>
 </html>
 

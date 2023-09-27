@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LinksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,22 +16,27 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
-    return view('principal.content');
-});
 
-//Route::resource('tasks',TaskController::class);
-Route::post('create','/App\Http\Controller\TaskController@store')->name('task.store');
+//principal
+Route::get('/', HomeController::class);
 
 
 Route::get('/login',function(){
     return view('Login.login');
-});
+})->name('login');
 Route::get('/cita',function() {
     return view('Cita.Agendar');
-});
+})->name('cita');
+
+//links part
+Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->name("des");
+Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name("acercaDe");
+Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
+Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
 Route::get('/developers',function() {
-    return view('Desarrolladores/developers');
+    return view('Links.developers');
 });
+
+
 
