@@ -21,19 +21,18 @@ use App\Http\Controllers\LinksController;
 Route::get('/', HomeController::class);
 
 
-
 Route::get('/login',function(){
     return view('Login.login');
-});
+})->name('login');
 Route::get('/cita',function() {
     return view('Cita.Agendar');
-});
+})->name('cita');
 
 //links part
 Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->name("des");
-Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe']);
-Route::get('/Links/Servicios',[LinksController::class, 'servicios']);
-Route::get('/Links/Registrate',[LinksController::class, 'Registrate']);
+Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name("acercaDe");
+Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
+Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
 Route::get('/developers',function() {
     return view('Links.developers');

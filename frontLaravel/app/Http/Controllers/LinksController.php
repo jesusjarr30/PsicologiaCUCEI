@@ -8,7 +8,7 @@ class LinksController extends Controller
 {
     
     public function acercaDe(){
-        return "Aqui va la descripcion de el producto";
+        return view('Links.acercaDe');
     }
     public function desarrolladores(){
         return view('Links.developers');
