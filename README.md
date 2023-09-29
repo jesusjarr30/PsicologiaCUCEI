@@ -3,6 +3,7 @@
 Página web para la administración de los psicólogos de CUCEI. Tiene como objetivo desarrollar una página web con el uso de Laravel en la cual los alumnos pueden registrar una cita para acudir al psicólogo. El psicólogo, por su parte, contará con una variedad amplia de herramientas para gestionar la gran cantidad de consultas y archivos que necesite.
 
 ## Requisitos
+
 Instalar PHP 8.1.2
 
 Composer 2.6.2
@@ -32,19 +33,28 @@ php artisan serve
 
 ## Problemas comunes
 
-Si tienes problemas al clonar el proyecto, debes ejecutar los siguientes comandos:
+Si tienes problemas al clonar el proyecto, debes ejecutar los siguientes comandos dependiendo del caso:
+
+En el caso del error: "vite" no se reconoce como comando interno o externo, programa o archivo por lotes.
+
+Debe de ejecutar el siguiente comando:
+npm install --save-dev vite
+
+Tras eso, podras ya ejecutar el comando
+npm run dev
 
 ## Contacto
 
 En caso de tener sugerencias o requerir soporte por parte de los desarrolladores, puedes contactar al siguiente correo electrónico para cualquier cosa que desees: jesus.jarr.30@gmail.com
 
-### English 
+### English
 
 # PsicologiaCUCEI
 
 Website for the management of CUCEI psychologists. Its objective is to develop a website using Laravel in which students can schedule an appointment to see a psychologist. The psychologist, on the other hand, will have a wide variety of tools to manage the large number of consultations and files required.
 
 ## Requirements
+
 Install PHP 8.1.2
 
 Composer 2.6.2
@@ -59,6 +69,7 @@ composer -v
 You can find the steps to install Composer on Linux in the following link: https://getcomposer.org/download/
 
 ## Compilation
+
 Navigate to the project's directory and run the following command:
 
 npm run dev
@@ -72,9 +83,17 @@ php artisan serve
 (This will enable the service, and you will be able to see the application in execution).
 
 ## Common Issues
-If you encounter problems when cloning the project, you should run the following commands:
+
+If you encounter problems when cloning the project, you should run the following commands depending on the case:
+
+In the case of the error: "vite" is not recognized as an internal or external command, program or batch file.
+
+You must execute the following command:
+npm install --save-dev vite
+
+After that, you can now execute the command
+npm run dev
 
 ## Contact
+
 If you have any suggestions or need support from the developers, you can contact the following email for anything you need: jesus.jarr.30@gmail.com
-
-
