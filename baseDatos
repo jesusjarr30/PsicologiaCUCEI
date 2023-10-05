@@ -1,0 +1,65 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table clientes {
+id integer [primary key]
+nombre string
+apellidos string
+codigo string
+correo string
+edad integer
+telefono string
+nacimineto string
+usuario_id string
+created_at timestamp 
+}
+Table comentarios {
+id integer [primary key]
+cliente_id integer
+descripcion string
+expectativas string
+horario string
+}
+
+Table usuarios {
+id integer [primary key]
+email varchar
+nombre varchar
+telefono varchar
+password varchar
+role varchar
+horario string 
+created_at timestamp
+activo boolean
+
+}
+
+Table citas {
+id integer [primary key]
+
+cliente_id string
+usuario_id string
+fecha string
+atendido boolean
+created_at timestamp
+}
+
+Table notas{
+id integer [primary key]
+cliente_id integer
+descripcion string
+}
+
+
+Ref: "clientes"."usuario_id" < "usuarios"."id"
+
+Ref: "citas"."usuario_id" < "usuarios"."id"
+
+Ref: "clientes"."id" < "citas"."cliente_id"
+
+Ref: "notas"."id" < "clientes"."id"
+
+Ref: "comentarios"."cliente_id" < "clientes"."id"
