@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->integer('cliente_id');
-            $table->integer('usuario_id');
-            $table->string('fecha');
-            $table->boolean('atendido');
+            $table->string('cliente_id');
+            $table->string('descripcion');
+            $table->string('expectativas');
+            $table->string('hoario')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('comentarios');
     }
 };

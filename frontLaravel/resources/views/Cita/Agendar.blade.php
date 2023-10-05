@@ -206,21 +206,14 @@
 
     <div>
       <label
-          for="fName"
-          class="mb-3 block text-base font-medium text-[#07074D]"
-        >VISO DE CONFIDENCIALIDAD La universidad de Guadalajara (en adelante U de G), con domicilio en Avenida Juárez 976, colonia Centro, código postal44100, en Guadalajara, Jalisco, hace de su conocimiento que se coonsiderará como información confidencial aquella quese encuentre contemplada en los artículos 3, fracción IX y X de la LPDPPSOEMJ; 21 de la LTAIPEJM; LineamientosCuadragésimo Octavo y Cuadragésimo Noveno de los lineamientos de clasificación; lineamientos Décimo Sexto, Décimoséptimo y Quincuagésimo octavo de los lineamientos de protección, así como aquellos datos de una persona físicaidentificada o identificable y la inherente a las personas jurídicas, los cuales podrán ser sometidos a tratamiento y seránúnica y exclusivamente utilizados para los fines que fueron proporcionados, de acuerdo con las finalidades yatribuciones establecidas en los artículos 1,5 y de la Ley Orgánica, así como 2 y 3 del Estatuto General, ambaslegislaciones de la U de G, de forma, para la prestación de los servicios que la misma ofrece conforme a las facultades yprerrogativas de la entidad universitaria correspondiente y estarán a resguardo y protección de la misma.Usted puede consultar nuestro aviso de privacidad integral en la siguiente página web:http://www.transparencia.udg.mx/aviso-confidencialidad-integral *Estoy de acuerdo con el aviso de confidencialidad:
-          type="text"
-          name="fName"
-          id="fName"
-          placeholder="First Name"
-          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-
+          class="mb-3 mt-8 block text-base font-medium text-[#07074D]"
+        >AVISO DE CONFIDENCIALIDAD <br> <br>La universidad de Guadalajara (en adelante U de G), con domicilio en Avenida Juárez 976, colonia Centro, código postal44100, en Guadalajara, Jalisco, hace de su conocimiento que se coonsiderará como información confidencial aquella quese encuentre contemplada en los artículos 3, fracción IX y X de la LPDPPSOEMJ; 21 de la LTAIPEJM; LineamientosCuadragésimo Octavo y Cuadragésimo Noveno de los lineamientos de clasificación; lineamientos Décimo Sexto, Décimoséptimo y Quincuagésimo octavo de los lineamientos de protección, así como aquellos datos de una persona físicaidentificada o identificable y la inherente a las personas jurídicas, los cuales podrán ser sometidos a tratamiento y seránúnica y exclusivamente utilizados para los fines que fueron proporcionados, de acuerdo con las finalidades yatribuciones establecidas en los artículos 1,5 y de la Ley Orgánica, así como 2 y 3 del Estatuto General, ambaslegislaciones de la U de G, de forma, para la prestación de los servicios que la misma ofrece conforme a las facultades yprerrogativas de la entidad universitaria correspondiente y estarán a resguardo y protección de la misma.Usted puede consultar nuestro aviso de privacidad integral en la siguiente página web:http://www.transparencia.udg.mx/aviso-confidencialidad-integral </label>
+         
     </div>
 
       <div class="mb-5">
         <label class="mb-3 block text-base font-medium text-[#07074D]">
-          Que tipo de cita busca?
+          ¿Estoy de acuerdo con el aviso de confidencialidad?
         </label>
         <div class="flex items-center space-x-6">
           <div class="flex items-center">
@@ -234,7 +227,7 @@
               for="radioButton1"
               class="pl-3 text-base font-medium text-[#07074D]"
             >
-              Presencial
+              Si
             </label>
           </div>
           <div class="flex items-center">
@@ -248,7 +241,7 @@
               for="radioButton2"
               class="pl-3 text-base font-medium text-[#07074D]"
             >
-              Remota
+              No
             </label>
           </div>
         </div>
