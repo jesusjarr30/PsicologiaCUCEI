@@ -19,11 +19,8 @@ use App\Http\Controllers\LinksController;
 
 //principal
 Route::get('/', HomeController::class);
+Route::get('/login',[HomeController::class, 'login'])->name("login");
 
-
-Route::get('/login',function(){
-    return view('Login.login');
-})->name('login');
 Route::get('/cita',function() {
     return view('Cita.Agendar');
 })->name('cita');
@@ -33,6 +30,8 @@ Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->nam
 Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name("acercaDe");
 Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
+//link part login
+
 
 Route::get('/developers',function() {
     return view('Links.developers');

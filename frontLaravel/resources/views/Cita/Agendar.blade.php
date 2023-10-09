@@ -20,39 +20,41 @@
     </head>
     <body >
     <div class="flex items-center justify-center p-12">
- 
-  <div class="mx-auto w-full max-w-[550px]">
+      <form action="" method="POST">
+      <div class="mx-auto w-full max-w-[550px]">
     
 
 
       <div class=" flex flex-wrap">
       <div class="mb-5 flex">
+        
+        
       <div class="w-1/2 mr-4">
         <label
-          for="fName"
+    
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
           Nombre
         </label>
         <input
           type="text"
-          name="fName"
-          id="fName"
+          name="nombre"
+       
           placeholder="Nombre"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
       </div>
       <div class="w-1/2">
         <label
-          for="lName"
+        
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
           Apellidos
         </label>
         <input
           type="text"
-          name="lName"
-          id="lName"
+          name="apellidos"
+          
           placeholder="Apellidos"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -61,13 +63,13 @@
           </div>
       <div>
       <label
-          for="fName"
+          
           class="mb-3 block text-base font-medium text-[#07074D]"
         >Codigo</label>
         <input
           type="text"
-          name="fName"
-          id="fName"
+          name="codigo"
+          
           placeholder="Codigo de estudiante"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
@@ -76,13 +78,13 @@
    
     <div>
       <label
-          for="fName"
+          
           class="mb-3 block text-base font-medium text-[#07074D]"
         >Correo</label>
         <input
           type="text"
-          name="fName"
-          id="fName"
+          name="correo"
+         
           placeholder="Institucional o personal"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
@@ -91,30 +93,30 @@
     <div class="mb-5 flex">
       <div class="w-1/2 mr-4">
         <label
-          for="fName"
+          
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
           Edad
         </label>
         <input
           type="text"
-          name="fName"
-          id="fName"
+          name="edad"
+         
           placeholder="Solo numeros"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
+          />
       </div>
       <div class="w-1/2">
         <label
-          for="lName"
+          
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
           Telefono
         </label>
         <input
           type="text"
-          name="lName"
-          id="lName"
+          name="telefono"
+    
           placeholder="Celular o casa"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -166,7 +168,7 @@
             </label>
             <input
               type="date"
-              name="date"
+              name="nacimiento"
               id="date"
               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -254,8 +256,9 @@
           Registrar
         </button>
       </div>
+    </div>
+  </form>
   </div>
-</div>
 
     </body>
 </html>

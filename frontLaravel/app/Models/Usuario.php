@@ -14,6 +14,7 @@ class Usuario extends Model
     use HasFactory;
 
     protected $table="usuarios";
+    
     protected function nombre():Attribute
     {
         return new Attribute(
