@@ -25,17 +25,24 @@
         <div class="flex w-full h-screen">
             {{-- div izquierdo --}}
             <div class="w-full flex items-center justify-center lg:w-1/2 ">
+                <form method="" action="">
+                    @csrf
                 
                 <div class="bg-white px-8 py-10 rounded-3xl border-2 border-gray-200">
             <h1 class="text-4xl font-semibold">Bienvenidos</h1>
             <div class="mt-8">
                 <div>
                     <label class="text-lg font-medium">Correo</label>
-                    <input class="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ingresa tu correo" type="text">
+                    <input class="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ingresa tu correo" 
+                    type="text"
+                    name="email">
                 </div>
                 <div>
                     <label class="text-lg font-medium">Contraseña</label>
-                    <input class="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ingresa tu contraseña" type="password">
+                    <input class="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ingresa tu contraseña" 
+                    type="password"
+                    name="password"
+                    >
                 </div>
             </div>
             <div class="mt-8 flex justify-between items-center">
@@ -60,8 +67,10 @@
                 
             </div>
         </div>
-
+    </form>
             </div>
+       
+
             {{-- div derecho --}}
 
 
