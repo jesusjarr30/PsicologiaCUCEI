@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('cliente_id');
             $table->string('descripcion');
             $table->string('expectativas');
-            $table->string('hoario')->nullable();
+            $table->string('horario')->nullable();
             $table->timestamps();
         });
     }

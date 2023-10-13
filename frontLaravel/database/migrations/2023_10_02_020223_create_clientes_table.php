@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('correo');
             $table->integer('edad');
             $table->string('telefono');
-            $table->string('nacimeinto')->nullable();
+            $table->date('nacimiento')->nullable();
             $table->string('usuario_id')->nullable();
             $table->timestamps();
         });

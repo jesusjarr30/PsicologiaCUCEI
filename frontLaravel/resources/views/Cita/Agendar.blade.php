@@ -20,7 +20,8 @@
     </head>
     <body >
     <div class="flex items-center justify-center p-12">
-      <form action="" method="POST">
+      <form action="{{ route('guardar-cita') }}" method="POST">
+        @csrf
       <div class="mx-auto w-full max-w-[550px]">
     
 
@@ -126,15 +127,13 @@
    
       <div class="mb-5">
         <label
-          for="guest"
           class="mb-3 block text-base font-medium text-[#07074D]"
         >
         Describa de manera breve cual es el motivo por el cual solicita apoyo del programa de psicología
         </label>
         <textarea
           type="text"
-          name="guest"
-          id="guest"
+          name="descripcion"
           placeholder="Describa brevemente la situación por la cual está atravesando."
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -149,8 +148,7 @@
         </label>
         <textarea
           type="text"
-          name="guest"
-          id="guest"
+          name="expectativas"
           placeholder="Describa brevemente la situación por la cual está atravesando."
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -198,8 +196,7 @@
         >¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana) </label>
         <input
           type="text"
-          name="fName"
-          id="fName"
+          name="horario"
           placeholder="First Name"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
@@ -252,6 +249,7 @@
       <div>
         <button
           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+          type = "subtmit"
         >
           Registrar
         </button>

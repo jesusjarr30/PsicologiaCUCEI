@@ -5,32 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 
-class AdminMainController extends Controller
+class AdminPsicologoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('layouts.BaseAdmin');
+        return view('layouts.BaseAd');
     }
-    public function registroUsuarios(){
+    public function showCitasPsicologo(){
+        $usuarios = Usuario::all();
 
-        
-        return view('administrador.registrarUsuario');
+        return view('psicologo.citasPsicologo',['usuarios' => $usuarios]);
     }
-    public function showUsuarios(){
-        $Usuarios = Usuario::all();
-
-
-        return view('administrador.usuarios',['usuarios'=>$Usuarios]);
-    }
-    public function showCitas(){
-        return view('administrador.verCitas');
-    }
-    public function showEstadisticas(){
-        return view('administrador.estadisticas');
-    }
+    
 
     /**
      * Show the form for creating a new resource.
