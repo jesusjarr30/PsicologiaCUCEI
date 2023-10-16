@@ -13,7 +13,7 @@
            
         </style>
     </head>
-    <body class="">
+    <body class="bg-blueGray-50">
       <div class="min-h-screen">
         <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
         <div class="w-full text-white bg-indigo-500 dark-mode:bg-gray-800">

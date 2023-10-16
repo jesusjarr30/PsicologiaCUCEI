@@ -19,6 +19,45 @@
         </style>
     </head>
     <body >
+      @if(session('success'))
+      <div class="alert alert-success">
+  
+          
+          <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
+            <div class="flex items-center">
+                <div class="text-green-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mx-3">
+                    <span class="font-semibold text-green-700">Exito!</span>
+                    <p class="text-sm text-green-700">{{ session('success') }}</p>
+                </div>
+            </div>
+        </div>
+      </div>
+  @endif
+    @if ($errors->any())
+    <div class="items-center">
+  
+    <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4 justify-center items-center">
+      <div class="flex items-center">
+          <div class="text-red-700">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+          </div>
+          <div class="mx-3">
+              <span class="font-semibold text-red-700">Error!</span>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+          </div>
+      </div>
+    </div>
+  </div>
+  @endif
     <div class="flex items-center justify-center p-12">
       <form action="{{ route('guardar-cita') }}" method="POST">
         @csrf
@@ -40,6 +79,7 @@
         <input
           type="text"
           name="nombre"
+          
        
           placeholder="Nombre"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

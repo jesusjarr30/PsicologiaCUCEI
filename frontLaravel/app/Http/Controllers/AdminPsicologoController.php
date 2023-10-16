@@ -15,9 +15,8 @@ class AdminPsicologoController extends Controller
         return view('layouts.BaseAd');
     }
     public function showCitasPsicologo(){
-        $usuarios = Usuario::all();
-
-        return view('psicologo.citasPsicologo',['usuarios' => $usuarios]);
+        
+        return view('psicologo.citasPsicologo');
     }
     
 

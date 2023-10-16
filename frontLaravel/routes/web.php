@@ -50,12 +50,16 @@ Route::get('/developers',function() {
 //Psicologo regular menu
 Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
 
+//beta para revisar las alertas
+Route::get('/alerta',function() {
+    return view('Alertas.alertas');
+})->name('alerta');
 
 
 
 //organizar los post
 Route::post('/guardar', [CitaController::class, 'store'])->name('guardar-cita');
-
+Route::post('/GuardarUsuario',[AdminMainController::class, 'store'])->name('guardar-usuario');
 
 
 
