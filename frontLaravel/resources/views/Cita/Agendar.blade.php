@@ -105,7 +105,7 @@
       <div>
       <label
           
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class=" mb-3 block text-base font-medium text-[#07074D]"
         >Codigo</label>
         <input
           type="text"
@@ -117,10 +117,10 @@
 
     </div>
    
-    <div>
+    <div class="mt-2">
       <label
           
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mt-2 mb-3 block text-base font-medium text-[#07074D]"
         >Correo</label>
         <input
           type="text"
@@ -220,12 +220,25 @@
             >
               Hora
             </label>
-            <input
+            <select
               type="time"
               name="time"
               id="time"
               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            />
+            >
+            <option value="10:00">>10:00 am</option>
+            <option value="11:00">>11:00 am</option>
+            <option value="12:00">>12:00 pm</option>
+            <option value="13:00">>01:00 pm</option>
+            <option value="14:00">>02:00 pm</option>
+            <option value="15:00">>03:00 pm</option>
+            <option value="16:00">>04:00 pm</option>
+            <option value="17:00">>05:00 pm</option>
+            <option value="18:00">>06:00 pm</option>
+            <option value="19:00">>07:00 pm</option>
+            <option value="20:00">>08:00 pm</option>
+
+          </select>
           </div>
         </div>
       </div>
@@ -263,7 +276,7 @@
               class="h-5 w-5"
             />
             <label
-              for="radioButton1"
+              
               class="pl-3 text-base font-medium text-[#07074D]"
             >
               Si

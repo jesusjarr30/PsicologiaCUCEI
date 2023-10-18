@@ -75,7 +75,11 @@
                 <div class="flex">
                     <button class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white hover:bg-green-500">Ver</button>
                     <button class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20 text-white hover:bg-yellow-500">Editar<button>
-                    <button class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-20 text-white hover:bg-red-500">Eliminar<button>
+                        <form action="{{route('eliminarRegistro',$Usuario)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type = "submit" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-20 text-white hover:bg-red-500">Eliminar<button>
+                        </form>
                 </div>
             </div>
             
