@@ -11,6 +11,21 @@ use Illuminate\Support\Facades\Validator;
 
 class citaController extends Controller
 {
+    public function boot()
+    {
+        Validator::extend('valid_birthdate', function ($attribute, $value, $parameters, $validator) {
+            // Verificar si la fecha está en el formato correcto y es válida.
+            if (!strtotime($value)) {
+                return false;
+            }
+            // Calcular la fecha actual.
+            $fechaActual = date('Y-m-d');
+
+            // Verificar si la fecha de nacimiento es anterior a la fecha actual y posterior a 1960-01-01.
+            return $value <= $fechaActual && $value >= '1960-01-01';
+        });
+    }
+
     public function index()
     {
         //
@@ -23,6 +38,7 @@ class citaController extends Controller
 
     public function store(Request $request): RedirectResponse
 {
+    //Aqui se registra la cita de un usuario.
     $nombre = $request->input('nombre');
     $apellidos = $request->input('apellidos');
     $codigo = $request->input('codigo');
@@ -39,13 +55,13 @@ class citaController extends Controller
     $validator = Validator::make($request->all(), [
         'nombre' => 'required|string|max:255',
         'apellidos' => 'required|string|max:255',
-        'codigo' => 'required|string|max:10',
+        'codigo' => 'required|numeric|max:12|min:8',
         'correo' => 'required|email',
-        'edad' => 'required|integer|min:16', // Cambia 18 por el valor mínimo requerido
-        'telefono' => 'required|string|max:12',
-        'nacimiento' => 'required|date',
-        'descripcion' => 'required|string',
-        'expectativas' => 'required|string',
+        'edad' => 'required|numeric|min:10|max:70        ', // Cambia 18 por el valor mínimo requerido
+        'telefono' => 'required|numeric|min:|max:12',
+        'nacimiento' => 'required|date|valid_birthdate',
+        'descripcion' => 'required|string|max:500',
+        'expectativas' => 'required|string|max:500',
         'horario' => 'required|string',
     ]);
 
