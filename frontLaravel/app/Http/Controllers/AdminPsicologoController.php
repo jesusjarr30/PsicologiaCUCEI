@@ -18,6 +18,10 @@ class AdminPsicologoController extends Controller
         
         return view('psicologo.citasPsicologo');
     }
+    public function showEditCitas(){
+        
+        return view('psicologo.EditarUsuario');
+    }
     
 
     /**

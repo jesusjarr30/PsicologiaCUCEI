@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 
-
 class citaController extends Controller
 {
     public function boot()
@@ -65,11 +64,11 @@ class citaController extends Controller
         'horario' => 'required|string',
     ]);
 
-    if ($validator->fails()) {
+    //if ($validator->fails()) {
         // Si la validación falla, redirige de vuelta con los errores
-        return redirect()->back()
-            ->withErrors($validator);
-    }
+      //  return redirect()->back()
+        //    ->withErrors($validator);
+    //}
 
     $tabla1 = new Cliente();
     $tabla1->nombre = $nombre;
