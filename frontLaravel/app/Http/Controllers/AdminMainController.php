@@ -108,8 +108,9 @@ class AdminMainController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $Usuario)
     {
-        //
+        dd($Usuario);
+        return "se elimino el usuario";
     }
 }

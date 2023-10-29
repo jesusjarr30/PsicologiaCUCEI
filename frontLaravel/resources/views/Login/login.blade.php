@@ -46,7 +46,9 @@
                 </div>
             </div>
             <div class="mt-8 flex justify-between items-center">
+                <a href="{{route('recoverP')}}">
                 <button class="font-medium text-base text-blue-300">¿Olvidó su contraseña?</button>
+                </a>
             </div>
             <div class="mt-8 flex flex-col gap-y-4">
                 <button class="active:scale-[.95] active:duration-75 hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-blue-500 text-white text-lg font-bol">

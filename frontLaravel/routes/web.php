@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\citaController;
-
+use App\Mail\RecuperarMailable;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,12 @@ use App\Http\Controllers\citaController;
 
 //principal
 Route::get('/', HomeController::class)->name("home");
+///links para el login 
 Route::get('/login',[HomeController::class, 'login'])->name("login");
+Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
+
+
+
 
 Route::get('/cita',function() {
     return view('Cita.Agendar');
@@ -34,7 +40,6 @@ Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->nam
 Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name("acercaDe");
 Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
-//link part login
 
 // Admin Menu
 Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
@@ -60,6 +65,17 @@ Route::get('/alerta',function() {
 //organizar los post
 Route::post('/guardar', [CitaController::class, 'store'])->name('guardar-cita');
 Route::post('/GuardarUsuario',[AdminMainController::class, 'store'])->name('guardar-usuario');
+
+//Delte
+Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
+
+//Email que se van a enviar
+
+Route::get('confirmacion',function(){
+    Mail::to('pruebas@pruebas')->send(new RecuperarMailable());
+    return "mensaje enviado";
+})->name('confirmacion');
+
 
 
 

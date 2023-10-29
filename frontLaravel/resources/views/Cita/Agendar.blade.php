@@ -38,26 +38,7 @@
         </div>
       </div>
   @endif
-    @if ($errors->any())
-    <div class="items-center">
   
-    <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4 justify-center items-center">
-      <div class="flex items-center">
-          <div class="text-red-700">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-          </div>
-          <div class="mx-3">
-              <span class="font-semibold text-red-700">Error!</span>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-          </div>
-      </div>
-    </div>
-  </div>
-  @endif
     <div class="flex items-center justify-center p-12">
       <form action="{{ route('guardar-cita') }}" method="POST">
         @csrf
@@ -79,11 +60,27 @@
         <input
           type="text"
           name="nombre"
+          value="{{ old('nombre') }}"
           
        
           placeholder="Nombre"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
+        @error('nombre')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">Nombre requerido.</p>
+              </div>
+          </div>
+      </div>
+        @enderror
       </div>
       <div class="w-1/2">
         <label
@@ -99,13 +96,29 @@
           placeholder="Apellidos"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
+            @error('apellidos')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">Apellidos Requerido.</p>
+              </div>
+          </div>
+      </div>
+        @enderror
           </div>
         </div>
+        
           </div>
       <div>
       <label
           
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class=" mb-3 block text-base font-medium text-[#07074D]"
         >Codigo</label>
         <input
           type="text"
@@ -114,13 +127,28 @@
           placeholder="Codigo de estudiante"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
+        @error('codigo')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">codigo numerico de 8 a 12 digitos</p>
+              </div>
+          </div>
+      </div>
+        @enderror
 
     </div>
    
-    <div>
+    <div class="mt-2">
       <label
           
-          class="mb-3 block text-base font-medium text-[#07074D]"
+          class="mt-2 mb-3 block text-base font-medium text-[#07074D]"
         >Correo</label>
         <input
           type="text"
@@ -129,6 +157,21 @@
           placeholder="Institucional o personal"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
+        @error('correo')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">correo no valido</p>
+              </div>
+          </div>
+      </div>
+        @enderror
 
     </div>
     <div class="mb-5 flex">
@@ -146,6 +189,21 @@
           placeholder="Solo numeros"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
+          @error('edad')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">Edad no valida</p>
+              </div>
+          </div>
+      </div>
+        @enderror
       </div>
       <div class="w-1/2">
         <label
@@ -161,6 +219,21 @@
           placeholder="Celular o casa"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
+            @error('telefono')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">telefono no valido</p>
+              </div>
+          </div>
+      </div>
+        @enderror
           </div>
         </div>
     
@@ -178,6 +251,21 @@
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           ></textarea>
+          @error('descripcion')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">tiene que ser menor a 255 caracteres</p>
+              </div>
+          </div>
+      </div>
+        @enderror
       </div>
       <div class="mb-5">
         <label
@@ -193,13 +281,28 @@
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           ></textarea>
+          @error('expectativas')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">tiene que ser menot a 260 caracteeres</p>
+              </div>
+          </div>
+      </div>
+        @enderror
       </div>
 
       <div class="-mx-3 flex flex-wrap">
         <div class="w-full px-3 sm:w-1/2">
           <div class="mb-5">
             <label
-              for="date"
+              
               class="mb-3 block text-base font-medium text-[#07074D]"
             >
               Fecha nacimeinto 
@@ -210,6 +313,21 @@
               id="date"
               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
+            @error('nacimiento')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">tiene que ser menot a 260 caracteeres</p>
+              </div>
+          </div>
+      </div>
+        @enderror
           </div>
         </div>
         <div class="w-full px-3 sm:w-1/2">
@@ -218,30 +336,46 @@
               for="time"
               class="mb-3 block text-base font-medium text-[#07074D]"
             >
-              Hora
+            ¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana)
             </label>
-            <input
+            <select
               type="time"
-              name="time"
+              name="horario"
               id="time"
               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            />
+            >
+            <option value="10:00">10:00 am</option>
+            <option value="11:00">11:00 am</option>
+            <option value="12:00">12:00 pm</option>
+            <option value="13:00">01:00 pm</option>
+            <option value="14:00">02:00 pm</option>
+            <option value="15:00">03:00 pm</option>
+            <option value="16:00">04:00 pm</option>
+            <option value="17:00">05:00 pm</option>
+            <option value="18:00">06:00 pm</option>
+            <option value="19:00">07:00 pm</option>
+            <option value="20:00">08:00 pm</option>
+
+          </select>
+          @error('horario')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">tiene que ser menot a 260 caracteeres</p>
+              </div>
+          </div>
+      </div>
+        @enderror
           </div>
         </div>
       </div>
-      <div>
-      <label
-          
-          class="mb-3 block text-base font-medium text-[#07074D]"
-        >¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana) </label>
-        <input
-          type="text"
-          name="horario"
-          placeholder="First Name"
-          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-
-    </div>
+      
 
     <div>
       <label
@@ -263,26 +397,13 @@
               class="h-5 w-5"
             />
             <label
-              for="radioButton1"
+              
               class="pl-3 text-base font-medium text-[#07074D]"
             >
               Si
             </label>
           </div>
-          <div class="flex items-center">
-            <input
-              type="radio"
-              name="radio1"
-              id="radioButton2"
-              class="h-5 w-5"
-            />
-            <label
-              for="radioButton2"
-              class="pl-3 text-base font-medium text-[#07074D]"
-            >
-              No
-            </label>
-          </div>
+          
         </div>
       </div>
 
