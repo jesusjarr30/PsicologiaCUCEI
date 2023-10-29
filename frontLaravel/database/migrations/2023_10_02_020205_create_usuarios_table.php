@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('telefono'); 
             $table->string('password');
             $table->string('role');
-            $table->string('horario')->nullable(); // Campo que puede ser nulo
+            $table->json('horario_inicio')->nullable();
+            $table->json('horario_final')->nullable();
             $table->boolean('activo');
             $table->rememberToken();
             $table->timestamps();
