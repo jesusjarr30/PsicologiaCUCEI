@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminPsicologoController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -43,8 +42,7 @@ Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('serv
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
 // Admin Menu
-Route::get('/Admin',[AdminMainController::class, 'index'])->middleware('auth')->name('AdminHome');
-
+Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
 Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
 Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
 Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
@@ -55,7 +53,7 @@ Route::get('/developers',function() {
 });
 
 //Psicologo regular menu
-Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->middleware('auth')->name('showCitasPsicologo');
+Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
 
 //beta para revisar las alertas
 Route::get('/alerta',function() {
@@ -79,12 +77,7 @@ Route::get('confirmacion',function(){
 })->name('confirmacion');
 
 
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

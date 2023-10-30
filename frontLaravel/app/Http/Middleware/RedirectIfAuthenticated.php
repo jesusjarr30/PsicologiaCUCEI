@@ -17,25 +17,14 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $user = auth()->user();
-        if(auth()->check() != null)
-        {
-            if($user->activo)
-            {
-                switch ($user->role) {
-                    case 'ADMIN':
-                        auth()->login($user, true);
-                        return redirect()->intended(route('AdminHome'));
-                    
-                    case 'USER':
-                        auth()->login($user, true);
-                        return redirect()->intended(route('showCitasPsicologo'));
-                    default:
-                        auth()->logout();
-                        return redirect()->route('home');
-                }
+        $guards = empty($guards) ? [null] : $guards;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return redirect(RouteServiceProvider::HOME);
             }
         }
+
         return $next($request);
     }
 }
