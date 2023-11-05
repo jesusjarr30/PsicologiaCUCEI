@@ -16,7 +16,7 @@ class AdminPsicologoController extends Controller
     }
     public function showCitasPsicologo(){
         $Usuario = auth()->user();
-        return view('psicologo.citasPsicologo',['citasPsicologo'=>$Usuario]);
+        return view('psicologo.citasPsicologo',['usuarioPsicologo'=>$Usuario]);
     }
     public function showEditCitas(){
         
