@@ -21,6 +21,23 @@
         </style>
     </head>
     <body class="antialiased body">
+        @if(session('success'))
+          <div class="alert alert-success">
+              <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
+                <div class="flex items-center">
+                    <div class="text-green-700">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div class="mx-3">
+                        <span class="font-semibold text-green-700">Exito!</span>
+                        <p class="text-sm text-green-700">{{ session('success') }}</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        @endif
     {{-- div principal --}}
         <div class="flex w-full h-screen">
             {{-- div izquierdo --}}
@@ -36,6 +53,21 @@
                     <input class="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent" placeholder="Ingresa tu correo" 
                     type="text"
                     name="email">
+                    @error('email')
+                        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+                          <div class="flex items-center">
+                              <div class="text-red-700">
+                                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                  </svg>
+                              </div>
+                              <div class="mx-3">
+
+                                  <p class="text-sm text-red-700">email requerido.</p>
+                              </div>
+                          </div>
+                      </div>
+                    @enderror
                 </div>
                 <div>
                     <label class="text-lg font-medium">Contraseña</label>
@@ -43,6 +75,21 @@
                     type="password"
                     name="password"
                     >
+                    @error('password')
+                        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+                          <div class="flex items-center">
+                              <div class="text-red-700">
+                                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                  </svg>
+                              </div>
+                              <div class="mx-3">
+
+                                  <p class="text-sm text-red-700">Password Requerido.</p>
+                              </div>
+                          </div>
+                      </div>
+                    @enderror
                 </div>
             </div>
             <div class="mt-8 flex justify-between items-center">

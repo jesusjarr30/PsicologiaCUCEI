@@ -46,7 +46,6 @@ Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('re
 
 // Admin Menu
 Route::get('/Admin',[AdminMainController::class, 'index'])->middleware('auth')->name('AdminHome');
-
 Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
 Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
 Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
