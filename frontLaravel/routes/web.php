@@ -11,6 +11,8 @@ use App\Http\Controllers\citaController;
 use App\Mail\RecuperarMailable;
 use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,4 +89,4 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

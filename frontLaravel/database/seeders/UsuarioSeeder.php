@@ -20,7 +20,49 @@ class UsuarioSeeder extends Seeder
         $usuario->telefono = "jesus";
         $usuario->password = bcrypt("jesus"); // Utiliza la función bcrypt para almacenar contraseñas seguras
         $usuario->role = "ADMIN";
-        $usuario->horario = null; // Si el campo permite valores nulos, establece null en lugar de una cadena vacía
+
+
+        
+        // Crear un array asociativo para el campo JSON "horario_final"
+        $horario2 = [[
+            "dia" => "lunes",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "martes",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "miercoles",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "jueves",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "viernes",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "sabado",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ],
+        [
+            "dia" => "domingo",
+            "inicio" => "Date format",
+            "fin" => "Date format"
+        ]
+        ];
+        
+        // Asignar el campo JSON "horario_final"
+        $usuario->horario = json_encode($horario2);
         $usuario->activo = true; // Utiliza un valor booleano en lugar de una cadena
       
         // Guarda el usuario en la base de datos

@@ -13,18 +13,25 @@ class UsuarioFactory extends Factory
 {
     protected $model = Usuario::class;
 
-
     public function definition(): array
     {
+        $horario = [
+            "dias" => ["Lunes", "Martes", "Miércoles"],
+            "horas" => ["08:00 AM", "09:00 AM", "10:00 AM"],
+        ];
+
+       
+
         return [
+            'nombre' => $this->faker->text(5),
+            'email' => $this->faker->email(),
+            'telefono' => $this->faker->phoneNumber(),
+            'password' => $this->faker->text(5),
+            'role' => $this->faker->randomElement(['ADMIN', 'USER']),
+            'horario' => json_encode($horario),
             
-            'nombre'=>$this->faker->text(5),
-            'email'=>$this->faker->email(),
-            'telefono'=>$this->faker->phoneNumber(),
-            'password'=>$this->faker->text(5),
-            'role'=>$this->faker->randomElement(['ADMIN','USER']),
-            'horario'=>$this->faker->text(5),
-            'activo'=> true,
+            'activo' => true,
         ];
     }
 }
+
