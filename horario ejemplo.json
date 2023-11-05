@@ -1,0 +1,37 @@
+[
+    {
+        "dia": "lunes",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "martes",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "miercoles",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "jueves",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "viernes",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "sabado",
+        "inicio":"Date format",
+        "fin":"Date format"
+    },
+    {
+        "dia": "domingo",
+        "inicio":"Date format",
+        "fin":"Date format"
+    }
+]
