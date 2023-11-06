@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminMainController extends Controller
 {
@@ -34,7 +36,19 @@ class AdminMainController extends Controller
         return view('administrador.verCitas');
     }
     public function showEstadisticas(){
-        return view('administrador.estadisticas');
+        $consulta1 = DB::select('SELECT COUNT(*) as count FROM citas');
+        $citas = $consulta1[0]->count;
+    
+        $consulta2 = DB::select('SELECT COUNT(*) as count FROM clientes');
+        $pacientes = $consulta2[0]->count;
+    
+        $consulta3 = DB::select('SELECT COUNT(*) as count FROM usuarios where role="ADMIN"');
+        $admin = $consulta3[0]->count;
+    
+        $consulta4 = DB::select('SELECT COUNT(*) as count FROM usuarios where role="USER"');
+        $psicologo = $consulta4[0]->count;
+        return view('administrador.estadisticas', compact('citas', 'pacientes', 'admin', 'psicologo'));
+
     }
 
     /**
