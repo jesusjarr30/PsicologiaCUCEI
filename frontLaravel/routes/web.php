@@ -31,9 +31,6 @@ Route::get('/', HomeController::class)->name("home");
 Route::get('/login',[HomeController::class, 'login'])->name("login");
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
 
-
-
-
 Route::get('/cita',function() {
     return view('Cita.Agendar');
 })->name('cita');
@@ -57,6 +54,8 @@ Route::get('/developers',function() {
 
 //Psicologo regular menu
 Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->middleware('auth')->name('showCitasPsicologo');
+Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
+
 
 //beta para revisar las alertas
 Route::get('/alerta',function() {
@@ -87,5 +86,4 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 
 Auth::routes();
-
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
