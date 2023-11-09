@@ -24,15 +24,15 @@ class RedirectIfAuthenticated
             {
                 switch ($user->role) {
                     case 'ADMIN':
-                        auth()->login($user, true);
                         return redirect()->intended(route('AdminHome'));
-                    
+                        break;
                     case 'USER':
-                        auth()->login($user, true);
                         return redirect()->intended(route('showCitasPsicologo'));
+                        break;
                     default:
                         auth()->logout();
-                        return redirect()->route('home');
+                        return redirect()->route('/');
+                        break;
                 }
             }
         }

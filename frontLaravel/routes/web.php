@@ -45,19 +45,22 @@ Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('serv
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
 // Admin Menu
-Route::get('/Admin',[AdminMainController::class, 'index'])->middleware('auth')->name('AdminHome');
-Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
-Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
-Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
-Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
+Route::group(['middleware' => ['auth','admin']], function () {
+    Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
+    Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
+    Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
+    Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
+    Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
+});
 
 Route::get('/developers',function() {
     return view('Links.developers');
 });
 
 //Psicologo regular menu
-Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->middleware('auth')->name('showCitasPsicologo');
-
+Route::group(['middleware' => ['auth','user']], function () {
+    Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
+});
 //beta para revisar las alertas
 Route::get('/alerta',function() {
     return view('Alertas.alertas');
