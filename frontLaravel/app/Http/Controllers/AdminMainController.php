@@ -7,6 +7,8 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\confirmarCorreoMailable;
 
 
 class AdminMainController extends Controller
@@ -92,11 +94,15 @@ class AdminMainController extends Controller
         $tabla1->telefono = $telefono;
         $tabla1->password = Hash::make($password);
         $tabla1->role =$role;
-        $tabla1->activo= true;
+        $tabla1->activo= false;
         $tabla1->save();
+        //mandar el correo de confirmacion a la cue3nta que se registro
+        Mail::to($email)->send(new confirmarCorreoMailable($email,$nombre));
 
-        return redirect()->route('registrar')->with('success', '¡El usuario se ha guardado exitosamente!');
+
+        return redirect()->route('registrar')->with('success', '¡El usuario se ha guardado exitosamente! Revise su correo y confirme la cuenta');
     }
+
 
     /**
      * Display the specified resource.
@@ -129,5 +135,24 @@ class AdminMainController extends Controller
     {
         dd($Usuario);
         return "se elimino el usuario";
+    }
+    public function ConfirmarCorreo($correo){
+        $user = Usuario::where('correo',$correo)->first();
+        if($user){
+            $user->activo = true;
+            $user->save();
+        } else {
+            return redirect()->back()->with('error', 'Usuario no encontrado.');
+        }
+    }
+    //metro que confirmara que el usuario dio de alta su cuenta por correo
+    public function confirmar(Request $request){
+        $valorCampo = $request->input('correo');
+        $usuario = Usuario::where('email', $valorCampo)->first();
+       
+        $usuario->activo= true;
+        $usuario->save();
+        return ("Usuario confirmado ya puede acceder");
+
     }
 }
