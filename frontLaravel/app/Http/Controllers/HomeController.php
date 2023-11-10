@@ -30,4 +30,8 @@ class HomeController extends Controller
         return view('principal.content');
     }
 
+    public function recoverP(){
+        return view('principal.recoverPassword');
+    }
+
 }

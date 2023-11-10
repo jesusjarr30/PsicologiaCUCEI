@@ -21,23 +21,7 @@
         </style>
     </head>
     <body class="antialiased body">
-        @if(session('success'))
-          <div class="alert alert-success">
-              <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
-                <div class="flex items-center">
-                    <div class="text-green-700">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </div>
-                    <div class="mx-3">
-                        <span class="font-semibold text-green-700">Exito!</span>
-                        <p class="text-sm text-green-700">{{ session('success') }}</p>
-                    </div>
-                </div>
-            </div>
-          </div>
-        @endif
+
     {{-- div principal --}}
         <div class="flex w-full h-screen">
             {{-- div izquierdo --}}
@@ -93,7 +77,9 @@
                 </div>
             </div>
             <div class="mt-8 flex justify-between items-center">
-                <button class="font-medium text-base text-blue-300">¿Olvidó su contraseña?</button>
+                <a href="{{route('recoverP')}}">
+                <button form="" class="font-medium text-base text-blue-300">¿Olvidó su contraseña?</button>
+                </a>
             </div>
             <div class="mt-8 flex flex-col gap-y-4">
                 <button class="active:scale-[.95] active:duration-75 hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-blue-500 text-white text-lg font-bol">
