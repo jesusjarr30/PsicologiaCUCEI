@@ -19,10 +19,7 @@ class UsuarioSeeder extends Seeder
         $usuario->nombre = "jesus";
         $usuario->telefono = "jesus";
         $usuario->password = bcrypt("jesus"); // Utiliza la función bcrypt para almacenar contraseñas seguras
-        $usuario->role = "ADMIN";
-
-
-        
+        $usuario->role = "ADMIN";        
         // Crear un array asociativo para el campo JSON "horario_final"
         $horario2 = [[
             "dia" => "lunes",
@@ -67,6 +64,19 @@ class UsuarioSeeder extends Seeder
       
         // Guarda el usuario en la base de datos
         $usuario->save();
+        //usuarios psicologo 
+
+        
+       $usuario2 = new Usuario();
+        $usuario2->email = "ale@ale.com";
+        $usuario2->nombre = "ale";
+        $usuario2->telefono = "33562564";
+        $usuario2->password = bcrypt("jesus"); // Utiliza la función bcrypt para almacenar contraseñas seguras
+        $usuario2->role = "USER";   
+        $usuario2->horario = json_encode($horario2);
+        $usuario2->activo = true; // Utiliza un valor booleano en lugar de una cadena
+        $usuario2->save();
+
 
         Usuario::factory(10)->create();
 

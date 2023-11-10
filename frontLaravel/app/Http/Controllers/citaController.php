@@ -7,6 +7,8 @@ use App\Models\Comentario;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CitaRegistradaMailable;
 
 class citaController extends Controller
 {
@@ -89,6 +91,9 @@ class citaController extends Controller
     $tabla2->horario = $horario;
 
     $tabla2->save();
+
+    Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
+
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
 }
 

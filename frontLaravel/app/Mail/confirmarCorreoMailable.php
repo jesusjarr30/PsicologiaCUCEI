@@ -5,12 +5,14 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Support\Facades\Config;
 
-class CitaRegistradaMailable extends Mailable
+
+class confirmarCorreoMailable extends Mailable
 {
     use Queueable, SerializesModels;
     public $correo;
@@ -19,10 +21,10 @@ class CitaRegistradaMailable extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($correo,$nombre)
+    public function __construct($email,$nombre)
     {
         $this->nombre=$nombre;
-        $this->correo=$correo;
+        $this->correo=$email;
     }
 
     /**
@@ -32,7 +34,7 @@ class CitaRegistradaMailable extends Mailable
     {
         return new Envelope(
             from: new Address('jesus.jarr.30@gmail.com','Jesus Renteria'),
-            subject: 'Confirmacion de cita CUCEI',
+            subject: 'Registro cuenta Piscologia CUCEI',
         );
     }
 
@@ -41,12 +43,14 @@ class CitaRegistradaMailable extends Mailable
      */
     public function content(): Content
     {
+
         return new Content(
-            view: 'MailMessages.RegistroCita',
+            view: 'MailMessages.ConfirmarUsuario',
             with: [
                 'correo' => $this->correo,
+                'nombre' => $this->nombre,
             ]
-        );   
+        );
     }
     /**
      * Get the attachments for the message.

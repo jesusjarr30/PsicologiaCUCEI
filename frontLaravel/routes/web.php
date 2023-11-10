@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\citaController;
+use App\Mail\CitaRegistradaMailable;
 use App\Mail\RecuperarMailable;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,9 +31,6 @@ Route::get('/', HomeController::class)->name("home");
 ///links para el login 
 Route::get('/login',[HomeController::class, 'login'])->name("login");
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
-
-
-
 
 Route::get('/cita',function() {
     return view('Cita.Agendar');
@@ -57,6 +55,8 @@ Route::get('/developers',function() {
 
 //Psicologo regular menu
 Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->middleware('auth')->name('showCitasPsicologo');
+Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
+
 
 //beta para revisar las alertas
 Route::get('/alerta',function() {
@@ -68,16 +68,17 @@ Route::get('/alerta',function() {
 //organizar los post
 Route::post('/guardar', [CitaController::class, 'store'])->name('guardar-cita');
 Route::post('/GuardarUsuario',[AdminMainController::class, 'store'])->name('guardar-usuario');
+Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name('ConfirmarUsuario');
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
 
-//Email que se van a enviar
+//Email a enviar
 
-Route::get('confirmacion',function(){
-    Mail::to('pruebas@pruebas')->send(new RecuperarMailable());
-    return "mensaje enviado";
-})->name('confirmacion');
+//Route::get('/confirmacion',function(){
+   // Mail::to('jesus.jarr.30@gmail.com')->send(new CitaRegistradaMailable());
+    //return "mensaje enviado";
+//})->name('confirmacion');
 
 
 // Authentication routes...
@@ -87,5 +88,14 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 
 Auth::routes();
-
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//prueba para ver la vista del correo 
+Route::get('/CCC',function() {
+    return view('MailMessages.RegistroCita',$data =["correo"=>"hola","nombre"=>"jesus"]);
+})->name('ccc');
+
+Route::get('/ddd',function() {
+    return view('MailMessages.ConfirmarUsuario',$data =["correo"=>"hhhh@hhh.com ","nombre"=>"jesus"]);
+})->name('ddd');

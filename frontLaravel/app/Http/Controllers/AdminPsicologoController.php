@@ -18,12 +18,14 @@ class AdminPsicologoController extends Controller
         $Usuario = auth()->user();
         return view('psicologo.citasPsicologo',['usuarioPsicologo'=>$Usuario]);
     }
-    public function showEditCitas(){
+    //public function showEditCitas(){
         
-        return view('psicologo.EditarUsuario');
+      //  return view('psicologo.EditarUsuario');
+    //}
+    public function EditUser(){
+        $Usuario = auth()->user();
+        return view('psicologo.EditarUsuario',['usuarioPsicologo'=>$Usuario]);
     }
-    
-
     /**
      * Show the form for creating a new resource.
      */
