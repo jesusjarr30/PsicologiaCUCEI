@@ -18,14 +18,9 @@ class AdminMainController extends Controller
      */
     public function index()
     {
-        //return view('layouts.BaseAdmin');
-        
-        $Usuario = auth()->user();
-        return view('administrador.homeAdmin',['homeAdmin'=>$Usuario]);
+        return view('administrador.homeAdmin');
     }
     public function registroUsuarios(){
-
-        
         return view('administrador.registrarUsuario');
     }
     public function showUsuarios(){

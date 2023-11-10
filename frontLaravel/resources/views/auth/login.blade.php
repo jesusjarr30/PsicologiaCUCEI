@@ -26,7 +26,7 @@
         <div class="flex w-full h-screen">
             {{-- div izquierdo --}}
             <div class="w-full flex items-center justify-center lg:w-1/2 ">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('authenticate') }}">
                     @csrf
                 
                 <div class="bg-white px-8 py-10 rounded-3xl border-2 border-gray-200">

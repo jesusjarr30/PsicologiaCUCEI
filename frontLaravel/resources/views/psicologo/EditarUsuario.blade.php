@@ -15,7 +15,7 @@
             <input
                 type="text"
                 class="border-none outline-none bg-transparent w-full"
-                value="Margot Foster"
+                value={{ Auth::user()->nombre }}
                 id="nombreCompleto"
                 />
           </dd>
@@ -25,7 +25,7 @@
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <label class="rounded-full text-white px-20 py-4 bg-amber-500 ">
                 <strong>
-                ale@ale.com
+                  {{ Auth::user()->email }}
                 </strong>
             </label>
       </dd>
@@ -37,7 +37,7 @@
             <input
             type="text"
             class="border-none outline-none bg-transparent w-full"
-            value="3313602980"
+            value={{ Auth::user()->telefono }}
             id="nombreCompleto"
             />
       </dd>
@@ -46,7 +46,7 @@
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Role</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 ">
-             <label class=" rounded-full text-white px-8 py-4 bg-blue-400 "> <strong>USER </strong></label></dd>
+             <label class=" rounded-full text-white px-8 py-4 bg-blue-400 "> <strong>{{ Auth::user()->role }} </strong></label></dd>
         </div>
 
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

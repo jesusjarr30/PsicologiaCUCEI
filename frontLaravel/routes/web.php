@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Auth\LoginRegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +31,17 @@ use Illuminate\Support\Facades\Auth;
 //principal
 Route::get('/', HomeController::class)->name("home");
 ///links para el login 
-Route::get('/login',[HomeController::class, 'login'])->name("login");
+
+Route::controller(LoginRegisterController::class)->group(function() {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
 
 Route::get('/cita',function() {
@@ -45,10 +57,10 @@ Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('re
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
-    Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
-    Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
-    Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
-    Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
+    Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas')->withoutMiddleware(['auth','admin']);
 });
 
 Route::get('/developers',function() {
@@ -57,12 +69,12 @@ Route::get('/developers',function() {
 
 //Psicologo regular menu
 
-Route::group(['middleware' => ['auth','user']], function () {
+Route::group(['middleware' => ['user']], function () {
     Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
+    Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
 });
 
 
-Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
 
 
 

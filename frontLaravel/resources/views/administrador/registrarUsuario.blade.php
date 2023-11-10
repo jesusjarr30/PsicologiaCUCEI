@@ -55,6 +55,13 @@
         <h6 class="text-blueGray-700 text-xl font-bold">
           Registra usuarios
         </h6>
+        <tr>
+    
+          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->nombre }}</td>
+          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->email }}</td>
+          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->telefono }}</td>
+          
+      </tr>
         <button type = "subtmit" class="bg-green-500 text-white active:bg-pink-800 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
           Agregar
         </button>
