@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario')->withoutMiddleware(['auth','admin']);
     Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas')->withoutMiddleware(['auth','admin']);
     Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes')->withoutMiddleware(['auth','admin']);
+
 });
 
 Route::get('/developers',function() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,15 @@ class AdminMainController extends Controller
     }
     public function showCitas(){
         return view('administrador.verCitas');
+    }
+    public function verPacientes(){
+
+        $pacientes = Cliente::paginate(10);
+
+        foreach ($pacientes as $paciente) {
+            info('Información del Paciente: ' . json_encode($paciente->toArray()));
+        }
+        return view('administrador.pacientes',['pacientes'=>$pacientes]);
     }
     public function showEstadisticas(){
         $consulta1 = DB::select('SELECT COUNT(*) as count FROM citas');
