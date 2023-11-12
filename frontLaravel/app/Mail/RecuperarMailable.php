@@ -8,17 +8,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use App\Models\Usuario;
 
 class RecuperarMailable extends Mailable
 {
     use Queueable, SerializesModels;
+    public $correo;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($email)
     {
-        //
+        $this->correo=$email;
     }
 
     /**
@@ -27,17 +30,20 @@ class RecuperarMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Recuperacion de contraseña',
+            from: new Address('jesus.jarr.30@gmail.com','Jesus Renteria'),
+            subject: 'Registro cuenta Piscologia CUCEI',
         );
     }
-
     /**
      * Get the message content definition.
      */
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'MailMessages.InvitacionRecuperacions',
+            with: [
+                'correo' => $this->correo,
+            ]
         );
     }
 
