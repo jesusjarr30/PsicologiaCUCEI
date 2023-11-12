@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\ContrasenaRecover;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,10 @@ Route::get('/alerta',function() {
 Route::post('/guardar', [CitaController::class, 'store'])->name('guardar-cita');
 Route::post('/GuardarUsuario',[AdminMainController::class, 'store'])->name('guardar-usuario');
 Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name('ConfirmarUsuario');
+Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->name('inivtacioRecuperar');
+Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
+Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
+
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
@@ -119,3 +124,12 @@ Route::get('/CCC',function() {
 Route::get('/ddd',function() {
     return view('MailMessages.ConfirmarUsuario',$data =["correo"=>"hhhh@hhh.com ","nombre"=>"jesus"]);
 })->name('ddd');
+
+Route::get('/aaa',function() {
+    return view('MailMessages.InvitacionRecuperacions',$data =["correo"=>"hhhh@hhh.com ","nombre"=>"jesus"]);
+})->name('aaa');
+
+Route::get('/ppp',function() {
+    return view('MailMessages.recuperarForm',$data =["correo"=>"bb@bb.com ","nombre"=>"jesus"]);
+})->name('ppp');
+
