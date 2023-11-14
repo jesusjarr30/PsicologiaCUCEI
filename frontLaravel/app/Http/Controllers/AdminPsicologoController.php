@@ -69,22 +69,19 @@ class AdminPsicologoController extends Controller
         $horario = array(
             'Lun_I'=>$request->input("Lun-horario-Inicio"),
             'Lun_F'=>$request->input("Lun-horario-Final"),
-            'Mar_I'=>$request->input("Lun-horario-Inicio"),
-            'Mar_F'=>$request->input("Lun-horario-Final"),
-            'Mie_I'=>$request->input("Lun-horario-Inicio"),
-            'Mie_F'=>$request->input("Lun-horario-Final"),
-            'Jue_I'=>$request->input("Lun-horario-Inicio"),
-            'Jue_F'=>$request->input("Lun-horario-Final"),
-            'Vie_I'=>$request->input("Lun-horario-Inicio"),
-            'Vie_F'=>$request->input("Lun-horario-Final"),
-            'Sab_I'=>$request->input("Lun-horario-Inicio"),
-            'Sab_F'=>$request->input("Lun-horario-Final"),
-
+            'Mar_I'=>$request->input("Mar-horario-Inicio"),
+            'Mar_F'=>$request->input("Mar-horario-Final"),
+            'Mie_I'=>$request->input("Mie-horario-Inicio"),
+            'Mie_F'=>$request->input("Mie-horario-Final"),
+            'Jue_I'=>$request->input("Jue-horario-Inicio"),
+            'Jue_F'=>$request->input("Jue-horario-Final"),
+            'Vie_I'=>$request->input("Vie-horario-Inicio"),
+            'Vie_F'=>$request->input("Vie-horario-Final"),
+            'Sab_I'=>$request->input("Sab-horario-Inicio"),
+            'Sab_F'=>$request->input("Sab-horario-Final")
             );
         $horario_json = json_encode($horario);
         $user->horario = $horario_json;
-
-        dd(json_decode( $user->horario)->Lun_I);
 
         $user->save();
 
