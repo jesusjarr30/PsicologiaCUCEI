@@ -1,11 +1,6 @@
-@if (Auth::user()->role == "ADMIN")
-    @extends('layouts.BaseAdmin')
-    @section('contentAdmin')
-@endif
-@if (Auth::user()->role == "USER")
-    @extends('layouts.BasePsicologo')
-    @section('contentPsicologo')
-@endif
+@extends('layouts.BaseAdmin')
+
+@section('contentAdmin')
 
 <div class="p-5 h-screen bg-gray-100">
     <h1 class="text-4xl mb-2"> Lista de Pacientes</h1>

@@ -82,7 +82,7 @@ class AdminPsicologoController extends Controller
             );
         $horario_json = json_encode($horario);
         $user->horario = $horario_json;
-
+            
         $user->save();
 
         return Redirect::route('EditUser')->with('status', 'profile-updated');

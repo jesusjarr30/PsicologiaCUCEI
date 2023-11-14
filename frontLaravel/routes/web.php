@@ -81,7 +81,7 @@ Route::get('/developers',function() {
 });
 
 //Psicologo regular menu
-Route::group(['middleware' => ['user']], function () {
+Route::group(['middleware' => ['auth','user']], function () {
     Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
     Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
 });
@@ -99,6 +99,7 @@ Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->na
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
 Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
+Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
