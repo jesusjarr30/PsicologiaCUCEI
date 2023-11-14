@@ -63,7 +63,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas')->withoutMiddleware(['auth','admin']);
     Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas')->withoutMiddleware(['auth','admin']);
     Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes')->withoutMiddleware(['auth','admin']);
-
+    Route::get('Admin/Pacientes/{id}',[AdminMainController::class,'EditarPaciente'] )->name('showPacienteEditar')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas')->withoutMiddleware(['auth','admin']);
+    
 });
 
 Route::get('/developers',function() {
@@ -95,6 +97,7 @@ Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name
 Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->name('inivtacioRecuperar');
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
+Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 
 
 //Delte
