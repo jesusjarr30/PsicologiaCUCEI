@@ -55,13 +55,7 @@
         <h6 class="text-blueGray-700 text-xl font-bold">
           Registra usuarios
         </h6>
-        <tr>
-    
-          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->nombre }}</td>
-          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->email }}</td>
-          <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ Auth::user()->telefono }}</td>
-          
-      </tr>
+
         <button type = "subtmit" class="bg-green-500 text-white active:bg-pink-800 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
           Agregar
         </button>
@@ -121,7 +115,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                 confirme su contraseña
               </label>
-              <input name="password_confirmation" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+              <input  name="password_confirmation" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
             </div>
           </div>
         </div>

@@ -2,21 +2,26 @@
 
 @section('contentPsicologo')
 
-<div>
+<form action="{{ route('editar-usuario' ) }}" method="POST">
+  @csrf
+  @method('put')
+  <div>
+    
     <div class="px-4 sm:px-0 mt-4">
       <h3 class="text-base font-semibold leading-7 text-gray-900">Editar usuario</h3>
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Puedes modificar todos los campos que se requieran</p>
     </div>
+    
     <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Nombre copleto</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <input
+                name="nombre"
                 type="text"
                 class="border-none outline-none bg-transparent w-full"
-                value={{ Auth::user()->nombre }}
-                id="nombreCompleto"
+                value="{{ Auth::user()->nombre }}"
                 />
           </dd>
         </div>
@@ -35,10 +40,10 @@
           <dt class="text-sm font-medium leading-6 text-gray-900">telefono</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <input
+            name="telefono"
             type="text"
             class="border-none outline-none bg-transparent w-full"
-            value={{ Auth::user()->telefono }}
-            id="nombreCompleto"
+            value="{{ Auth::user()->telefono }}"
             />
       </dd>
           </dd>
@@ -60,10 +65,10 @@
                     
                     <div class="ml-4 flex min-w-0 flex-1 gap-2">
                         <input
+                        name="password_Old"
                         type="password"
                         class="border-2 rounded-md bg-transparent w-full border-blue-600"
                         value=""
-                        id="nombreCompleto"
                         placeholder="Ingresa tu contraseña actual"
                         />
                     </div>
@@ -74,10 +79,10 @@
 
                       <div class="ml-4 flex min-w-0 flex-1 gap-2">
                           <input
+                          name="password"
                           type="password"
                           class="border-2 rounded-md bg-transparent w-full border-blue-600"
                           value=""
-                          id="nombreCompleto"
                           placeholder="Ingresa nueva contraseña"
                           />
                       </div>
@@ -85,14 +90,12 @@
                   </li>
                   <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                     <div class="flex w-0 flex-1 items-center">
-    
-                      
                       <div class="ml-4 flex min-w-0 flex-1 gap-2">
                           <input
+                          name="password_confirmation"
                           type="password"
                           class="border-2 rounded-md bg-transparent w-full border-blue-600"
                           value=""
-                          id="nombreCompleto"
                           placeholder="Confirmar contraseña"
                           />
                       </div>
@@ -102,11 +105,6 @@
             </ul>
         </dd>
         </div>
-
-
-
-
-       
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Horario laboral</dt>
           <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -394,16 +392,15 @@
         </div>
       </dl>
     </div>
+    
   </div>
 
   <div class="ml-4">
     
-    <Button class="px-4 py-2 rounded-full bg-red-600 text-white border-2 border-red-800 hover:bg-red-800""><strong>Cancelar</strong></Button>
+    <button form=""  href="{{Redirect::route('EditUser')}}" class="px-4 py-2 rounded-full bg-red-600 text-white border-2 border-red-800 hover:bg-red-800"><strong>Cancelar</strong></Button>
 
     <button class="ml-6 px-4 py-2 rounded-full bg-green-600 text-white border-2 border-green-800 hover:bg-green-800"><strong>Guardar</strong></button>
   </div>
- 
-
-  
+</form>
 
 @endsection

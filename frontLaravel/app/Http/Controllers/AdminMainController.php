@@ -25,8 +25,6 @@ class AdminMainController extends Controller
     }
     public function showUsuarios(){
         $Usuarios = Usuario::paginate(10);
-
-
         return view('administrador.usuarios',['usuarios'=>$Usuarios]);
     }
     public function showCitas(){

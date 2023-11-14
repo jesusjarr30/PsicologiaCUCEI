@@ -40,7 +40,7 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::post('/logout', 'logout')->name('logout');
+    Route::post('/logout', 'logout')->name('logout')->middleware(['auth']);
 });
 
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
@@ -58,10 +58,10 @@ Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('re
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
-    Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar')->withoutMiddleware(['auth','admin']);
-    Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario')->withoutMiddleware(['auth','admin']);
-    Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas')->withoutMiddleware(['auth','admin']);
-    Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas')->withoutMiddleware(['auth','admin']);
+    Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
+    Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
+    Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
+    Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
 });
 
 Route::get('/developers',function() {
@@ -69,22 +69,15 @@ Route::get('/developers',function() {
 });
 
 //Psicologo regular menu
-
 Route::group(['middleware' => ['user']], function () {
     Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
     Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
 });
 
-
-
-
-
 //beta para revisar las alertas
 Route::get('/alerta',function() {
     return view('Alertas.alertas');
 })->name('alerta');
-
-
 
 //organizar los post
 Route::post('/guardar', [CitaController::class, 'store'])->name('guardar-cita');
@@ -93,7 +86,7 @@ Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name
 Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->name('inivtacioRecuperar');
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
-
+Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
@@ -104,13 +97,6 @@ Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->nam
    // Mail::to('jesus.jarr.30@gmail.com')->send(new CitaRegistradaMailable());
     //return "mensaje enviado";
 //})->name('confirmacion');
-
-
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
 
 Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

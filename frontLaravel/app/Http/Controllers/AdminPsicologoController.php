@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPsicologoController extends Controller
 {
@@ -15,16 +19,11 @@ class AdminPsicologoController extends Controller
         return view('layouts.BaseAd');
     }
     public function showCitasPsicologo(){
-        $Usuario = auth()->user();
-        return view('psicologo.citasPsicologo',['usuarioPsicologo'=>$Usuario]);
+        return view('psicologo.citasPsicologo');
     }
-    //public function showEditCitas(){
-        
-      //  return view('psicologo.EditarUsuario');
-    //}
+
     public function EditUser(){
-        $Usuario = auth()->user();
-        return view('psicologo.EditarUsuario',['usuarioPsicologo'=>$Usuario]);
+        return view('psicologo.EditarUsuario');
     }
     /**
      * Show the form for creating a new resource.
@@ -61,9 +60,16 @@ class AdminPsicologoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request){
+        $user = Auth::user();
+        //dd($user,$request);
+        if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre');}
+        if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono');}
+        if($user->password != $request->input('password') && ($request->input('password') != null )){ $user->password = Hash::make($request->input('password'));}
+        
+        $user->save();
+
+        return Redirect::route('EditUser')->with('status', 'profile-updated');
     }
 
     /**
