@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\Cliente;
+use App\Models\Nota;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\confirmarCorreoMailable;
+use Illuminate\Support\Facades\Crypt;
 
 
 class AdminMainController extends Controller
@@ -29,6 +33,15 @@ class AdminMainController extends Controller
     }
     public function showCitas(){
         return view('administrador.verCitas');
+    }
+    public function verPacientes(){
+
+        $pacientes = Cliente::paginate(10);
+
+        foreach ($pacientes as $paciente) {
+            info('Información del Paciente: ' . json_encode($paciente->toArray()));
+        }
+        return view('administrador.pacientes',['pacientes'=>$pacientes]);
     }
     public function showEstadisticas(){
         $consulta1 = DB::select('SELECT COUNT(*) as count FROM citas');
@@ -148,4 +161,62 @@ class AdminMainController extends Controller
         return ("Usuario confirmado ya puede acceder");
 
     }
+    public function VerNotas($id){
+
+        $cliente = cliente::find($id);
+        $notas = Nota::where('cliente_id', $id)->get();
+
+        return view('administrador.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
+
+
+    }
+    //para editar al paciente
+    public function EditarPaciente($id){
+        
+        $cliente = Cliente::find($id);
+
+        return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+    public function GuardarNota(Request $request){
+
+
+
+        $id= $request->input('pacienteID');
+        $cliente = Cliente::find($id);
+        $titulo= $request->input('titulo');
+        $descripcion = $request->input('descripcion');
+
+        $nota = new Nota();
+        $nota->cliente_id = $id;
+        $nota->titulo = $titulo;
+        $nota->description=$descripcion;
+        // Definir reglas de validación
+        $reglas = [
+            'titulo' => 'required|string|max:150',
+            'descripcion' => 'required|string|max:300',
+        ];
+
+        // Definir mensajes de error personalizados si es necesario
+        $mensajes = [
+            'titulo.max' => 'El título no puede tener más de 150 caracteres.',
+            'descripcion.max' => 'La descripción no puede tener más de 300 caracteres.',
+        ];
+
+        // Validar los datos del formulario
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        // Comprobar si la validación falla
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $nota->save();
+
+        // Resto de la lógica
+    
+        return back()->with('success', 'Nota creada con éxito.');
+
+
+    }
+    
 }

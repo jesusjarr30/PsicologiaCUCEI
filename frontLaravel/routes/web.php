@@ -62,6 +62,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
     Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
     Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
+    Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes');
+    Route::get('Admin/Pacientes/{id}',[AdminMainController::class,'EditarPaciente'] )->name('showPacienteEditar');
+    Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
 });
 
 Route::get('/developers',function() {
@@ -86,7 +89,7 @@ Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name
 Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->name('inivtacioRecuperar');
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
-Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
+
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
