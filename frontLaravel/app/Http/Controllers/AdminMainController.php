@@ -174,9 +174,24 @@ class AdminMainController extends Controller
     public function EditarPaciente($id){
         
         $cliente = Cliente::find($id);
+        return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+
+    const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
+    public function ActualizarPaciente(Request $request, $id){
+        
+        $cliente = Cliente::find($id);
+        //dd($cliente, $request);
+        foreach (self::FIELDS as $field) {
+            if ($request->$field) {
+                $cliente->$field = $request->input($field);
+                $cliente->save();
+            }
+        }
 
         return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
     }
+
     public function GuardarNota(Request $request){
 
 

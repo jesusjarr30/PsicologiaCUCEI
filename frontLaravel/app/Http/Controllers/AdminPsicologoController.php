@@ -62,7 +62,6 @@ class AdminPsicologoController extends Controller
      */
     public function update(Request $request){
         $user = Auth::user();
-        //dd($user,$request);
         if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre');}
         if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono');}
         if($user->password != $request->input('password') && ($request->input('password') != null )){ $user->password = Hash::make($request->input('password'));}
