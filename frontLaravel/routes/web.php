@@ -89,7 +89,7 @@ Route::post('/ConfirmarUsuario',[AdminMainController::class, 'confirmar'])->name
 Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->name('inivtacioRecuperar');
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
-
+Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');
