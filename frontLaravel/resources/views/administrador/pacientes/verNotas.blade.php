@@ -28,6 +28,23 @@
         </div>
     </div>
 @endif
+@if(Session::has('error'))
+      <div class="max-w-lg mx-auto">
+          <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+              <div class="flex items-center">
+                  <div class="text-red-700">
+                      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                  </div>
+                  <div class="mx-3">
+                      <span class="font-semibold text-red-700">Error!</span>
+                      <p class="text-sm text-red-700">No se pudo generar tu nota intentalo de nuevo</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      @endif
 
    <form method="POST" action="{{ route('GuardarNota') }}">
     @csrf
