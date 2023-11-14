@@ -66,6 +66,26 @@ class AdminPsicologoController extends Controller
         if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono');}
         if($user->password != $request->input('password') && ($request->input('password') != null )){ $user->password = Hash::make($request->input('password'));}
         
+        $horario = array(
+            'Lun_I'=>$request->input("Lun-horario-Inicio"),
+            'Lun_F'=>$request->input("Lun-horario-Final"),
+            'Mar_I'=>$request->input("Lun-horario-Inicio"),
+            'Mar_F'=>$request->input("Lun-horario-Final"),
+            'Mie_I'=>$request->input("Lun-horario-Inicio"),
+            'Mie_F'=>$request->input("Lun-horario-Final"),
+            'Jue_I'=>$request->input("Lun-horario-Inicio"),
+            'Jue_F'=>$request->input("Lun-horario-Final"),
+            'Vie_I'=>$request->input("Lun-horario-Inicio"),
+            'Vie_F'=>$request->input("Lun-horario-Final"),
+            'Sab_I'=>$request->input("Lun-horario-Inicio"),
+            'Sab_F'=>$request->input("Lun-horario-Final"),
+
+            );
+        $horario_json = json_encode($horario);
+        $user->horario = $horario_json;
+
+        dd(json_decode( $user->horario)->Lun_I);
+
         $user->save();
 
         return Redirect::route('EditUser')->with('status', 'profile-updated');

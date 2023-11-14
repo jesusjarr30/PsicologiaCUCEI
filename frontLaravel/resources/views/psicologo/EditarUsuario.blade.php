@@ -117,10 +117,13 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Lun-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Lun_I}}">
+                          {{json_decode( Auth::user()->horario)->Lun_I}} Actual</option>
+
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -136,10 +139,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Lun-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Lun_F}}">
+                          {{json_decode( Auth::user()->horario)->Lun_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -163,10 +168,12 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Mar-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Mar_I}}">
+                          {{json_decode( Auth::user()->horario)->Mar_I}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -182,10 +189,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Mar-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Mar_F}}">
+                          {{json_decode( Auth::user()->horario)->Mar_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -209,10 +218,12 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Mie-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Mie_I}}">
+                          {{json_decode( Auth::user()->horario)->Mie_I}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -228,10 +239,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Mie-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Mie_F}}">
+                          {{json_decode( Auth::user()->horario)->Mie_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -255,10 +268,12 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Jue-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Jue_I}}">
+                          {{json_decode( Auth::user()->horario)->Jue_I}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -274,10 +289,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Jue-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Jue_F}}">
+                          {{json_decode( Auth::user()->horario)->Jue_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -301,10 +318,12 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Vie-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Vie_I}}">
+                          {{json_decode( Auth::user()->horario)->Vie_I}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -320,10 +339,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Vie-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Vie_F}}">
+                          {{json_decode( Auth::user()->horario)->Vie_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -347,10 +368,12 @@
                   <div class="ml-4 flex min-w-0 flex-1 gap-2">
                     <select
                         type="time"
-                        name="horario"
+                        name="Sab-horario-Inicio"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Sab_I}}">
+                          {{json_decode( Auth::user()->horario)->Sab_I}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
@@ -366,10 +389,12 @@
                     </select>
                     <select
                         type="time"
-                        name="horario"
+                        name="Sab-horario-Final"
                         id="time"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         >
+                        <option value="{{json_decode( Auth::user()->horario)->Sab_F}}">
+                          {{json_decode( Auth::user()->horario)->Sab_F}} Actual</option>
                         <option value="10:00">10:00 am</option>
                         <option value="11:00">11:00 am</option>
                         <option value="12:00">12:00 pm</option>
