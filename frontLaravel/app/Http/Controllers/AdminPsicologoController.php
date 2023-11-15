@@ -8,6 +8,8 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cliente;
+use App\Models\Nota;
 
 class AdminPsicologoController extends Controller
 {
@@ -94,5 +96,28 @@ class AdminPsicologoController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function verPacientes(){
+
+        $pacientes = Cliente::paginate(10);
+
+        foreach ($pacientes as $paciente) {
+            info('Información del Paciente: ' . json_encode($paciente->toArray()));
+        }
+        return view('psicologo.pacientes',['pacientes'=>$pacientes]);
+    }
+    public function VerNotas($id){
+
+        $cliente = cliente::find($id);
+        $notas = Nota::where('cliente_id', $id)->get();
+
+        return view('psicologo.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
+
+
+    }
+    public function EditarPaciente($id){
+        
+        $cliente = Cliente::find($id);
+        return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
     }
 }
