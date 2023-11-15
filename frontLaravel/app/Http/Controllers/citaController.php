@@ -39,6 +39,7 @@ class citaController extends Controller
 
     public function store(Request $request): RedirectResponse
 {
+    $request->flash();
     //Aqui se registra la cita de un usuario.
     $nombre = $request->input('nombre');
     $apellidos = $request->input('apellidos');
@@ -52,25 +53,27 @@ class citaController extends Controller
     $expectativas = $request->input('expectativas');
     $horario = $request->input('horario');
 
+    
+
     // Validación
     $validator = Validator::make($request->all(), [
         'nombre' => 'required|string|max:255',
         'apellidos' => 'required|string|max:255',
-        'codigo' => 'required|numeric|max:12|min:8',
+        'codigo' => 'required|numeric',
         'correo' => 'required|email',
         'edad' => 'required|numeric|min:10|max:70        ', // Cambia 18 por el valor mínimo requerido
-        'telefono' => 'required|numeric|min:|max:12',
+        'telefono' => 'required|numeric',
         'nacimiento' => 'required|date|valid_birthdate',
         'descripcion' => 'required|string|max:500',
         'expectativas' => 'required|string|max:500',
         'horario' => 'required|string',
     ]);
 
-    //if ($validator->fails()) {
-        // Si la validación falla, redirige de vuelta con los errores
-      //  return redirect()->back()
-        //    ->withErrors($validator);
-    //}
+    if ($validator->fails()) {
+         //Si la validación falla, redirige de vuelta con los errores
+       return redirect()->back()
+           ->withErrors($validator);
+    }
 
     $tabla1 = new Cliente();
     $tabla1->nombre = $nombre;

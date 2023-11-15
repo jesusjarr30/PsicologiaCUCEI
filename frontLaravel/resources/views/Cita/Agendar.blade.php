@@ -92,6 +92,7 @@
         <input
           type="text"
           name="apellidos"
+          value="{{ old('apellidos') }}"
           
           placeholder="Apellidos"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -123,7 +124,7 @@
         <input
           type="text"
           name="codigo"
-          
+          value="{{ old('codigo') }}"
           placeholder="Codigo de estudiante"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
@@ -153,7 +154,7 @@
         <input
           type="text"
           name="correo"
-         
+          value="{{ old('correo') }}"
           placeholder="Institucional o personal"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
@@ -185,7 +186,7 @@
         <input
           type="text"
           name="edad"
-         
+          value="{{ old('edad') }}"
           placeholder="Solo numeros"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
@@ -215,7 +216,7 @@
         <input
           type="text"
           name="telefono"
-    
+          value="{{ old('telefono') }}"
           placeholder="Celular o casa"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
@@ -241,6 +242,7 @@
       <div class="mb-5">
         <label
           class="mb-3 block text-base font-medium text-[#07074D]"
+          
         >
         Describa de manera breve cual es el motivo por el cual solicita apoyo del programa de psicología
         </label>
@@ -250,7 +252,7 @@
           placeholder="Describa brevemente la situación por la cual está atravesando."
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-          ></textarea>
+          >{{ old('descripcion') }}</textarea>
           @error('descripcion')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
@@ -275,12 +277,13 @@
         ¿Qué esperas de las sesiones de acompañamiento? (¿Cuáles son tus expectativas?)
         </label>
         <textarea
+        
           type="text"
           name="expectativas"
           placeholder="Describa brevemente la situación por la cual está atravesando."
           rows="4" 
           class="w-full h-40 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-          ></textarea>
+          >{{ old('expectativas')}}</textarea>
           @error('expectativas')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
@@ -308,6 +311,7 @@
               Fecha nacimeinto 
             </label>
             <input
+            value="{{ old('nacimiento') }}"
               type="date"
               name="nacimiento"
               id="date"
@@ -323,7 +327,7 @@
               </div>
               <div class="mx-3">
                   
-                  <p class="text-sm text-red-700">tiene que ser menot a 260 caracteeres</p>
+                  <p class="text-sm text-red-700">ingrese una fecha valida</p>
               </div>
           </div>
       </div>
@@ -339,6 +343,7 @@
             ¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana)
             </label>
             <select
+            value="{{ old('horario') }}"
               type="time"
               name="horario"
               id="time"
