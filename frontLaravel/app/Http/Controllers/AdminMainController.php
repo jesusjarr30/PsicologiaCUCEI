@@ -43,6 +43,30 @@ class AdminMainController extends Controller
         }
         return view('administrador.pacientes',['pacientes'=>$pacientes]);
     }
+    public function serch_dataCliente(Request $request){
+        $search = $request->search;
+        
+        $pacientes = Cliente::where(function($query) use ($search){
+            $query->where('codigo','like',"%$search%")
+            ->orWhere('nombre','like',"%$search%");
+        })
+        ->paginate(10);
+
+        return view('administrador.pacientes',['pacientes'=>$pacientes]);
+
+    }
+    public function serch_dataUsuario(Request $request){
+        $search = $request->search;
+        
+        $Usuarios = Usuario::where(function($query) use ($search){
+            $query->where('nombre','like',"%$search%");
+        })
+        ->paginate(10);
+
+        return view('administrador.usuarios',['usuarios'=>$Usuarios]);
+
+    }
+
     public function showEstadisticas(){
         $consulta1 = DB::select('SELECT COUNT(*) as count FROM citas');
         $citas = $consulta1[0]->count;
@@ -166,7 +190,7 @@ class AdminMainController extends Controller
         $cliente = cliente::find($id);
         $notas = Nota::where('cliente_id', $id)->get();
 
-        return view('administrador.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
+            
 
 
     }

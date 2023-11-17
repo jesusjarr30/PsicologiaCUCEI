@@ -3,10 +3,18 @@
 @section('contentAdmin')
 
 <div class="p-5 h-screen bg-gray-100">
-    <h1 class="text-4xl mb-2"> Lista de Pacientes</h1>
     <div>
-        <input placeholder="Nombre" class="block p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
+        <div class="flex">
+
+            <form id="form1" action="{{route('searchDataCliente')}}" method="GET">
+                @csrf
+                <input placeholder="Nombre o Codigo" name="search" class=" mr-4 mt-2 p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
+            </form>
+            <button form="form1" type="submit" class="mr-2 mt-2 border border-blue-800 bg-blue-800 rounded-lg w-20 text-white hover:bg-blue-500"> Buscar</button>
+        </div>
     </div>
+    <h1 class="text-4xl mb-2"> Lista de Pacientes</h1>
+    
     <div class="overflow-auto rounded-lg shadow hidden md:block mt-6">
 
         <table class="w-full">
@@ -54,7 +62,7 @@
         <div class="pagination mt-4">
             {{ $pacientes->links() }}
         </div>
-        
+
     </div>
     <!-- Aqui va lo de movil devices. -->
     <div class="mt-3 grid grid-cols-1 gap-4 md:hidden">
@@ -65,7 +73,7 @@
                 <div>{{ $Paciente->correo }}</div>
                 <div>tel: {{ $Paciente->telefono }}</div>
                 
-                <div class="flex">
+                <div >
                     <button class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white hover:bg-green-500">Ver</button>
                     <button class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20 text-white hover:bg-yellow-500">Editar<button>
                     <button class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar<button>
