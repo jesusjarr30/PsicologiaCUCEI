@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('cliente_id');
             $table->integer('usuario_id');
-            $table->string('fecha');
+            $table->date('fecha');
             $table->boolean('atendido');
             $table->timestamps();
         });

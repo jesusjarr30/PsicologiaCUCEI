@@ -24,10 +24,10 @@
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
       <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
           <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-white">Nuestro Equipo</h2>
-          <p class="font-light lg:mb-16 sm:text-xl">Somos un equipo de estudiantes de la Universidad de Guadalajara. Como apasionados de la programación, nos encanta explorar nuevas tecnologías, innovar y estar en constante aprendizaje. Nuestro objetivo es brindar soluciones tecnológicas creativas y de calidad, aprovechando nuestra formación académica y nuestras habilidades técnicas.</p>
+          <p class="font-light lg:mb-16 sm:text-xl text-white">Somos un equipo de estudiantes de la Universidad de Guadalajara. Como apasionados de la programación, nos encanta explorar nuevas tecnologías, innovar y estar en constante aprendizaje. Nuestro objetivo es brindar soluciones tecnológicas creativas y de calidad, aprovechando nuestra formación académica y nuestras habilidades técnicas.</p>
       </div> 
       <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
-          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex">
+          <div class="items-center bg-yellow-500 rounded-lg shadow sm:flex">
               <a href="#">
                   <img class="max-w-200 w-full rounded-lg sm:rounded-none sm:rounded-l-lg " src="{{ asset('Imagenes/team/JesusFoto.png') }}" alt="Developer">
               </a>
@@ -61,7 +61,7 @@
                   </ul>
               </div>
           </div> 
-          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex">
+          <div class="items-center bg-blue-500 rounded-lg shadow sm:flex">
               <a href="#">
                   <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="{{ asset('Imagenes/team/NestorFoto.png') }}" alt="Bonnie Avatar">
               </a>
@@ -95,7 +95,7 @@
                   </ul>
               </div>
           </div> 
-          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex">
+          <div class="items-center bg-blue-500 rounded-lg shadow sm:flex">
               <a href="#">
                   <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="{{ asset('Imagenes/team/bonillaFoto.png') }}" alt="Bonnie Avatar">
               </a>
