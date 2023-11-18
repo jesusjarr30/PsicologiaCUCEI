@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
+    Route::get('Admin/showUsuarios/eliminar/{id}',[AdminMainController::class,'EliminarUsuario'] )->name('eliminar-Usuario');
     Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
     Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
     Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes');
@@ -72,6 +73,7 @@ Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_da
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes');
+    Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     
     Route::get('Admin/Pacientes/{id}',[AdminMainController::class,'EditarPaciente'] )->name('showPacienteEditar');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');

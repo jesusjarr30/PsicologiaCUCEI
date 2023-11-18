@@ -43,8 +43,9 @@
                     <td class="flex"> 
                         <button class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-16 text-white hover:bg-green-500">Ver</button>
                         <button class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar<button>
-                        <button class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar<button>
-
+                        <a href="{{ route('eliminar-Usuario', ['id' => $Usuario->id]) }}">
+                            <button  class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar<button>
+                        </a>
 
                     </td>
                 </tr>

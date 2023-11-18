@@ -46,8 +46,7 @@
                         
                            
                         <a href="{{ route('showPacienteEditar', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
-                        <a href="" class="mr-2 mt-2 border border-red-800
-                             bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                        <a href="{{ route('eliminar-Paciente', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
                     </td>
                 </tr>
                 @php

@@ -166,6 +166,13 @@ class AdminMainController extends Controller
         dd($Usuario);
         return "se elimino el usuario";
     }
+    public function EliminarUsuario($id){
+        
+        $Usuario = Usuario::find($id);
+        $Usuario->delete();
+
+        return  $this->showUsuarios();
+    }
     public function ConfirmarCorreo($correo){
         $user = Usuario::where('correo',$correo)->first();
         if($user){
@@ -214,6 +221,13 @@ class AdminMainController extends Controller
         }
 
         return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+    public function EliminarPaciente($id){
+        
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+
+        return  $this->verPacientes();
     }
 
     public function GuardarNota(Request $request){
