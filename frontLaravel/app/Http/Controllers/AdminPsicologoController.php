@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 use App\Models\Cliente;
 use App\Models\Nota;
+
+use Illuminate\Support\Facades\Validator;
+
 
 class AdminPsicologoController extends Controller
 {
@@ -64,9 +66,35 @@ class AdminPsicologoController extends Controller
      */
     public function update(Request $request){
         $user = Auth::user();
-        if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre');}
-        if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono');}
-        if($user->password != $request->input('password') && ($request->input('password') != null )){ $user->password = Hash::make($request->input('password'));}
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'string|max:255',
+            'telefono' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator);
+        }
+        $actualizado = "profile-updated";
+        if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre'); $actualizado .=", nombre";}
+        if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono'); $actualizado .=", telefono";}
+        if($request->input('password') != null && $request->input('password_Old') != null){ 
+            $validator2 = Validator::make($request->all(), [
+                'password' => 'string|min:8|confirmed',
+            ]);
+            if ($validator2->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator2);
+            }
+            
+            if (Hash::check($request->input('password_Old'),$user->password ) ){
+                $user->password = Hash::make($request->input('password'));
+                $actualizado .=", password";
+            }else{
+                return redirect()->back()->withErrors('No coincide contraseña antigua');
+            }
+        }
         
         $horario = array(
             'Lun_I'=>$request->input("Lun-horario-Inicio"),
@@ -86,8 +114,8 @@ class AdminPsicologoController extends Controller
         $user->horario = $horario_json;
             
         $user->save();
-
-        return Redirect::route('EditUser')->with('status', 'profile-updated');
+        
+        return redirect()->route('EditUser')->with('success', $actualizado);
     }
 
     /**

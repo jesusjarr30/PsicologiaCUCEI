@@ -5,8 +5,14 @@
 <div class="p-5 h-screen bg-gray-100">
     <h1 class="text-4xl mb-2"> Lista de usuarios</h1>
     <div>
-        <input placeholder="Nombre" class="block p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
-    </div>
+        <div class="flex">
+
+            <form id="form1" action="{{route('searchDataUsuario')}}" method="GET">
+                @csrf
+                <input placeholder="Nombre" name="search" class=" mr-4 mt-2 p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
+            </form>
+            <button form="form1" type="submit" class="mr-2 mt-2 border border-blue-800 bg-blue-800 rounded-lg w-20 text-white hover:bg-blue-500"> Buscar</button>
+        </div>    </div>
     <div class="overflow-auto rounded-lg shadow hidden md:block mt-6">
 
         <table class="w-full">

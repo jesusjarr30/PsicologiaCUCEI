@@ -84,7 +84,11 @@ class LoginRegisterController extends Controller
         if(Auth::attempt($credentials))
         {
             $request->session()->regenerate();
-            //dd(Auth::user());
+            if(Auth::user()->activo == 0){
+                return back()->withErrors( [
+                        'email' => 'Correo no verificado',
+                    ])->onlyInput('email');
+            }
 
             if(Auth::user()->role == "ADMIN"){
                 return redirect()->route('AdminHome')
@@ -92,10 +96,6 @@ class LoginRegisterController extends Controller
             }elseif(Auth::user()->role == "USER"){
                 return redirect()->route('showCitasPsicologo')
                     ->withSuccess('You have successfully logged in!');
-            }else{
-                return back()->withErrors([
-                    'email' => 'Rol no valido... contaque con su administrador',
-                ])->onlyInput('email');
             }
         }
 
