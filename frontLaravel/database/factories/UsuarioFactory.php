@@ -16,11 +16,19 @@ class UsuarioFactory extends Factory
     public function definition(): array
     {
         $horario = [
-            "dias" => ["Lunes", "Martes", "Miércoles"],
-            "horas" => ["08:00 AM", "09:00 AM", "10:00 AM"],
+            "Lun_I" => "00:00",
+            "Lun_F" => "00:00",
+            "Mar_I" => "00:00",
+            "Mar_F" => "00:00",
+            "Mie_I" => "00:00", 
+            "Mie_F" => "00:00",
+            "Jue_I" => "00:00",
+            "Jue_F" => "00:00",
+            "Vie_I" => "00:00",
+            "Vie_F" => "00:00",
+            "Sab_I" => "00:00",
+            "Sab_F" => "00:00", 
         ];
-
-       
 
         return [
             'nombre' => $this->faker->text(5),

@@ -21,41 +21,20 @@ class UsuarioSeeder extends Seeder
         $usuario->password = bcrypt("jesus"); // Utiliza la función bcrypt para almacenar contraseñas seguras
         $usuario->role = "ADMIN";        
         // Crear un array asociativo para el campo JSON "horario_final"
-        $horario2 = [[
-            "dia" => "lunes",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "martes",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "miercoles",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "jueves",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "viernes",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "sabado",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ],
-        [
-            "dia" => "domingo",
-            "inicio" => "Date format",
-            "fin" => "Date format"
-        ]
+        
+        $horario2 = [
+            "Lun_I"=> "10:00",
+            "Lun_F" => "11:00",
+            "Mar_I" => "11:00",
+            "Mar_F" => "12:00",
+            "Mie_I" => "12:00", 
+            "Mie_F" => "13:00",
+            "Jue_I" => "13:00",
+            "Jue_F" => "14:00",
+            "Vie_I" => "14:00",
+            "Vie_F" => "15:00",
+            "Sab_I" => "15:00",
+            "Sab_F" => "16:00", 
         ];
         
         // Asignar el campo JSON "horario_final"
