@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CitaRegistradaMailable;
+use App\Models\Usuario;
+use App\Models\Cita;
+use Carbon\Carbon;
 
 class citaController extends Controller
 {
@@ -39,6 +42,7 @@ class citaController extends Controller
 
     public function store(Request $request): RedirectResponse
 {
+    $request->flash();
     //Aqui se registra la cita de un usuario.
     $nombre = $request->input('nombre');
     $apellidos = $request->input('apellidos');
@@ -52,25 +56,27 @@ class citaController extends Controller
     $expectativas = $request->input('expectativas');
     $horario = $request->input('horario');
 
+    
+
     // Validación
     $validator = Validator::make($request->all(), [
         'nombre' => 'required|string|max:255',
         'apellidos' => 'required|string|max:255',
-        'codigo' => 'required|numeric|max:12|min:8',
+        'codigo' => 'required|numeric',
         'correo' => 'required|email',
-        'edad' => 'required|numeric|min:10|max:70        ', // Cambia 18 por el valor mínimo requerido
-        'telefono' => 'required|numeric|min:|max:12',
-        'nacimiento' => 'required|date|valid_birthdate',
+        'edad' => 'required|numeric', // Cambia 18 por el valor mínimo requerido
+        'telefono' => 'required|numeric',
+        'nacimiento' => 'required|date',
         'descripcion' => 'required|string|max:500',
         'expectativas' => 'required|string|max:500',
         'horario' => 'required|string',
     ]);
 
-    //if ($validator->fails()) {
-        // Si la validación falla, redirige de vuelta con los errores
-      //  return redirect()->back()
-        //    ->withErrors($validator);
-    //}
+    if ($validator->fails()) {
+         //Si la validación falla, redirige de vuelta con los errores
+       return redirect()->back()
+           ->withErrors($validator);
+    }
 
     $tabla1 = new Cliente();
     $tabla1->nombre = $nombre;
@@ -91,21 +97,227 @@ class citaController extends Controller
     $tabla2->horario = $horario;
 
     $tabla2->save();
+    //obtener el IDd del usuario que se registro
+    $tabla2Id = $tabla2->id;
 
     Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
+    $this -> GenerarCita($tabla2Id,$tabla2->horario);
 
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
-}
+    }
+
+    public function GenerarCita($id,$horario){
+        $horaAComparar = Carbon::parse($horario);
+        $LLunes = [];
+        $LMartes = [];
+        $LMiercoles = [];
+        $LJueves = [];
+        $LViernes = [];
+        $LSabado = [];
+        
+
+        $usuariosConHorario = Usuario::whereNotNull('horario')->select('id', 'horario')->get();
+
+        info("Aqui debe de ir los manesje de los usuarios que se registraron");
+        info($usuariosConHorario);
+
+        foreach ($usuariosConHorario as &$usuario) {
+            // Decodificar el JSON en el campo 'horario' para trabajar con un arreglo asociativo
+            $horario = json_decode($usuario['horario'], true);
+        
+            if( $horaAComparar->between(Carbon::parse($horario['Lun_I']), Carbon::parse($horario['Lun_F'])) ){
+                array_push($LLunes, $usuario['id']);
+            }
+            if( $horaAComparar->between(Carbon::parse($horario['Mar_I']), Carbon::parse($horario['Mar_F'])) ){
+                array_push($LMartes, $usuario['id']);
+            }
+            if( $horaAComparar->between(Carbon::parse($horario['Mie_I']), Carbon::parse($horario['Mie_F'])) ){
+                array_push($LMiercoles, $usuario['id']);
+            }
+            if( $horaAComparar->between(Carbon::parse($horario['Jue_I']), Carbon::parse($horario['Jue_F'])) ){
+                array_push($LJueves, $usuario['id']);
+            }
+            if( $horaAComparar->between(Carbon::parse($horario['Vie_I']), Carbon::parse($horario['Vie_F'])) ){
+                array_push($LViernes, $usuario['id']);
+            }
+            if( $horaAComparar->between(Carbon::parse($horario['Sab_I']), Carbon::parse($horario['Sab_F'])) ){
+                array_push($LSabado, $usuario['id']);
+            }
+            //$usuario['horario'] = json_encode($horario);
+        }
+        unset($usuario);
+        if(empty($LLunes) && empty($LMartes) && empty($LMiercoles) && empty($LJueves) && empty($LViernes) && empty($LSabado)){
+            return response()->json(['message' => 'no existe psicolog con esta cita']);
+        }
+        
+        //info($usuariosConHorario);
+        //revisar los logs para ver que onda
+        info($LLunes);
+        info($LMartes);
+        info($LMiercoles);
+        info($LJueves);
+        info($LViernes);
+        info($LSabado); 
+        $dias=1;
+        $hoy = Carbon::now();//obtener el dia de hoy
+        $fecha = $hoy->addDays($dias);
+        info($fecha);
+        $fecha = $fecha->addDays($dias);
+        info($fecha);
+        $fecha = $fecha->addDays($dias);
+        info($fecha);
+        $diaSemana = Carbon::parse($fecha)->format('l');
+        
+        $econtrado = true;
+        $idParaCita="";
+
+        while($econtrado){
+            $fecha = $fecha->addDays($dias);
+            $diaSemana = Carbon::parse($fecha)->format('l');
+            info($diaSemana);
+            info($fecha);
+        //poner todos los dias de la semana 
+        if($diaSemana === "Monday"){
+
+            for ($i = 0; $i < count($LMiercoles); $i++) {
+                info("si entro al for");
+                $cita = Cita::where('usuario_id', $LMiercoles[$i])
+                ->whereDate('fecha', $fecha->toDateString())
+                ->first();
+
+                if($cita  === null){
+                    $econtrado=false;
+                    $idParaCita=$LMiercoles[$i];
+                    info("entro a null");
+                    break;
+                    
+                }
+            }
+            
+        }
+
+        if($diaSemana === "Tuesday"){
+
+            for ($i = 0; $i < count($LMartes); $i++) {
+                info("si entro al for");
+                $cita = Cita::where('usuario_id', $LMartes[$i])
+                ->whereDate('fecha', $fecha->toDateString())
+                ->first();
+
+                if($cita  === null){
+                    $econtrado=false;
+                    $idParaCita=$LMartes[$i];
+                    info("entro a null");
+                    break;
+                    
+                }
+            }
+            
+        }
+            
+
+            if($diaSemana === "Wednesday"){
+
+                for ($i = 0; $i < count($LMiercoles); $i++) {
+                    info("si entro al for");
+                    $cita = Cita::where('usuario_id', $LMiercoles[$i])
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$LMiercoles[$i];
+                        info("entro a null");
+                        break;
+                        
+                    }
+                }
+                
+            }
+
+            if($diaSemana === "Thursday"){
+
+                for ($i = 0; $i < count($LJueves); $i++) {
+                    info("si entro al for");
+                    $cita = Cita::where('usuario_id', $LJueves[$i])
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$LJueves[$i];
+                        info("entro a null");
+                        break;
+                        
+                    }
+                }
+                
+            }
+            if($diaSemana === "Friday"){
+
+                for ($i = 0; $i < count($LViernes); $i++) {
+                    info("si entro al for");
+                    $cita = Cita::where('usuario_id', $LViernes[$i])
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$LViernes[$i];
+                        info("entro a null");
+                        break;
+                        
+                    }
+                }
+                
+            }
+            if($diaSemana === "Saturday"){
+
+                for ($i = 0; $i < count($LSabado); $i++) {
+                    info("si entro al for");
+                    $cita = Cita::where('usuario_id', $LSabado[$i])
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$LSabado[$i];
+                        info("entro a null");
+                        break;
+                        
+                    }
+                }
+                
+            }
+           
+            
+        }
+        info("la informacion para la cita es la siguiente");
+        info($idParaCita);
+
+        $cita = new Cita([
+            'cliente_id' => 1,
+            'usuario_id' => $idParaCita,
+            'fecha' => $fecha,
+            'atendido'=>false,
+        ]);
+        $cita->save();
+        
+
+        info("Salio de cita");
+
+        return response()->json(['message' => 'Cita generada correctamente']);
+    }
 
 
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)
     {
-        //
+        
     }
 
     public function update(Request $request, $id)
