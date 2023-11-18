@@ -40,7 +40,7 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::post('/logout', 'logout')->name('logout')->middleware(['auth']);
+    Route::post('/puta', 'logout')->name('logout')->middleware(['auth']);
 });
 
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
@@ -60,22 +60,14 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
+    Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_dataUsuario'] )->name('searchDataUsuario');
     Route::get('Admin/showUsuarios/eliminar/{id}',[AdminMainController::class,'EliminarUsuario'] )->name('eliminar-Usuario');
     Route::get('Admin/Estaditicas',[AdminMainController::class,'showEstadisticas'] )->name('showEstadisticas');
     Route::get('Admin/Citas',[AdminMainController::class,'showCitas'] )->name('showCitas');
     Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes');
-    Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
-});
-Route::get('Admin/Pacientes/searchData',[AdminMainController::class,'serch_dataCliente'] )->name('searchDataCliente');
-Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_dataUsuario'] )->name('searchDataUsuario');
-
-
-Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('Admin/Pacientes',[AdminMainController::class,'verPacientes'] )->name('showPacientes');
-    Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
-    
     Route::get('Admin/Pacientes/{id}',[AdminMainController::class,'EditarPaciente'] )->name('showPacienteEditar');
+    Route::get('Admin/Pacientes/searchData',[AdminMainController::class,'serch_dataCliente'] )->name('searchDataCliente');
+    Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
 });
@@ -121,7 +113,7 @@ Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->nam
     //return "mensaje enviado";
 //})->name('confirmacion');
 
-Auth::routes();
+//Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
