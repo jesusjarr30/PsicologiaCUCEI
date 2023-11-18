@@ -125,6 +125,13 @@ class AdminPsicologoController extends Controller
     {
         //
     }
+    public function EliminarPaciente($id){
+        
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+        
+        return  $this->verPacientes();
+    }
     public function verPacientes(){
 
         $pacientes = Cliente::paginate(10);

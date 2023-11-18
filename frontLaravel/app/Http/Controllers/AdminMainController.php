@@ -226,7 +226,7 @@ class AdminMainController extends Controller
         
         $cliente = Cliente::find($id);
         $cliente->delete();
-
+        
         return  $this->verPacientes();
     }
 
