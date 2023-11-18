@@ -137,3 +137,5 @@ Route::get('/ppp',function() {
     return view('MailMessages.recuperarForm',$data =["correo"=>"bb@bb.com ","nombre"=>"jesus"]);
 })->name('ppp');
 
+Route::get('/generar-cita/{id}/{horario}', [CitaController::class, 'GenerarCita']);
+

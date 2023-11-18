@@ -10,6 +10,7 @@ class Cita extends Model
     use HasFactory;
     
     protected $table="citas";
+    protected $fillable = ['cliente_id', 'usuario_id', 'fecha', 'atendido'];
 
     public function usuario()
     {
