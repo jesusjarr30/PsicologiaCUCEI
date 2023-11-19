@@ -29,7 +29,7 @@ class citaController extends Controller
             return $value <= $fechaActual && $value >= '1960-01-01';
         });
     }
-    
+
     public function index()
     {
         //
@@ -302,6 +302,8 @@ class citaController extends Controller
             'atendido'=>false,
         ]);
         $cita->save();
+
+        //Mail::to($email)->send(new confirmarCorreoMailable($email,$nombre));
         
 
         info("Salio de cita");

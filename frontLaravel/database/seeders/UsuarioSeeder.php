@@ -57,10 +57,7 @@ class UsuarioSeeder extends Seeder
         $usuario2->save();
 
 
-        Usuario::factory(10)->create();
-
-        
-        
+        //Usuario::factory(10)->create();
 
 
     }
