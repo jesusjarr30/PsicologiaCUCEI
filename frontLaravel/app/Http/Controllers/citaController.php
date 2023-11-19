@@ -29,7 +29,7 @@ class citaController extends Controller
             return $value <= $fechaActual && $value >= '1960-01-01';
         });
     }
-
+    
     public function index()
     {
         //
@@ -106,7 +106,7 @@ class citaController extends Controller
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
     }
 
-    public function GenerarCita($id,$horario){
+    public function GenerarCita($id,$horario){//
         $horaAComparar = Carbon::parse($horario);
         $LLunes = [];
         $LMartes = [];
@@ -179,9 +179,9 @@ class citaController extends Controller
         //poner todos los dias de la semana 
         if($diaSemana === "Monday"){
 
-            for ($i = 0; $i < count($LMiercoles); $i++) {
+            for ($i = 0; $i < count($LLunes); $i++) {
                 info("si entro al for");
-                $cita = Cita::where('usuario_id', $LMiercoles[$i])
+                $cita = Cita::where('usuario_id', $LLunes[$i])
                 ->whereDate('fecha', $fecha->toDateString())
                 ->first();
 
@@ -296,7 +296,7 @@ class citaController extends Controller
         info($idParaCita);
 
         $cita = new Cita([
-            'cliente_id' => 1,
+            'cliente_id' => $id,
             'usuario_id' => $idParaCita,
             'fecha' => $fecha,
             'atendido'=>false,
