@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cliente;
 use App\Models\Nota;
 use App\Models\Cita;
+use App\Models\Usuario;
 use Carbon\Carbon;
+
 
 use Illuminate\Support\Facades\Validator;
 
@@ -141,9 +143,6 @@ class AdminPsicologoController extends Controller
         info($citasMananaEnAdelante);
 
         return view('psicologo.VerCita',['citasHoy'=>$citasHoy,'citaPosterior'=>$citasMananaEnAdelante]);
-
-
-
     }
 
     /**
@@ -173,7 +172,6 @@ class AdminPsicologoController extends Controller
 
         $cliente = cliente::find($id);
         $notas = Nota::where('cliente_id', $id)->get();
-
         return view('psicologo.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
 
 

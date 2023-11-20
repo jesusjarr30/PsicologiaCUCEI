@@ -213,7 +213,7 @@ class AdminMainController extends Controller
         $cliente = cliente::find($id);
         $notas = Nota::where('cliente_id', $id)->get();
 
-            
+        return view('administrador.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
 
 
     }

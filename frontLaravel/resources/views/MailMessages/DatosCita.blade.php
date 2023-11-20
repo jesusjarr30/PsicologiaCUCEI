@@ -17,7 +17,7 @@
     </header>
 
     <main class="mt-8">
-        <h2 class="mt-6 text-gray-700 dark:text-gray-200">Hola, {{$nombre}}</h2>
+        <h2 class="mt-6 text-gray-700 dark:text-gray-200">Hola, {{$correo}}</h2>
 
         <p class="mt-6 leading-loose text-gray-600 dark:text-gray-300">
             Hemos recibido tu solicitud de cita y ya tenemos una fecha para ti. Tu cita es el día {{$fecha}}. 
@@ -42,7 +42,7 @@
         <p class="mt-2 text-gray-500 dark:text-gray-400">Ingenieria en computacion</p>
 
         <p class="mt-6 text-gray-500 dark:text-gray-400">
-            EL correo de tu Psicolog asigando es el siguiente:<a  class="text-blue-600 hover:underline dark:text-blue-400" target="_blank">{{$correo}}</a>. 
+            EL correo de tu Psicolog asigando es el siguiente:<a  class="text-blue-600 hover:underline dark:text-blue-400" target="_blank">{{$psicologoCorreo}}</a>. 
             <br>
             Porfavor no contestes este correo ya que se envia de forma automatica.
         </p>

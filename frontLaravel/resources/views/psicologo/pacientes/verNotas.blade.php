@@ -85,9 +85,9 @@
                             <time class="text-xs tracki uppercase dark:text-gray-400">{{$nota->created_at}}</time>
                   
                             @php
-        // Limita la descripción a 50 caracteres y agrega un salto de línea si es necesario
-        $wrappedDescription = wordwrap($nota->description, 50, "\n", true);
-    @endphp
+                                // Limita la descripción a 50 caracteres y agrega un salto de línea si es necesario
+                                $wrappedDescription = wordwrap($nota->description, 50, "\n", true);
+                            @endphp
                             {!! nl2br(e($wrappedDescription)) !!}
                         </div>
                         
