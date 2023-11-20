@@ -117,7 +117,7 @@ Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->nam
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-//prueba para ver la vista del correo 
+//prueba para ver la vista del correo esto lo vol a eliminar mas adelante pero es para testing xd
 Route::get('/CCC',function() {
     return view('MailMessages.RegistroCita',$data =["correo"=>"hola","nombre"=>"jesus"]);
 })->name('ccc');
@@ -133,6 +133,12 @@ Route::get('/aaa',function() {
 Route::get('/ppp',function() {
     return view('MailMessages.recuperarForm',$data =["correo"=>"bb@bb.com ","nombre"=>"jesus"]);
 })->name('ppp');
+
+Route::get('/correoMM',function() {
+    return view('MailMessages.DatosCita',$data =["nombre"=>"Maria","fecha"=>"10 de boviembre","psicologoNombre"=>"roberto", "correo"=>"roberto@roberto.com"]);
+})->name('correoMM');
+
+//este es el link para las citas
 
 Route::get('/generar-cita/{id}/{horario}', [CitaController::class, 'GenerarCita']);
 

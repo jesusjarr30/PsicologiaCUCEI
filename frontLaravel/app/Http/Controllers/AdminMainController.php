@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\confirmarCorreoMailable;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Cita;
+use Carbon\Carbon;
 
 
 class AdminMainController extends Controller
@@ -32,7 +34,21 @@ class AdminMainController extends Controller
         return view('administrador.usuarios',['usuarios'=>$Usuarios]);
     }
     public function showCitas(){
-        return view('administrador.verCitas');
+
+        $citasHoy = Cita::with('cliente', 'usuario')
+        ->whereDate('fecha', '=', Carbon::today()->toDateString())
+        ->get();
+        info(Carbon::today()->toDateString());
+
+        // Obtener citas de mañana y posteriores
+        $citasMananaEnAdelante = Cita::with('cliente', 'usuario')
+        ->whereDate('fecha', '>=', Carbon::tomorrow())
+        ->get();
+        info("regreso de la query");
+        info($citasHoy);
+        info($citasMananaEnAdelante);
+
+        return view('administrador.verCitas',['citasHoy'=>$citasHoy,'citaPosterior'=>$citasMananaEnAdelante]);
     }
     public function verPacientes(){
 

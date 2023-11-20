@@ -187,7 +187,7 @@ class citaController extends Controller
 
                 if($cita  === null){
                     $econtrado=false;
-                    $idParaCita=$LMiercoles[$i];
+                    $idParaCita=$LLunes[$i];
                     info("entro a null");
                     break;
                     
@@ -234,7 +234,6 @@ class citaController extends Controller
                 }
                 
             }
-
             if($diaSemana === "Thursday"){
 
                 for ($i = 0; $i < count($LJueves); $i++) {
@@ -294,11 +293,14 @@ class citaController extends Controller
         }
         info("la informacion para la cita es la siguiente");
         info($idParaCita);
+        $fechaCompleta = $fecha->setTime($horaAComparar->hour, $horaAComparar->minute);
+        info("fecha ultima");
+        info($fechaCompleta);
 
         $cita = new Cita([
             'cliente_id' => $id,
             'usuario_id' => $idParaCita,
-            'fecha' => $fecha,
+            'fecha' => $fechaCompleta,
             'atendido'=>false,
         ]);
         $cita->save();
@@ -310,7 +312,7 @@ class citaController extends Controller
 
         return response()->json(['message' => 'Cita generada correctamente']);
     }
-
+    
 
     public function show($id)
     {
