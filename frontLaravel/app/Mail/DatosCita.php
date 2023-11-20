@@ -9,24 +9,27 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
+use App\Models\Usuario;
 
 class DatosCita extends Mailable
 {
     use Queueable, SerializesModels;
     public $idPaciente;
-    public $idPsicologo;
-    public $horario;
-
+    public $usuario_id;
+    public $email;
+    public $fecha;
     /**
      * Create a new message instance.
      */
-    public function __construct($idPaciente,$idPsicologo,$horario)
+    public function __construct($email,$fecha,$usuario_id)
     {
-        $this->idPaciente=$idPaciente;
-        $this->idPsicologo=$idPsicologo;
-        $this->horario=$horario;
-    }
+      
+       $this->usuario_id=$usuario_id;
+       $this->email=$email;
+       $this->fecha=$fecha;
 
+    }
+    // Mail::to($email)->send(new CitaRegistradaMailable($email,$fechaCompleta,$idParaCita));
     /**
      * Get the message envelope.
      */
@@ -44,12 +47,14 @@ class DatosCita extends Mailable
     public function content(): Content
     {
         
-        
+        $user = Usuario::find($this->usuario_id);
         return new Content(
-            view: 'MailMessages.ConfirmarUsuario',
+            view: 'MailMessages.DatosCita',
             with: [
-                //'correo' => $this->correo,
-                //'nombre' => $this->nombre,
+                'correo' => $this->email,
+                'fecha' => $this->fecha,
+                'psicologoNombre'=>$user->nombre,
+                'psicologoCorreo'=>$user->email,
             ]
         );
     }

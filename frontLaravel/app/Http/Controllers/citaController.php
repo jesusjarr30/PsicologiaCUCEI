@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CitaRegistradaMailable;
 use App\Models\Usuario;
 use App\Models\Cita;
+use App\Mail\confirmarCorreoMailable;
+use App\Mail\DatosCita;
 use Carbon\Carbon;
 
 class citaController extends Controller
@@ -101,12 +103,12 @@ class citaController extends Controller
     $tabla2Id = $tabla2->id;
 
     Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
-    $this -> GenerarCita($tabla2Id,$tabla2->horario);
+    $this -> GenerarCita($tabla2Id,$tabla2->horario,$tabla1->correo);
 
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
     }
 
-    public function GenerarCita($id,$horario){//
+    public function GenerarCita($id,$horario,$email){//
         $horaAComparar = Carbon::parse($horario);
         $LLunes = [];
         $LMartes = [];
@@ -305,7 +307,7 @@ class citaController extends Controller
         ]);
         $cita->save();
 
-        //Mail::to($email)->send(new confirmarCorreoMailable($email,$nombre));
+        Mail::to($email)->send(new DatosCita($email,$fechaCompleta,$idParaCita));
         
 
         info("Salio de cita");
