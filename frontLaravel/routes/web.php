@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth','user']], function () {
     Route::get('/Piscologo/Pacientes/{id}',[AdminPsicologoController::class,'EditarPaciente'] )->name('showPacienteEditarPSI');
     Route::get('/Piscologo/Pacientes/eliminar/{id}',[AdminPsicologoController::class,'EliminarPaciente'] )->name('eliminar-PacientePSI');
     Route::get('/Piscologo/Pacientes/VerNotas/{id}',[AdminPsicologoController::class,'VerNotas'] )->name('verNotasPSI');
+    Route::get('/Piscologo/VerCita',[AdminPsicologoController::class,'VerCita'] )->name('verCitaPS');
     
     
 });
