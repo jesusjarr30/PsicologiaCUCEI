@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Cliente;
 use App\Models\Nota;
+use App\Models\Cita;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -116,6 +118,32 @@ class AdminPsicologoController extends Controller
         $user->save();
         
         return redirect()->route('EditUser')->with('success', $actualizado);
+    }
+    public function VerCita(){
+
+        $userEmail = Auth::user()->id;
+        info("El id del usaurio con el que me estoy loogeando es el siguient ");
+        info($userEmail);
+
+        $citasHoy = Cita::with('cliente', 'usuario')
+        ->where('usuario_id', 2)
+        ->whereDate('fecha', '=', Carbon::today()->toDateString())
+        ->get();
+    
+
+        // Obtener citas de mañana y posteriores
+        $citasMananaEnAdelante = Cita::with('cliente', 'usuario')
+        ->where('usuario_id', 2)
+        ->whereDate('fecha', '>=', Carbon::tomorrow())
+        ->get();
+        info("regreso de la query");
+        info($citasHoy);
+        info($citasMananaEnAdelante);
+
+        return view('psicologo.VerCita',['citasHoy'=>$citasHoy,'citaPosterior'=>$citasMananaEnAdelante]);
+
+
+
     }
 
     /**
