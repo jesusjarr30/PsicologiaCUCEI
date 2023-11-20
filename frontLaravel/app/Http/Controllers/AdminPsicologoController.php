@@ -168,6 +168,18 @@ class AdminPsicologoController extends Controller
         }
         return view('psicologo.pacientes',['pacientes'=>$pacientes]);
     }
+    public function serch_dataCliente(Request $request){
+        $search = $request->search;
+        
+        $pacientes = Cliente::where(function($query) use ($search){
+            $query->where('codigo','like',"%$search%")
+            ->orWhere('nombre','like',"%$search%");
+        })
+        ->paginate(10);
+
+        return view('psicologo.pacientes',['pacientes'=>$pacientes]);
+
+    }
     public function VerNotas($id){
 
         $cliente = cliente::find($id);
