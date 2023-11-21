@@ -39,6 +39,7 @@
                            
                         <a href="{{ route('showPacienteEditarPSI', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
                         <a href="{{ route('eliminar-PacientePSI', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                        <a href="{{ route('AgregarCita', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-orange-800 bg-orange-800 rounded-lg w-16 text-white hover:bg-orange-500">Cita</a>
                     </td>
                 </tr>
                 @php

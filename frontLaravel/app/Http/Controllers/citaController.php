@@ -14,6 +14,8 @@ use App\Models\Cita;
 use App\Mail\confirmarCorreoMailable;
 use App\Mail\DatosCita;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+
 
 class citaController extends Controller
 {
@@ -314,7 +316,174 @@ class citaController extends Controller
 
         return response()->json(['message' => 'Cita generada correctamente']);
     }
-    
+    public function citaManual(Request $request)
+    {
+        $usuario_id = $request->input('usuario_id');
+        $pacinete_id = $request->input('pacinete_id');
+        $horario= $request->input('horario');
+        info('los datos del post son lo siguientes');
+        info($usuario_id);
+        info($pacinete_id);
+        info($horario);
+
+        $horaAComparar = Carbon::parse($horario);
+        $LLunes = [];
+        $LMartes = [];
+        $LMiercoles = [];
+        $LJueves = [];
+        $LViernes = [];
+        $LSabado = [];
+        info($LLunes);
+        info($LMartes);
+        info($LMiercoles);
+        info($LJueves);
+        info($LViernes);
+        info($LSabado); 
+
+        $dias=1;
+        $hoy = Carbon::now();//obtener el dia de hoy
+        $fecha = $hoy->addDays($dias);
+        info($fecha);
+        $fecha = $fecha->addDays($dias);
+        info($fecha);
+        $fecha = $fecha->addDays($dias);
+        info($fecha);
+        $diaSemana = Carbon::parse($fecha)->format('l');
+        
+        $econtrado = true;
+        $idParaCita="";
+
+        while($econtrado){
+            $fecha = $fecha->addDays($dias);
+            $diaSemana = Carbon::parse($fecha)->format('l');
+            info($diaSemana);
+            info($fecha);
+        //poner todos los dias de la semana 
+        if($diaSemana === "Monday"){
+
+                $cita = Cita::where('usuario_id', $usuario_id)
+                ->whereDate('fecha', $fecha->toDateString())
+                ->first();
+
+                if($cita  === null){
+                    $econtrado=false;
+                    $idParaCita=$usuario_id;
+                    info("entro a null");
+                    break;
+                    
+                }
+            
+            
+        }
+
+        if($diaSemana === "Tuesday"){
+
+          
+                $cita = Cita::where('usuario_id', $usuario_id)
+                ->whereDate('fecha', $fecha->toDateString())
+                ->first();
+
+                if($cita  === null){
+                    $econtrado=false;
+                    $idParaCita=$usuario_id;
+                    info("entro a null");
+                    break;
+                    
+                }
+            
+            
+        }
+            
+
+            if($diaSemana === "Wednesday"){
+
+                    $cita = Cita::where('usuario_id', $usuario_id)
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$usuario_id;
+                        info("entro a null");
+                        break;
+                        
+                    }
+                
+                
+            }
+            if($diaSemana === "Thursday"){
+
+                
+                    $cita = Cita::where('usuario_id', $usuario_id)
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$usuario_id;
+                        info("entro a null");
+                        break;
+                        
+                    }
+                
+                
+            }
+            if($diaSemana === "Friday"){
+
+                
+                    $cita = Cita::where('usuario_id', $usuario_id)
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$usuario_id;
+                        info("entro a null");
+                        break;
+                        
+                    }
+                
+                
+            }
+            if($diaSemana === "Saturday"){
+                    $cita = Cita::where('usuario_id', $usuario_id)
+                    ->whereDate('fecha', $fecha->toDateString())
+                    ->first();
+
+                    if($cita  === null){
+                        $econtrado=false;
+                        $idParaCita=$usuario_id;
+                        info("entro a null");
+                        break;
+                        
+                    }
+                
+                
+            }
+           
+            return response()->json(['message' => 'Cita generada correctamente']);
+        }
+        info("la informacion para la cita es la siguiente");
+        info($idParaCita);
+        $fechaCompleta = $fecha->setTime($horaAComparar->hour, $horaAComparar->minute);
+        info("fecha ultima");
+        info($fechaCompleta);
+
+        $cita = new Cita([
+            'cliente_id' => $pacinete_id,
+            'usuario_id' => $idParaCita,
+            'fecha' => $fechaCompleta,
+            'atendido'=>false,
+        ]);
+        $cita->save();
+
+        //Mail::to($email)->send(new DatosCita($email,$fechaCompleta,$idParaCita));
+        
+
+        info("Salio de cita");
+
+        
+    }
 
     public function show($id)
     {
