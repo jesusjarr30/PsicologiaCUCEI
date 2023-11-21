@@ -187,7 +187,7 @@ class AdminMainController extends Controller
         $Usuario = Usuario::find($id);
         $Usuario->delete();
 
-        return  $this->showUsuarios();
+        return  back()->with('success', 'Se elimino el usuario con éxito.');
     }
     public function ConfirmarCorreo($correo){
         $user = Usuario::where('correo',$correo)->first();
@@ -236,14 +236,14 @@ class AdminMainController extends Controller
             }
         }
 
-        return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
+        return back()->with('success', 'Se actualizo el paciente con éxito.');
     }
     public function EliminarPaciente($id){
         
         $cliente = Cliente::find($id);
         $cliente->delete();
         
-        return  $this->verPacientes();
+        return  back()->with('success', 'Se elimino el paciente con éxito.');
     }
 
     public function GuardarNota(Request $request){

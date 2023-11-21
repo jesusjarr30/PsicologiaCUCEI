@@ -5,11 +5,8 @@
   @csrf
   @method('put')
 <div>
-
   @if(session('success'))
     <div class="alert alert-success">
-
-        
         <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
               <div class="text-green-700">

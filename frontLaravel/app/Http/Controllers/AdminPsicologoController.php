@@ -161,7 +161,7 @@ class AdminPsicologoController extends Controller
         $cita->delete();
         $cliente->delete();
 
-        return  $this->verPacientes();
+        return  back()->with('success', 'Se elimino el paciente con éxito.');
     }
     public function verPacientes(){
 
@@ -209,6 +209,6 @@ class AdminPsicologoController extends Controller
             }
         }
 
-        return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
+        return back()->with('success', 'Se actualizo el paciente con éxito.');
     }
 }
