@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->integer('cliente_id');
             $table->integer('usuario_id');
             $table->datetime('fecha');

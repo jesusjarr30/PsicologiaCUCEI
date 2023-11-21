@@ -1,7 +1,7 @@
 @extends('layouts.BasePsicologo')
 
 @section('contentPsicologo')
-<form  action="{{ route('actualizar-Paciente', $cliente->id ) }}" method="POST">
+<form  action="{{ route('actualizar-PacientePSI', $cliente->id ) }}" method="POST">
     @csrf
     @method('put')
   <div>

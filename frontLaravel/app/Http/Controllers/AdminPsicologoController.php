@@ -12,8 +12,7 @@ use App\Models\Nota;
 use App\Models\Cita;
 use App\Models\Usuario;
 use Carbon\Carbon;
-
-
+use DateTime;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -155,8 +154,13 @@ class AdminPsicologoController extends Controller
     public function EliminarPaciente($id){
         
         $cliente = Cliente::find($id);
+        $cita = Cita::find($id);
+
+        $cita->fecha = date('Y-m-d 00:00:00', strtotime('0001-01-01'));
+        $cita->save();
+        $cita->delete();
         $cliente->delete();
-        
+
         return  $this->verPacientes();
     }
     public function verPacientes(){
@@ -191,6 +195,20 @@ class AdminPsicologoController extends Controller
     public function EditarPaciente($id){
         
         $cliente = Cliente::find($id);
+        return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+    const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
+    public function ActualizarPaciente(Request $request, $id){
+        
+        $cliente = Cliente::find($id);
+        //dd($cliente, $request);
+        foreach (self::FIELDS as $field) {
+            if ($request->$field) {
+                $cliente->$field = $request->input($field);
+                $cliente->save();
+            }
+        }
+
         return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
     }
 }
