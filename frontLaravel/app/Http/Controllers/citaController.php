@@ -457,8 +457,6 @@ class citaController extends Controller
                         break;
                         
                     }
-                
-                
             }
            
             return response()->json(['message' => 'Cita generada correctamente']);
