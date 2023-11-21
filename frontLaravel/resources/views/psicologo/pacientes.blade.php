@@ -3,9 +3,55 @@
 @section('contentPsicologo')
 
 <div class="p-5 h-screen bg-gray-100">
+    @if(session('success'))
+    <div class="alert alert-success">
+
+        <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-green-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  <span class="font-semibold text-green-700">Exito!</span>
+                  <p class="text-sm text-green-700">{{ session('success') }}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+    @endif
+      @if ($errors->any())
+      <div class="items-center">
+      
+      <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4 justify-center items-center">
+        <div class="flex items-center">
+            <div class="text-red-700">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+            <div class="mx-3">
+                <span class="font-semibold text-red-700">Error!</span>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </div>
+        </div>
+      </div>
+    </div>
+    @endif
+
     <h1 class="text-4xl mb-2"> Lista de Pacientes</h1>
     <div>
-        <input placeholder="Nombre" class="block p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
+        <div class="flex">
+            
+            <form id="form1" action="{{route('searchDataClientePSI')}}" method="GET">
+                @csrf
+                <input placeholder="Nombre o Codigo" name="search" class=" mr-4 mt-2 p-2 text-xl rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"/>
+            </form>
+            <button form="form1" type="submit" class="mr-2 mt-2 border border-blue-800 bg-blue-800 rounded-lg w-20 text-white hover:bg-blue-500"> Buscar</button>
+        </div>
     </div>
     <div class="overflow-auto rounded-lg shadow hidden md:block mt-6">
 

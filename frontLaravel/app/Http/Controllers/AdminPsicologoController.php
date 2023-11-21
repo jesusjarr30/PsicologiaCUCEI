@@ -12,8 +12,7 @@ use App\Models\Nota;
 use App\Models\Cita;
 use App\Models\Usuario;
 use Carbon\Carbon;
-
-
+use DateTime;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -155,9 +154,14 @@ class AdminPsicologoController extends Controller
     public function EliminarPaciente($id){
         
         $cliente = Cliente::find($id);
+        $cita = Cita::find($id);
+
+        $cita->fecha = date('Y-m-d 00:00:00', strtotime('0001-01-01'));
+        $cita->save();
+        $cita->delete();
         $cliente->delete();
-        
-        return  $this->verPacientes();
+
+        return  back()->with('success', 'Se elimino el paciente con éxito.');
     }
     public function verPacientes(){
 
@@ -167,6 +171,18 @@ class AdminPsicologoController extends Controller
             info('Información del Paciente: ' . json_encode($paciente->toArray()));
         }
         return view('psicologo.pacientes',['pacientes'=>$pacientes]);
+    }
+    public function serch_dataCliente(Request $request){
+        $search = $request->search;
+        
+        $pacientes = Cliente::where(function($query) use ($search){
+            $query->where('codigo','like',"%$search%")
+            ->orWhere('nombre','like',"%$search%");
+        })
+        ->paginate(10);
+
+        return view('psicologo.pacientes',['pacientes'=>$pacientes]);
+
     }
     public function VerNotas($id){
 
@@ -179,11 +195,27 @@ class AdminPsicologoController extends Controller
         $cliente = Cliente::find($id);
         return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
     }
+
     public function AgregarCita($id){
         $user = Auth::user();
 
         $cliente = Cliente::find($id);
         return view('psicologo.pacientes.AgregarCita',['user'=> $user,'cliente'=>$cliente]);
+
+    }
+    const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
+    public function ActualizarPaciente(Request $request, $id){
+        
+        $cliente = Cliente::find($id);
+        //dd($cliente, $request);
+        foreach (self::FIELDS as $field) {
+            if ($request->$field) {
+                $cliente->$field = $request->input($field);
+                $cliente->save();
+            }
+        }
+
+        return back()->with('success', 'Se actualizo el paciente con éxito.');
 
     }
 }
