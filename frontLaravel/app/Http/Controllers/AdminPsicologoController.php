@@ -189,13 +189,19 @@ class AdminPsicologoController extends Controller
         $cliente = cliente::find($id);
         $notas = Nota::where('cliente_id', $id)->get();
         return view('psicologo.pacientes.verNotas',['cliente' => $cliente, 'notas' => $notas]);
-
-
     }
     public function EditarPaciente($id){
         
         $cliente = Cliente::find($id);
         return view('psicologo.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+
+    public function AgregarCita($id){
+        $user = Auth::user();
+
+        $cliente = Cliente::find($id);
+        return view('psicologo.pacientes.AgregarCita',['user'=> $user,'cliente'=>$cliente]);
+
     }
     const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
     public function ActualizarPaciente(Request $request, $id){
@@ -210,5 +216,6 @@ class AdminPsicologoController extends Controller
         }
 
         return back()->with('success', 'Se actualizo el paciente con éxito.');
+
     }
 }
