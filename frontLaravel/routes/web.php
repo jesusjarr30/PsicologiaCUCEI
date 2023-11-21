@@ -148,6 +148,6 @@ Route::get('/correoMM',function() {
 
 //este es el link para las citas
 
-Route::get('/generar-cita/{id}/{horario}', [CitaController::class, 'GenerarCita']);
+Route::get('/generar-cita/{id}/{horario}/{email}', [CitaController::class, 'GenerarCita']);
 Route::post('/generar-manual', [CitaController::class, 'citaManual'])->name('GenerarManual');
 

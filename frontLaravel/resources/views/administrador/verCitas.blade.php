@@ -57,7 +57,7 @@
     @foreach($citaPosterior as $cita)
 
     <ul role="list" class="divide-y divide-gray-100">
-        <li class="justify-between gap-x-6 py-5 px-4 hover:bg-violet-300">
+        <li class="justify-between gap-x-6 py-5 px-4 hover:bg-orange-300">
 
         <div class="xl:flex lg:flex md:flex xm:flex-col sx:flex-col  min-w-0 gap-x-4 ml-2 mr-2">
             <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{ asset('Imagenes/iconos-citas/usuario.png') }}" alt="">

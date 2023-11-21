@@ -309,7 +309,7 @@ class citaController extends Controller
         ]);
         $cita->save();
 
-        Mail::to($email)->send(new DatosCita($email,$fechaCompleta,$idParaCita));
+        //Mail::to($email)->send(new DatosCita($email,$fechaCompleta,$idParaCita));
         
 
         info("Salio de cita");

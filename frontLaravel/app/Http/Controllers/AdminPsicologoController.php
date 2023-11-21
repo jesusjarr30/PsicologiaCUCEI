@@ -127,14 +127,14 @@ class AdminPsicologoController extends Controller
         info($userEmail);
 
         $citasHoy = Cita::with('cliente', 'usuario')
-        ->where('usuario_id', 2)
+        //->where('usuario_id', 2)
         ->whereDate('fecha', '=', Carbon::today()->toDateString())
         ->get();
     
 
         // Obtener citas de mañana y posteriores
         $citasMananaEnAdelante = Cita::with('cliente', 'usuario')
-        ->where('usuario_id', 2)
+        //->where('usuario_id', 2)
         ->whereDate('fecha', '>=', Carbon::tomorrow())
         ->get();
         info("regreso de la query");
