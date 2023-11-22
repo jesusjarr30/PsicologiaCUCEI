@@ -1,3 +1,7 @@
+@extends('layouts.BasePsicologo')
+
+@section('contentPsicologo')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -19,6 +23,8 @@
         </style>
     </head>
     <body >
+     
+
       @if(session('success'))
       <div class="alert alert-success">
   
@@ -426,3 +432,4 @@
 
     </body>
 </html>
+@endsection

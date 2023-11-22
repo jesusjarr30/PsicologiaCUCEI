@@ -45,10 +45,6 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
 
-Route::get('/cita',function() {
-    return view('Cita.Agendar');
-})->name('cita');
-
 //links part
 Route::get('/Links/Developers',[LinksController::class, 'desarrolladores'])->name("des");
 Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name("acercaDe");
@@ -58,6 +54,7 @@ Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('re
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
+    Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
     Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_dataUsuario'] )->name('searchDataUsuario');
@@ -79,6 +76,7 @@ Route::get('/developers',function() {
 //Psicologo regular menu
 Route::group(['middleware' => ['auth','user']], function () {
     Route::get('/Piscologo',[AdminPsicologoController::class, 'showCitasPsicologo'])->name('showCitasPsicologo');
+    Route::get('/Piscologo/cita',function() { return view('psicologo.Agendar'); })->name('citaPSI');
     Route::get('/Piscologo/EditUser',[AdminPsicologoController::class, 'EditUser'])->name('EditUser');
     Route::get('/Piscologo/Pacientes',[AdminPsicologoController::class,'verPacientes'] )->name('showPacientesPSI');
     Route::get('/Piscologo/Pacientes/searchData',[AdminPsicologoController::class,'serch_dataCliente'] )->name('searchDataClientePSI');
