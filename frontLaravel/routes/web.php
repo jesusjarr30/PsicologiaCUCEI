@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AdminMainController;
 use App\Http\Controllers\AdminPsicologoController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CalendarController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinksController;
@@ -33,6 +34,9 @@ use App\Http\Controllers\ContrasenaRecover;
 Route::get('/', HomeController::class)->name("home");
 ///links para el login 
 
+Route::get('books', [BookController::class, 'index'])->name('books.index');
+Route::post('books', [BookController::class, 'store'])->name('books.store');
+
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -53,6 +57,7 @@ Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('re
 
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
+
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
     Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
@@ -67,6 +72,12 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
+
+    //Calendario
+    Route::get('Admin/calendar/index', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::post('Admin/calendar', [CalendarController::class, 'store'])->name('calendar.store');
+    Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'update'])->name('calendar.update');
+    Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
 });
 
 Route::get('/developers',function() {
