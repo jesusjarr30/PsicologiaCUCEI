@@ -90,22 +90,20 @@ class citaController extends Controller
     $tabla1->edad = $edad;
     $tabla1->telefono = $telefono;
     $tabla1->nacimiento = $nacimiento;
+    $tabla1->descripcion = $descripcion;
+    $tabla1->expectativas = $expectativas;
+    $tabla1->horario = $horario;
+    $tabla1->clasificacion = null;
+    $tabla1->secciones=null;
+
     $tabla1->save();
 
-    $cliente_id = $tabla1->id;
+    //$cliente_id = $tabla1->id;
 
-    $tabla2 = new Comentario();
-    $tabla2->cliente_id = $cliente_id;
-    $tabla2->descripcion = $descripcion;
-    $tabla2->expectativas = $expectativas;
-    $tabla2->horario = $horario;
-
-    $tabla2->save();
+ 
     //obtener el IDd del usuario que se registro
-    $tabla2Id = $tabla2->id;
-
-    Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
-    $this -> GenerarCita($tabla2Id,$tabla2->horario,$tabla1->correo);
+    //Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
+    //$this -> GenerarCita($tabla2Id,$tabla2->horario,$tabla1->correo);
 
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
     }

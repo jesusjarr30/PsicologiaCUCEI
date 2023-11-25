@@ -55,11 +55,16 @@ Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name
 Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
+Route::get('/cita',function() {
+    return view('Cita.Agendar');
+})->name('cita');
+
+
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
 
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
-    Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
+    //Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
     Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_dataUsuario'] )->name('searchDataUsuario');

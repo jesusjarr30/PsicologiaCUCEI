@@ -1,6 +1,4 @@
-@extends('layouts.BaseAdmin')
 
-@section('contentAdmin')
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -355,6 +353,8 @@
               id="time"
               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             >
+            <option value="10:00">08:00 am</option>
+            <option value="10:00">09:00 am</option>
             <option value="10:00">10:00 am</option>
             <option value="11:00">11:00 am</option>
             <option value="12:00">12:00 pm</option>
@@ -364,8 +364,7 @@
             <option value="16:00">04:00 pm</option>
             <option value="17:00">05:00 pm</option>
             <option value="18:00">06:00 pm</option>
-            <option value="19:00">07:00 pm</option>
-            <option value="20:00">08:00 pm</option>
+            
 
           </select>
           @error('horario')
@@ -432,4 +431,3 @@
 
     </body>
 </html>
-@endsection
