@@ -287,5 +287,8 @@ class AdminMainController extends Controller
 
 
     }
+    public function clasificacionShow(){
+        return ('administrador.pacientes.EditarPaciente');
+    }
     
 }
