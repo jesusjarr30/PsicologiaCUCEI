@@ -20,8 +20,13 @@ return new class extends Migration
             $table->string('correo');
             $table->integer('edad');
             $table->string('telefono');
+            $table->string('descripcion');
+            $table->string('expectativas');
+            $table->string('horario')->nullable();
+            $table->string('clasificacion')->nullable();
             $table->date('nacimiento')->nullable();
             $table->string('usuario_id')->nullable();
+            $table->string('secciones')->nullable();
             $table->timestamps();
         });
     }

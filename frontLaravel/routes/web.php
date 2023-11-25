@@ -55,11 +55,16 @@ Route::get('/Links/AcercaDeNosotros',[LinksController::class, 'acercaDe'])->name
 Route::get('/Links/Servicios',[LinksController::class, 'servicios'])->name('servicios');
 Route::get('/Links/Registrate',[LinksController::class, 'registrate'])->name('registrate');
 
+Route::get('/cita',function() {
+    return view('Cita.Agendar');
+})->name('cita');
+
+
 // Admin Menu
 Route::group(['middleware' => ['auth','admin']], function () {
 
     Route::get('/Admin',[AdminMainController::class, 'index'])->name('AdminHome');
-    Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
+    //Route::get('Admin/cita',function() { return view('administrador.Agendar'); })->name('cita');
     Route::get('Admin/Registrar',[AdminMainController::class,'registroUsuarios'] )->name('registrar');
     Route::get('Admin/showUsuarios',[AdminMainController::class,'showUsuarios'] )->name('showUsuario');
     Route::get('Admin/showUsuarios/searchData',[AdminMainController::class,'serch_dataUsuario'] )->name('searchDataUsuario');
@@ -71,6 +76,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Pacientes/{id}',[AdminMainController::class,'EditarPaciente'] )->name('showPacienteEditar');
     Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
+    Route::get('Admin/Clasificacion',[AdminMainController::class,'clasificacionShow'] )->name('verClasificacion');
+    
+
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
 
     //Calendario
