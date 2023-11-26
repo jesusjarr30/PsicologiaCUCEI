@@ -127,6 +127,8 @@ Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->na
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
 Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
+Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
+Route::put('/clasificarClientes',[AdminMainController::class, 'ClasificarCli'])->name('ClasificarCli');
 
 //Delte
 Route::delete('/eliminarRegistro', [AdminMainController::class, 'destroy'])->name('eliminarRegistro');

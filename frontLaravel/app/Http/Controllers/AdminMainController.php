@@ -288,7 +288,37 @@ class AdminMainController extends Controller
 
     }
     public function clasificacionShow(){
-        return ('administrador.pacientes.EditarPaciente');
+
+        $clasificar = Cliente::orwhereNull('clasificacion')
+                    ->orWhereNull('secciones')//numero de citas
+                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                    ->get();
+        return view('administrador.pacientes.clasificacionPaciente',['clasificar'=>$clasificar]);
+        //return view('administrador.verCitas',['citasHoy'=>$citasHoy,'citaPosterior'=>$citasMananaEnAdelante]);
     }
+    public function ClasificarCli(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'secciones' => 'required',
+            'clasificar' => ['required', 'not_in:N/A'],
+        ], [
+            'secciones.required' => 'El campo Secciones es obligatorio.',
+            'clasificar.required' => 'El campo Clasificar es obligatorio.',
+            'clasificar.not_in' => 'El campo Clasificar no puede ser N/A.',
+        ]);
     
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $cliente = Cliente::findorFail( $request->input('id'));
+        
+        $cliente->secciones = $request->input('secciones');
+        $cliente->clasificacion = $request->input('clasificar');
+
+        $cliente->save();
+
+        return back();
+
+    }
 }
