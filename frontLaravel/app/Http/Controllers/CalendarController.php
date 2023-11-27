@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class CalendarController extends Controller
 {
@@ -28,7 +29,21 @@ class CalendarController extends Controller
                 'color' => $color
             ];
         }
-        return view('calendar.index', ['events' => $events]);
+
+        $clasiDepresion = Cliente::where('clasificacion', '=', 'depresion')
+                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                    ->get();
+        $clasiAnsiedad = Cliente::where('clasificacion', '=', 'ansiedad')
+                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                    ->get();
+        $clasiSuicidio = Cliente::where('clasificacion', '=', 'suicidio')
+                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                    ->get();
+        $clasiOtros = Cliente::where('clasificacion', '=', 'otros')
+                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                    ->get();
+                
+        return view('calendar.index', ['events' => $events, 'clasiDepresion'=> $clasiDepresion,'clasiAnsiedad'=> $clasiAnsiedad,'clasiSuicidio'=> $clasiSuicidio,'clasiOtros'=> $clasiOtros]);
     }
     public function store(Request $request)
     {

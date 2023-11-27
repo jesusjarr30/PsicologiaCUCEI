@@ -57,10 +57,27 @@
                                 </div>
                                 <div class="card-body">
                                     <div id="external-events">
+
                                         <div class="external-event bg-success ui-draggable ui-draggable-handle" style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
+                                        <div class="min-w-0 flex-col">
+                                        @foreach($clasiSuicidio as $clasi)
+                                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                        @endforeach
+                                        </div>
                                         <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Depresion</div>
+                                        @foreach($clasiDepresion as $clasi)
+                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                        @endforeach
+                                        
                                         <div class="external-event bg-info ui-draggable ui-draggable-handle" style="position: relative;">Ansiedad</div>
+                                        @foreach($clasiAnsiedad as $clasi)
+                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                        @endforeach
+                                        
                                         <div class="external-event bg-danger ui-draggable ui-draggable-handle" style="position: relative;">Otros</div>
+                                        @foreach($clasiOtros as $clasi)
+                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
