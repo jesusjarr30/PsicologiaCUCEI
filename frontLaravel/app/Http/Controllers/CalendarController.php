@@ -5,20 +5,57 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Cita;
+
 
 class CalendarController extends Controller
 {
     public function index()
     {
         $events = array();
+        $citas = Cita::with('cliente')
+                        ->orwhereNull('atendido')
+                        ->get();
+
+        foreach($citas as $cita) {
+            $color = null;
+            if($cita->cliente->clasificacion == 'suicidio') {
+                $color = '#dc3545';
+            }
+            if($cita->cliente->clasificacion == 'depresion') {
+                $color = '#ffc107';
+            }
+            if($cita->cliente->clasificacion == 'ansiedad') {
+                $color = '#198754';
+            }
+            if($cita->cliente->clasificacion == 'otros') {
+                $color = '#0dcaf0';
+            }
+
+            $events[] = [
+                'id'   => $cita->id,
+                'title' => $cita->title,
+                'start' => $cita->start_date,
+                'end' => $cita->end_date,
+                'color' => $color
+            ];
+        }
+
         $bookings = Booking::all();
         foreach($bookings as $booking) {
             $color = null;
-            if($booking->title == 'Test') {
-                $color = '#924ACE';
+
+            if($booking->title == 'suicidio') {
+                $color = '#dc3545';
             }
-            if($booking->title == 'Test 1') {
-                $color = '#68B01A';
+            if($booking->title == 'depresion') {
+                $color = '#ffc107';
+            }
+            if($booking->title == 'ansiedad') {
+                $color = '#198754';
+            }
+            if($booking->title == 'otros') {
+                $color = '#0dcaf0';
             }
 
             $events[] = [
@@ -59,8 +96,17 @@ class CalendarController extends Controller
 
         $color = null;
 
-        if($booking->title == 'Test') {
-            $color = '#924ACE';
+        if($booking->title == 'suicidio') {
+            $color = '#dc3545';
+        }
+        if($booking->title == 'depresion') {
+            $color = '#ffc107';
+        }
+        if($booking->title == 'ansiedad') {
+            $color = '#198754';
+        }
+        if($booking->title == 'otros') {
+            $color = '#0dcaf0';
         }
 
         return response()->json([

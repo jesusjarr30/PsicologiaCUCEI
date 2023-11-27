@@ -57,26 +57,24 @@
                                 </div>
                                 <div class="card-body">
                                     <div id="external-events">
-
-                                        <div class="external-event bg-success ui-draggable ui-draggable-handle" style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
-                                        <div class="min-w-0 flex-col">
+                                        <div class="bg-danger " style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
                                         @foreach($clasiSuicidio as $clasi)
-                                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                            <p class="external-event bg-danger ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
                                         @endforeach
-                                        </div>
+
                                         <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Depresion</div>
                                         @foreach($clasiDepresion as $clasi)
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                            <p class="external-event bg-warning ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
                                         @endforeach
                                         
-                                        <div class="external-event bg-info ui-draggable ui-draggable-handle" style="position: relative;">Ansiedad</div>
+                                        <div class="bg-success" style="position: relative;">Ansiedad</div>
                                         @foreach($clasiAnsiedad as $clasi)
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                            <p class="external-event bg-success ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
                                         @endforeach
                                         
-                                        <div class="external-event bg-danger ui-draggable ui-draggable-handle" style="position: relative;">Otros</div>
+                                        <div class="bg-info" style="position: relative;">Otros</div>
                                         @foreach($clasiOtros as $clasi)
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$clasi->codigo}}</p>
+                                            <p class="external-event bg-info ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
                                         @endforeach
                                     </div>
                                 </div>
@@ -128,8 +126,8 @@
 
                     $('#saveBtn').click(function() {
                         var title = $('#title').val();
-                        var start_date = moment(start).format('YYYY-MM-DD');
-                        var end_date = moment(end).format('YYYY-MM-DD');
+                        var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
+                        var end_date = moment(end).format('YYYY-MM-DD, HH:mm:ss');
 
                         $.ajax({
                             url:"{{ route('calendar.store') }}",
@@ -159,8 +157,8 @@
                 editable: true,
                 eventDrop: function(event) {
                     var id = event.id;
-                    var start_date = moment(event.start).format('YYYY-MM-DD');
-                    var end_date = moment(event.end).format('YYYY-MM-DD');
+                    var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
+                    var end_date = moment(event.end).format('YYYY-MM-DD, HH:mm:ss');
 
                     $.ajax({
                             url:"{{ route('calendar.update', '') }}" +'/'+ id,
