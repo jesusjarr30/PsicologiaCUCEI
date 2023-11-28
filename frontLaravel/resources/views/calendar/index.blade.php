@@ -27,7 +27,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Booking title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Codigo de estudante</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -111,14 +111,16 @@
             });
 
             var booking = @json($events);
-
+            var citas = @json($eventsCitas);
+            
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay',
                 },
-                events: booking,
+                //events: booking,
+                events: citas,
                 selectable: true,
                 selectHelper: true,
                 select: function(start, end, allDays) {
@@ -130,16 +132,18 @@
                         var end_date = moment(end).format('YYYY-MM-DD, HH:mm:ss');
 
                         $.ajax({
-                            url:"{{ route('calendar.store') }}",
+                            url:"{{ route('calendar.storeCita') }}",
                             type:"POST",
                             dataType:'json',
-                            data:{ title, start_date, end_date  },
+                            data:{ title, start_date },
                             success:function(response)
                             {
+                                { console.log(response); }
                                 $('#bookingModal').modal('hide')
                                 $('#calendar').fullCalendar('renderEvent', {
-                                    'title': response.title,
-                                    'start' : response.start,
+                                    'cliente_id': response.cliente_id,
+                                    'descripcion' : response.descripcion,
+                                    'start'  : response.start,
                                     'end'  : response.end,
                                     'color' : response.color
                                 });
@@ -161,7 +165,7 @@
                     var end_date = moment(event.end).format('YYYY-MM-DD, HH:mm:ss');
 
                     $.ajax({
-                            url:"{{ route('calendar.update', '') }}" +'/'+ id,
+                            url:"{{ route('calendar.updateCita', '') }}" +'/'+ id,
                             type:"PATCH",
                             dataType:'json',
                             data:{ start_date, end_date  },
@@ -180,7 +184,7 @@
 
                     if(confirm('Are you sure want to remove it')){
                         $.ajax({
-                            url:"{{ route('calendar.destroy', '') }}" +'/'+ id,
+                            url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
                             type:"DELETE",
                             dataType:'json',
                             success:function(response)
