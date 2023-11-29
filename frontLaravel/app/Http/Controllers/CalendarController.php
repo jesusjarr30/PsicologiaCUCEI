@@ -46,17 +46,17 @@ class CalendarController extends Controller
         }
 
         $clasiDepresion = Cliente::where('clasificacion', '=', 'depresion')
-                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                    ->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+
         $clasiAnsiedad = Cliente::where('clasificacion', '=', 'ansiedad')
-                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                    ->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+
         $clasiSuicidio = Cliente::where('clasificacion', '=', 'suicidio')
-                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                    ->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+
         $clasiOtros = Cliente::where('clasificacion', '=', 'otros')
-                    ->orderBy('created_at', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                    ->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+
     // Bookings
         $events = array();
         $bookings = Booking::all();
@@ -131,9 +131,7 @@ class CalendarController extends Controller
             'title' => 'required|string'
         ]);
 
-        info("storeCita");
         $cliente = Cliente::where('codigo','like',"%$request->title%")->get();
-        info($cliente[0]);
 
         $cita = Cita::create([
             'cliente_id' => $cliente[0]->id,
@@ -156,16 +154,12 @@ class CalendarController extends Controller
             $color = '#0dcaf0';
         }
         
-        info("start_date");
-        info($request->start_date);
-        info("fechaEnd");
         $fechaEnd = date("Y-m-d H:i:s", strtotime( $request->start_date.'+ 1 hours' ));
-        info($fechaEnd);
         return response()->json([
             'id'   => $cita->id,
-            'cliente_id' => $cliente[0]->id,
+            'cliente_id' => $cita->cliente_id,
             'descripcion' => $cliente[0]->descripcion,
-            'start' => $request->start_date,
+            'start' => $cita->fecha,
             'end' => $fechaEnd,
             'color' => $color
         ]);
