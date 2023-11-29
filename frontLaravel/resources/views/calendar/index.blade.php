@@ -59,22 +59,22 @@
                                     <div id="external-events">
                                         <div class="bg-danger " style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
                                         @foreach($clasiSuicidio as $clasi)
-                                            <p class="external-event bg-danger ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
+                                            <p class="external-event bg-danger ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
                                         @endforeach
 
                                         <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Depresion</div>
                                         @foreach($clasiDepresion as $clasi)
-                                            <p class="external-event bg-warning ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
+                                            <p class="external-event bg-warning ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}} </p>
                                         @endforeach
                                         
                                         <div class="bg-success" style="position: relative;">Ansiedad</div>
                                         @foreach($clasiAnsiedad as $clasi)
-                                            <p class="external-event bg-success ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
+                                            <p class="external-event bg-success ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
                                         @endforeach
                                         
                                         <div class="bg-info" style="position: relative;">Otros</div>
                                         @foreach($clasiOtros as $clasi)
-                                            <p class="external-event bg-info ui-draggable ui-draggable-handle">{{$clasi->codigo}}</p>
+                                            <p class="external-event bg-info ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
                                         @endforeach
                                     </div>
                                 </div>
@@ -181,7 +181,6 @@
                 },
                 eventClick: function(event){
                     var id = event.id;
-
                     if(confirm('Are you sure want to remove it')){
                         $.ajax({
                             url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,

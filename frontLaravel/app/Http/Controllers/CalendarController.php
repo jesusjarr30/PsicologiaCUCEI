@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Cita;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 
 class CalendarController extends Controller
@@ -132,7 +133,11 @@ class CalendarController extends Controller
         ]);
 
         $cliente = Cliente::where('codigo','like',"%$request->title%")->get();
-
+        
+        if( $cliente->count() == 0){
+            throw ValidationException::withMessages(['title' => 'No se encontro el paciente con el codigo']);
+        }
+            
         $cita = Cita::create([
             'cliente_id' => $cliente[0]->id,
             'fecha' => $request->start_date,
