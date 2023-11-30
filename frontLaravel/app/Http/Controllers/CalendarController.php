@@ -39,7 +39,7 @@ class CalendarController extends Controller
             $eventsCitas[] = [
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
-                'descripcion' => $cita->cliente->descripcion,
+                'title' => $cita->cliente->codigo,
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
                 'color' => $color
@@ -47,16 +47,24 @@ class CalendarController extends Controller
         }
 
         $clasiDepresion = Cliente::where('clasificacion', '=', 'depresion')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )
+                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                                ->get();
 
         $clasiAnsiedad = Cliente::where('clasificacion', '=', 'ansiedad')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )
+                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                                ->get();
 
         $clasiSuicidio = Cliente::where('clasificacion', '=', 'suicidio')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )
+                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                                ->get();
 
         $clasiOtros = Cliente::where('clasificacion', '=', 'otros')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )->get();
+                                ->whereNotIn( 'id', Cita::select('cliente_id') )
+                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
+                                ->get();
 
     // Bookings
         $events = array();
@@ -163,7 +171,7 @@ class CalendarController extends Controller
         return response()->json([
             'id'   => $cita->id,
             'cliente_id' => $cita->cliente_id,
-            'descripcion' => $cliente[0]->descripcion,
+            'title' => $cliente[0]->codigo,
             'start' => $cita->fecha,
             'end' => $fechaEnd,
             'color' => $color
