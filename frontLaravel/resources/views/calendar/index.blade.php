@@ -65,27 +65,27 @@
                                                 $rowColor= 'bg-white';
                                                 switch($clasi->clasificacion){
                                                     case 'suicidio':
-                                                        $rowColor= 'bg-danger';
+                                                        $rowColor= '#dc3545';
                                                         break;
                                                     case 'depresion':
-                                                        $rowColor= 'bg-warning';
+                                                        $rowColor= '#ffc107';
                                                         break;
                                                     case 'ansiedad':
-                                                        $rowColor= 'bg-success';
+                                                        $rowColor= '#198754';
                                                         break;
                                                     case 'otros':
-                                                        $rowColor= 'bg-info';
+                                                        $rowColor= '#0dcaf0';
                                                         break;
                                                     default:
-                                                        $rowColor= 'bg-white';
+                                                        $rowColor= '#dce4e6';
                                                         break;
                                                 }
                                             @endphp
-                                                <div id="draggable" class='fc-event {{$rowColor}}' value='{ "title": "my event", "duration": "01:00" }'>{{$clasi->codigo}}</div>
+                                                <div id="draggable" class='fc-event' style="background-color:{{$rowColor}}" 
+                                                    data-value='{ "cliente_id":"{{$clasi->cliente_id}}", "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
+                                                    >{{$clasi->codigo}}: {{$clasi->horario}}</div>
                                             @endforeach
                                         </p>
-                                        <input type='checkbox' id='drop-remove' />
-                                        <label for='drop-remove'>remover despues de soltar</label>
                                     </div>
                                 </div>
                             </div>
@@ -124,11 +124,14 @@
         //----------------------------------------------------
 
         $('#external-events .fc-event').each(function() {
-
+            // Obtiene los datos de los eventos externos
+            var data = $.parseJSON($(this).attr('data-value'));
             // store data so the calendar knows to render an event upon drop
             $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
+                id: null,
+                title: data['title'], // use the element's text as the event title
                 duration : "01:00",
+                color: data['color'] ,
                 stick: true // maintain when user navigates (see docs on the renderEvent method)
             });
 
@@ -167,7 +170,7 @@
                 selectHelper: true,
                 defaultView: 'agendaWeek',
                 nowIndicator: true,
-                
+                /*
                 select: function(start, end, allDays) {
                     $('#bookingModal').modal('toggle');
 
@@ -202,28 +205,22 @@
                             },
                         });
                     });
-                },
+                },*/
                 droppable: true,
                 editable: true,
                 drop: function() {
-                    // is the "remove after drop" checkbox checked?
-                        if ($('#drop-remove').is(':checked')) {
-                          // if so, remove the element from the "Draggable Events" list
-                            $(this).remove();
-                        }
-                    
-
+                    $(this).remove();
                 },
-                eventReceive: function(start, end, allDays) {
+                eventReceive: function(event) {
                     //get the bits of data we want to send into a simple object
 
                     {console.log("eventReceive")};
+                    {console.log(event)};
 
-                    
-                    var title = $('#draggable').val();
-                    var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
-                    {console.log(title)};
-                    {console.log("title")};
+                    var title = event.title;
+                    var color = event.color;
+                    var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
+
                     //var start_date = moment(info.event.start).format('YYYY-MM-DD, HH:mm:ss');
                     $.ajax({
                         url:"{{ route('calendar.storeCita') }}",
@@ -233,14 +230,7 @@
                         success:function(response)
                         {
                             { console.log(response); }
-                            $('#bookingModal').modal('hide')
-                            $('#calendar').fullCalendar('renderEvent', {
-                                'cliente_id': response.cliente_id,
-                                'title' : response.title,
-                                'start'  : response.start,
-                                'end'  : response.end,
-                                'color' : response.color
-                            });
+                            event.id= response.id;
                         },
                         error:function(error)
                         {
@@ -251,9 +241,14 @@
                     });
                 },
                 eventDrop: function(event) {
+
+
                     {console.log("eventDrop")};
+
                     var id = event.id;
                     var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
+
+                    {console.log(event)};
 
                     $.ajax({
                             url:"{{ route('calendar.updateCita', '') }}" +'/'+ id,
@@ -290,16 +285,17 @@
                     }
 
                 },
+                
                 selectAllow: function(event)
                 {
                     return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1, 'second').utcOffset(false), 'day');
                 },
 
             });
-
+            /*
             $("#bookingModal").on("hidden.bs.modal", function () {
                 $('#saveBtn').unbind();
-            });
+            });*/
 
         });
     </script>
