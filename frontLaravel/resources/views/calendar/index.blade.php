@@ -16,6 +16,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta/lib/draggable.min.js"></script>
+
 </head>
 <body>
 
@@ -53,29 +55,37 @@
                         <div class="sticky-top mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Pacientes pendientes</h4>
+                                    <strong class="card-title">Pacientes pendientes</strong>
                                 </div>
                                 <div class="card-body">
-                                    <div id="external-events">
-                                        <div class="bg-danger " style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
-                                        @foreach($clasiSuicidio as $clasi)
-                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-danger">{{$clasi->codigo}}-{{$clasi->horario}}</div>
-                                        @endforeach
-
-                                        <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Depresion</div>
-                                        @foreach($clasiDepresion as $clasi)
-                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-warning">{{$clasi->codigo}}-{{$clasi->horario}}</div>
-                                        @endforeach
-                                        
-                                        <div class="bg-success" style="position: relative;">Ansiedad</div>
-                                        @foreach($clasiAnsiedad as $clasi)
-                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-success">{{$clasi->codigo}}-{{$clasi->horario}}</div>
-                                        @endforeach
-                                        
-                                        <div class="bg-info" style="position: relative;">Otros</div>
-                                        @foreach($clasiOtros as $clasi)
-                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-info">{{$clasi->codigo}}-{{$clasi->horario}}</div>
-                                        @endforeach
+                                    <div id='external-events'>
+                                        <p>
+                                        @foreach($clasificacion as $clasi)
+                                            @php
+                                                $rowColor= 'bg-white';
+                                                switch($clasi->clasificacion){
+                                                    case 'suicidio':
+                                                        $rowColor= 'bg-danger';
+                                                        break;
+                                                    case 'depresion':
+                                                        $rowColor= 'bg-warning';
+                                                        break;
+                                                    case 'ansiedad':
+                                                        $rowColor= 'bg-success';
+                                                        break;
+                                                    case 'otros':
+                                                        $rowColor= 'bg-info';
+                                                        break;
+                                                    default:
+                                                        $rowColor= 'bg-white';
+                                                        break;
+                                                }
+                                            @endphp
+                                                <div id="draggable" class='fc-event {{$rowColor}}' value='{ "title": "my event", "duration": "01:00" }'>{{$clasi->codigo}}</div>
+                                            @endforeach
+                                        </p>
+                                        <input type='checkbox' id='drop-remove' />
+                                        <label for='drop-remove'>remover despues de soltar</label>
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +94,8 @@
                     
                     <div class="col-md-10">
                         <div class="card card-primary">
-                            <div class="card-body p-0">
-                                <div id="calendar">
+                            <div id='calendar-container'>
+                                <div id='calendar'></div>
                             </div>
                         </div>
                     </div>
@@ -102,16 +112,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script>
+        
+        var booking = @json($events);
+        var citas = @json($eventsCitas);
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+        //----------------------------------------------------
 
-        // Calendario
-            var booking = @json($events);
-            var citas = @json($eventsCitas);
+        $('#external-events .fc-event').each(function() {
+
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                duration : "01:00",
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+              zIndex: 999,
+              revert: true,      // will cause the event to go back to its
+              revertDuration: 0  //  original position after the drag
+            });
+        
+        });
+
+        // initialize the calendar
+  // -----------------------------------------------------------------
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
@@ -135,8 +166,8 @@
                 selectable: true,
                 selectHelper: true,
                 defaultView: 'agendaWeek',
-                droppable: true,
-                locale: 'es',
+                nowIndicator: true,
+                
                 select: function(start, end, allDays) {
                     $('#bookingModal').modal('toggle');
 
@@ -172,37 +203,55 @@
                         });
                     });
                 },
+                droppable: true,
                 editable: true,
-                drop: function(start, end, allDays, arg){
-                    {console.log(externalEvent);}
-                    var title = $('#external-events-list').val();
-                    var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
-                    $.ajax({
-                            url:"{{ route('calendar.storeCita') }}",
-                            type:"POST",
-                            dataType:'json',
-                            data:{ title, start_date },
-                            success:function(response)
-                            {
-                                { console.log(response); }
-                                $('#calendar').fullCalendar('renderEvent', {
-                                    'cliente_id': response.cliente_id,
-                                    'title' : response.title,
-                                    'start'  : response.start,
-                                    'end'  : response.end,
-                                    'color' : response.color
-                                });
+                drop: function() {
+                    // is the "remove after drop" checkbox checked?
+                        if ($('#drop-remove').is(':checked')) {
+                          // if so, remove the element from the "Draggable Events" list
+                            $(this).remove();
+                        }
+                    
 
-                            },
-                            error:function(error)
-                            {
-                                if(error.responseJSON.errors) {
-                                    $('#titleError').html(error.responseJSON.errors.title);
-                                }
-                            },
-                        });
+                },
+                eventReceive: function(start, end, allDays) {
+                    //get the bits of data we want to send into a simple object
+
+                    {console.log("eventReceive")};
+
+                    
+                    var title = $('#draggable').val();
+                    var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
+                    {console.log(title)};
+                    {console.log("title")};
+                    //var start_date = moment(info.event.start).format('YYYY-MM-DD, HH:mm:ss');
+                    $.ajax({
+                        url:"{{ route('calendar.storeCita') }}",
+                        type:"POST",
+                        dataType:'json',
+                        data:{ title, start_date },
+                        success:function(response)
+                        {
+                            { console.log(response); }
+                            $('#bookingModal').modal('hide')
+                            $('#calendar').fullCalendar('renderEvent', {
+                                'cliente_id': response.cliente_id,
+                                'title' : response.title,
+                                'start'  : response.start,
+                                'end'  : response.end,
+                                'color' : response.color
+                            });
+                        },
+                        error:function(error)
+                        {
+                            if(error.responseJSON.errors) {
+                                $('#titleError').html(error.responseJSON.errors.title);
+                            }
+                        },
+                    });
                 },
                 eventDrop: function(event) {
+                    {console.log("eventDrop")};
                     var id = event.id;
                     var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
 
@@ -246,19 +295,11 @@
                     return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1, 'second').utcOffset(false), 'day');
                 },
 
-
-
             });
-
 
             $("#bookingModal").on("hidden.bs.modal", function () {
                 $('#saveBtn').unbind();
             });
-
-            $('.fc-event').css('font-size', '13px');
-            $('.fc-event').css('width', '20px');
-            $('.fc-event').css('border-radius', '50%');
-
 
         });
     </script>
