@@ -46,26 +46,11 @@ class CalendarController extends Controller
             ];
         }
 
-        $clasiDepresion = Cliente::where('clasificacion', '=', 'depresion')
+        $clasificacion  = Cliente::whereNotNull('clasificacion')
                                 ->whereNotIn( 'id', Cita::select('cliente_id') )
+                                ->orderBy('clasificacion', 'desc')
                                 ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
                                 ->get();
-
-        $clasiAnsiedad = Cliente::where('clasificacion', '=', 'ansiedad')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )
-                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                                ->get();
-
-        $clasiSuicidio = Cliente::where('clasificacion', '=', 'suicidio')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )
-                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                                ->get();
-
-        $clasiOtros = Cliente::where('clasificacion', '=', 'otros')
-                                ->whereNotIn( 'id', Cita::select('cliente_id') )
-                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
-                                ->get();
-
     // Bookings
         $events = array();
         $bookings = Booking::all();
@@ -95,7 +80,7 @@ class CalendarController extends Controller
         }
 
         
-    return view('calendar.index', ['events' => $events,'eventsCitas' => $eventsCitas, 'clasiDepresion'=> $clasiDepresion,'clasiAnsiedad'=> $clasiAnsiedad,'clasiSuicidio'=> $clasiSuicidio,'clasiOtros'=> $clasiOtros]);
+    return view('calendar.index', ['events' => $events,'eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion]);
     }
     public function store(Request $request)
     {
