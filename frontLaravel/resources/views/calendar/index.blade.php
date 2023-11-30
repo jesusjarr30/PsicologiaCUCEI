@@ -59,22 +59,22 @@
                                     <div id="external-events">
                                         <div class="bg-danger " style="position: relative; z-index: auto; left: 0px; top: 0px;">Suicidio</div>
                                         @foreach($clasiSuicidio as $clasi)
-                                            <p class="external-event bg-danger ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
+                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-danger">{{$clasi->codigo}}-{{$clasi->horario}}</div>
                                         @endforeach
 
                                         <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Depresion</div>
                                         @foreach($clasiDepresion as $clasi)
-                                            <p class="external-event bg-warning ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}} </p>
+                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-warning">{{$clasi->codigo}}-{{$clasi->horario}}</div>
                                         @endforeach
                                         
                                         <div class="bg-success" style="position: relative;">Ansiedad</div>
                                         @foreach($clasiAnsiedad as $clasi)
-                                            <p class="external-event bg-success ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
+                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-success">{{$clasi->codigo}}-{{$clasi->horario}}</div>
                                         @endforeach
                                         
                                         <div class="bg-info" style="position: relative;">Otros</div>
                                         @foreach($clasiOtros as $clasi)
-                                            <p class="external-event bg-info ui-draggable ui-draggable-handle">{{$clasi->codigo}} Hr: {{$clasi->horario}}</p>
+                                            <div draggable="false"  id='draggable-el' data-event='{ "title": {{$clasi->codigo}} }'  class= "bg-info">{{$clasi->codigo}}-{{$clasi->horario}}</div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -103,33 +103,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
+        // Calendario
             var booking = @json($events);
             var citas = @json($eventsCitas);
-            
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay',
                 },
+                // Traduccion
+                buttonText: {
+                today: 'hoy',
+                month: 'mes',
+                week: 'semana',
+                day: 'dia'
+                 },
+                monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+                
                 //events: booking,
                 events: citas,
                 selectable: true,
                 selectHelper: true,
+                defaultView: 'agendaWeek',
+                droppable: true,
+                locale: 'es',
                 select: function(start, end, allDays) {
                     $('#bookingModal').modal('toggle');
 
                     $('#saveBtn').click(function() {
                         var title = $('#title').val();
                         var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
-                        var end_date = moment(end).format('YYYY-MM-DD, HH:mm:ss');
 
                         $.ajax({
                             url:"{{ route('calendar.storeCita') }}",
@@ -140,9 +153,10 @@
                             {
                                 { console.log(response); }
                                 $('#bookingModal').modal('hide')
+
                                 $('#calendar').fullCalendar('renderEvent', {
                                     'cliente_id': response.cliente_id,
-                                    'descripcion' : response.descripcion,
+                                    'title' : response.title,
                                     'start'  : response.start,
                                     'end'  : response.end,
                                     'color' : response.color
@@ -159,16 +173,44 @@
                     });
                 },
                 editable: true,
+                drop: function(start, end, allDays, arg){
+                    {console.log(externalEvent);}
+                    var title = $('#external-events-list').val();
+                    var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
+                    $.ajax({
+                            url:"{{ route('calendar.storeCita') }}",
+                            type:"POST",
+                            dataType:'json',
+                            data:{ title, start_date },
+                            success:function(response)
+                            {
+                                { console.log(response); }
+                                $('#calendar').fullCalendar('renderEvent', {
+                                    'cliente_id': response.cliente_id,
+                                    'title' : response.title,
+                                    'start'  : response.start,
+                                    'end'  : response.end,
+                                    'color' : response.color
+                                });
+
+                            },
+                            error:function(error)
+                            {
+                                if(error.responseJSON.errors) {
+                                    $('#titleError').html(error.responseJSON.errors.title);
+                                }
+                            },
+                        });
+                },
                 eventDrop: function(event) {
                     var id = event.id;
                     var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
-                    var end_date = moment(event.end).format('YYYY-MM-DD, HH:mm:ss');
 
                     $.ajax({
                             url:"{{ route('calendar.updateCita', '') }}" +'/'+ id,
                             type:"PATCH",
                             dataType:'json',
-                            data:{ start_date, end_date  },
+                            data:{ start_date },
                             success:function(response)
                             {
                                 swal("Good job!", "Event Updated!", "success");
