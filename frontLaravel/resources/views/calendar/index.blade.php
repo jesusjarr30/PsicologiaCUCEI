@@ -24,26 +24,49 @@
     @extends('layouts.BaseAdmin')
 
     @section('contentAdmin')
-  <!-- Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Codigo de estudante</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" id="title">
-          <span id="titleError" class="text-danger"></span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" id="saveBtn" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="infoCita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Informacion de la cita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div  id="title"> Pasiente:
+                        </div>
+                    <div  id="title"> Codigo:
+                        </div>
+                    <div  id="title"> Correo:
+                        </div>
+                    <div  id="title"> Edad:
+                        </div>
+                    <div  id="title"> Telefono:
+                        </div>
+                    <div  id="title"> Descripcion:
+                        </div>
+                    <div  id="title"> Expectativas:
+                        </div>
+                    <div  id="title"> Horario:
+                        </div>
+                    <div  id="title"> Clasificacion:
+                        </div>
+                    <div  id="title"> Secciones:
+                        </div>
+                    <div  id="title"> Nacimiento:
+                        </div>
+                    
 
+                    <span id="titleError" class="text-danger"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="saveBtn" class="btn btn-primary">Eliminar Cita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
     <div class="container-fluid">
         <div class="row">
             <div class="col- 12">
@@ -158,7 +181,7 @@
                 month: 'mes',
                 week: 'semana',
                 day: 'dia'
-                 },
+                },
                 monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
                 monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
                 dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
@@ -170,42 +193,12 @@
                 selectHelper: true,
                 defaultView: 'agendaWeek',
                 nowIndicator: true,
-                /*
-                select: function(start, end, allDays) {
-                    $('#bookingModal').modal('toggle');
-
-                    $('#saveBtn').click(function() {
-                        var title = $('#title').val();
-                        var start_date = moment(start).format('YYYY-MM-DD, HH:mm:ss');
-
-                        $.ajax({
-                            url:"{{ route('calendar.storeCita') }}",
-                            type:"POST",
-                            dataType:'json',
-                            data:{ title, start_date },
-                            success:function(response)
-                            {
-                                { console.log(response); }
-                                $('#bookingModal').modal('hide')
-
-                                $('#calendar').fullCalendar('renderEvent', {
-                                    'cliente_id': response.cliente_id,
-                                    'title' : response.title,
-                                    'start'  : response.start,
-                                    'end'  : response.end,
-                                    'color' : response.color
-                                });
-
-                            },
-                            error:function(error)
-                            {
-                                if(error.responseJSON.errors) {
-                                    $('#titleError').html(error.responseJSON.errors.title);
-                                }
-                            },
-                        });
-                    });
-                },*/
+                allDaySlot: false,
+                slotDuration: '01:00:00',
+                weekends:false,
+                minTime: "08:00",
+                maxTime: "19:00",
+                eventDurationEditable: false,
                 droppable: true,
                 editable: true,
                 drop: function() {
@@ -230,6 +223,7 @@
                         success:function(response)
                         {
                             { console.log(response); }
+                            swal("Good job!", "Cita agendada!", "success");
                             event.id= response.id;
                         },
                         error:function(error)
@@ -257,7 +251,7 @@
                             data:{ start_date },
                             success:function(response)
                             {
-                                swal("Good job!", "Event Updated!", "success");
+                                swal("Good job!", "Cita actualizada!", "success");
                             },
                             error:function(error)
                             {
@@ -267,23 +261,26 @@
                 },
                 eventClick: function(event){
                     var id = event.id;
-                    if(confirm('Are you sure want to remove it')){
-                        $.ajax({
+                    {console.log(event);}
+                    $('#infoCita').modal('toggle');
+
+                    $('#saveBtn').click(function() {  
+                         $.ajax({
                             url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
                             type:"DELETE",
                             dataType:'json',
                             success:function(response)
                             {
+                                $('#infoCita').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
-                                // swal("Good job!", "Event Deleted!", "success");
+                                 swal("Good job!", "Cita eliminada!", "success");
                             },
                             error:function(error)
                             {
                                 console.log(error)
                             },
                         });
-                    }
-
+                    });
                 },
                 
                 selectAllow: function(event)
@@ -292,10 +289,6 @@
                 },
 
             });
-            /*
-            $("#bookingModal").on("hidden.bs.modal", function () {
-                $('#saveBtn').unbind();
-            });*/
 
         });
     </script>
