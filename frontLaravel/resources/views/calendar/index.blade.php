@@ -242,8 +242,11 @@
                         success:function(response)
                         {
                             { console.log(response); }
-                            swal("Good job!", "Cita agendada!", "success");
                             event.id= response.id;
+                            swal("Good job!", "Cita agendada!", "success").then(function() {
+                                location.reload();
+                            });
+
                         },
                         error:function(error)
                         {
@@ -269,7 +272,9 @@
                             success:function(response)
                             {
                                 { console.log(response); }
-                                swal("Good job!", "Cita actualizada!", "success");
+                                swal("Good job!", "Cita actualizada!", "success").then(function() {
+                                    location.reload();
+                                });
                             },
                             error:function(error)
                             {
@@ -291,7 +296,6 @@
                         {
                             { console.log('calendar.info'); }
                             { console.log(response); }
-
 
                             for (let parametro in response) {
                                 var div = document.getElementById(parametro);
@@ -315,11 +319,11 @@
                             {
                                 const idDiv = ['modal-pasiente','modal-codigo','modal-correo','modal-edad','modal-telefono','modal-descripcion',
                                         'modal-expectativa','modal-horario','modal-clasificacion','modal-secciones','modal-nacimiento' ];
-
-
                                 $('#infoCita').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
-                                 swal("Good job!", "Cita eliminada!", "success");
+                                swal("Good job!", "Cita eliminada!", "success").then(function() {
+                                    location.reload();
+                                });
                             },
                             error:function(error)
                             {
