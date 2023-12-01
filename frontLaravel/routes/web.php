@@ -83,10 +83,6 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
     //Calendario
     Route::get('Admin/calendar/index', [CalendarController::class, 'index'])->name('calendar.index');
-    //Route::post('Admin/calendar', [CalendarController::class, 'store'])->name('calendar.store');
-    //Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'update'])->name('calendar.update');
-    //Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
-
     Route::post('Admin/calendar', [CalendarController::class, 'storeCita'])->name('calendar.storeCita');
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
     Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroyCita'])->name('calendar.destroyCita');

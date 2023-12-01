@@ -51,72 +51,8 @@ class CalendarController extends Controller
                                 ->orderBy('clasificacion', 'desc')
                                 ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
                                 ->get();
-    // Bookings
-        $events = array();
-        $bookings = Booking::all();
-        foreach($bookings as $booking) {
-            $color = null;
 
-            if($booking->title == 'suicidio') {
-                $color = '#dc3545';
-            }
-            if($booking->title == 'depresion') {
-                $color = '#ffc107';
-            }
-            if($booking->title == 'ansiedad') {
-                $color = '#198754';
-            }
-            if($booking->title == 'otros') {
-                $color = '#0dcaf0';
-            }
-
-            $events[] = [
-                'id'   => $booking->id,
-                'title' => $booking->title,
-                'start' => $booking->start_date,
-                'end' => $booking->end_date,
-                'color' => $color
-            ];
-        }
-
-        
-    return view('calendar.index', ['events' => $events,'eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion]);
-    }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string'
-        ]);
-
-        $booking = Booking::create([
-            'title' => $request->title,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-
-        $color = null;
-
-        if($booking->title == 'suicidio') {
-            $color = '#dc3545';
-        }
-        if($booking->title == 'depresion') {
-            $color = '#ffc107';
-        }
-        if($booking->title == 'ansiedad') {
-            $color = '#198754';
-        }
-        if($booking->title == 'otros') {
-            $color = '#0dcaf0';
-        }
-
-        return response()->json([
-            'id' => $booking->id,
-            'start' => $booking->start_date,
-            'end' => $booking->end_date,
-            'title' => $booking->title,
-            'color' => $color ? $color: '',
-
-        ]);
+        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion]);
     }
 
     public function storeCita(Request $request)
@@ -162,20 +98,7 @@ class CalendarController extends Controller
             'color' => $color
         ]);
     }
-    public function update(Request $request ,$id)
-    {
-        $booking = Booking::find($id);
-        if(! $booking) {
-            return response()->json([
-                'error' => 'Unable to locate the event'
-            ], 404);
-        }
-        $booking->update([
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-        return response()->json('Event updated');
-    }
+
     public function updateCita(Request $request ,$id)
     {
         $cita = Cita::find($id);
@@ -189,17 +112,7 @@ class CalendarController extends Controller
         ]);
         return response()->json('Event updated');
     }
-    public function destroy($id)
-    {
-        $booking = Booking::find($id);
-        if(! $booking) {
-            return response()->json([
-                'error' => 'Unable to locate the event'
-            ], 404);
-        }
-        $booking->delete();
-        return $id;
-    }
+
     public function destroyCita($id)
     {
         $cita = Cita::find($id);
