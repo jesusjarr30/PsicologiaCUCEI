@@ -124,4 +124,30 @@ class CalendarController extends Controller
         $cita->delete();
         return $id;
     }
+    public function getPasiente($id)
+    {
+        info('getPasiente');
+        $cita = Cita::with('cliente')
+        ->where('cliente_id', $id)
+        ->get();
+        info($cita);
+        if(! $cita) {
+            return response()->json([
+                'error' => 'Unable to locate the event'
+            ], 404);
+        }
+        return response()->json([
+            'modal-pasiente'   => $cita[0]->cliente->nombre .' '. $cita[0]->cliente->apellidos,
+            'modal-codigo' => $cita[0]->cliente->codigo,
+            'modal-correo' => $cita[0]->cliente->correo,
+            'modal-edad' => $cita[0]->cliente->edad,
+            'modal-telefono' => $cita[0]->cliente->telefono,
+            'modal-descripcion' => $cita[0]->cliente->descripcion,
+            'modal-expectativa' => $cita[0]->cliente->expectativas,
+            'modal-horario' =>  $cita[0]->cliente->horario,
+            'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
+            'modal-secciones' => $cita[0]->cliente->secciones,
+            'modal-nacimiento' => $cita[0]->cliente->nacimiento,
+        ]);
+    }
 }
