@@ -33,29 +33,49 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div  id="title"> Pasiente:
-                        </div>
-                    <div  id="title"> Codigo:
-                        </div>
-                    <div  id="title"> Correo:
-                        </div>
-                    <div  id="title"> Edad:
-                        </div>
-                    <div  id="title"> Telefono:
-                        </div>
-                    <div  id="title"> Descripcion:
-                        </div>
-                    <div  id="title"> Expectativas:
-                        </div>
-                    <div  id="title"> Horario:
-                        </div>
-                    <div  id="title"> Clasificacion:
-                        </div>
-                    <div  id="title"> Secciones:
-                        </div>
-                    <div  id="title"> Nacimiento:
-                        </div>
-                    
+                    <span > Pasiente: </span>
+                    <div style="display: inline" id="modal-pasiente"> </div>
+                    <div></div>
+
+                    <span > Codigo: </span>
+                    <div style="display: inline" id="modal-codigo"> </div>
+                    <div></div>
+
+                    <span > Correo: </span>
+                    <div style="display: inline" id="modal-correo"> </div>
+                    <div></div>
+
+                    <span > Edad: </span>
+                    <div style="display: inline" id="modal-edad"> </div>
+                    <div></div>
+
+                    <span > Telefono: </span>
+                    <div style="display: inline" id="modal-telefono"> </div>
+                    <div></div>
+
+                    <span > Descripcion: </span>
+                    <div style="display: inline" id="modal-descripcion"> </div>
+                    <div></div>
+
+                    <span > Expectativas: </span>
+                    <div style="display: inline" id="modal-expectativa"> </div>
+                    <div></div>
+
+                    <span > Horario: </span>
+                    <div style="display: inline" id="modal-horario"> </div>
+                    <div></div>
+
+                    <span > Clasificacion: </span>
+                    <div style="display: inline" id="modal-clasificacion"> </div>
+                    <div></div>
+
+                    <span > Secciones: </span>
+                    <div style="display: inline" id="modal-secciones"> </div>
+                    <div></div>
+
+                    <span > Nacimiento: </span>
+                    <div style="display: inline" id="modal-nacimiento"> </div>
+                    <div></div>
 
                     <span id="titleError" class="text-danger"></span>
                 </div>
@@ -234,8 +254,6 @@
                     });
                 },
                 eventDrop: function(event) {
-
-
                     {console.log("eventDrop")};
 
                     var id = event.id;
@@ -250,6 +268,7 @@
                             data:{ start_date },
                             success:function(response)
                             {
+                                { console.log(response); }
                                 swal("Good job!", "Cita actualizada!", "success");
                             },
                             error:function(error)
@@ -260,7 +279,31 @@
                 },
                 eventClick: function(event){
                     var id = event.id;
+                    var cliente_id = event.cliente_id;
+                    {console.log('eventClick');}
                     {console.log(event);}
+
+                    $.ajax({
+                        url:"{{ route('calendar.info', '') }}" +'/'+ cliente_id,
+                        type:"POST",
+                        dataType:'json',
+                        success:function(response)
+                        {
+                            { console.log('calendar.info'); }
+                            { console.log(response); }
+
+
+                            for (let parametro in response) {
+                                var div = document.getElementById(parametro);
+                                div.innerHTML = response[parametro];
+                            }
+                        },
+                        error:function(error)
+                        {
+                            { console.log('calendar.info - error'); }
+                        },
+                    });
+
                     $('#infoCita').modal('toggle');
 
                     $('#saveBtn').click(function() {  
@@ -270,6 +313,10 @@
                             dataType:'json',
                             success:function(response)
                             {
+                                const idDiv = ['modal-pasiente','modal-codigo','modal-correo','modal-edad','modal-telefono','modal-descripcion',
+                                        'modal-expectativa','modal-horario','modal-clasificacion','modal-secciones','modal-nacimiento' ];
+
+
                                 $('#infoCita').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
                                  swal("Good job!", "Cita eliminada!", "success");
