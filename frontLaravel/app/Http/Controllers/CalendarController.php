@@ -12,12 +12,13 @@ use Illuminate\Validation\ValidationException;
 
 class CalendarController extends Controller
 {
-    public function index()
+    public function index($num)
     {
     // citas
         //info('citas index');
         $citas = Cita::with('cliente')
                         ->where('atendido','=',"%0%")
+                        ->where('consultorio',$num)
                         ->get();
         //info($citas);
         $eventsCitas = array();
@@ -39,6 +40,7 @@ class CalendarController extends Controller
             $eventsCitas[] = [
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
+                'consultorio' => $cita->consultorio,
                 'title' => $cita->cliente->codigo,
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
@@ -52,11 +54,13 @@ class CalendarController extends Controller
                                 ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
                                 ->get();
 
-        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion]);
+        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'consultorio' => $num]);
     }
 
     public function storeCita(Request $request)
     {
+        info("storeCita");
+
         $request->validate([
             'title' => 'required|string'
         ]);
@@ -66,13 +70,18 @@ class CalendarController extends Controller
         if( $cliente->count() == 0){
             throw ValidationException::withMessages(['title' => 'No se encontro el paciente con el codigo']);
         }
-            
+
+        info("request->consultorio");
+        info("$request->consultorio");
         $cita = Cita::create([
             'cliente_id' => $cliente[0]->id,
+            'consultorio' => $request->consultorio,
             'fecha' => $request->start_date,
             'atendido' => false,
         ]);
-
+        info($cita );
+        info("cita->consultorio");
+        info($cita->consultorio);
         $color = null;
 
         if($cliente[0]->clasificacion == 'suicidio') {
@@ -92,6 +101,7 @@ class CalendarController extends Controller
         return response()->json([
             'id'   => $cita->id,
             'cliente_id' => $cita->cliente_id,
+            'consultorio' => $cita->consultorio,
             'title' => $cliente[0]->codigo,
             'start' => $cita->fecha,
             'end' => $fechaEnd,
@@ -145,6 +155,7 @@ class CalendarController extends Controller
             'modal-descripcion' => $cita[0]->cliente->descripcion,
             'modal-expectativa' => $cita[0]->cliente->expectativas,
             'modal-horario' =>  $cita[0]->cliente->horario,
+            'modal-consultorio' =>  $cita[0]->consultorio,
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $cita[0]->cliente->secciones,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,

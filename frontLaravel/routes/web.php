@@ -82,11 +82,13 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
 
     //Calendario
-    Route::get('Admin/calendar/index', [CalendarController::class, 'index'])->name('calendar.index');
+    //vistas
+    Route::get('Admin/calendar/consultorio/{num}', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::post('Admin/calendar/infoEvent/{id}', [CalendarController::class, 'getPasiente'])->name('calendar.info');
+    //Funciones
     Route::post('Admin/calendar', [CalendarController::class, 'storeCita'])->name('calendar.storeCita');
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
     Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroyCita'])->name('calendar.destroyCita');
-    Route::post('Admin/calendar/infoEvent/{id}', [CalendarController::class, 'getPasiente'])->name('calendar.info');
 });
 
 Route::get('/developers',function() {

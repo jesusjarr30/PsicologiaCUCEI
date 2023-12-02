@@ -11,7 +11,7 @@ class Cita extends Model
     use HasFactory, SoftDeletes;
     
     protected $table="citas";
-    protected $fillable = ['cliente_id', 'usuario_id', 'fecha', 'atendido'];
+    protected $fillable = ['cliente_id', 'consultorio', 'usuario_id', 'fecha', 'atendido'];
 
     public function usuario()
     {

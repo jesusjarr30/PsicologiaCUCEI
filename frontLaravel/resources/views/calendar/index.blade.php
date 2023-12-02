@@ -73,6 +73,10 @@
                     <div style="display: inline" id="modal-secciones"> </div>
                     <div></div>
 
+                    <span > Consultorio: </span>
+                    <div style="display: inline" id="modal-consultorio"> </div>
+                    <div></div>
+
                     <span > Nacimiento: </span>
                     <div style="display: inline" id="modal-nacimiento"> </div>
                     <div></div>
@@ -90,15 +94,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col- 12">
-                <h3 class="text-center mt-5">Gestionar citas</h3>
+
+                <div class="text-center mt-5">
+                    <h3 >Gestionar citas, Consultorio - {{$consultorio}} -</h3>
+                    <a href="{{route('calendar.index',1) }}">
+                        <button form="" class="font-medium text-base text-blue-300">Consultorio 1</button>
+                    </a>
+
+                    <a href="{{route('calendar.index',2) }}">
+                        <button form="" class="font-medium text-base text-blue-300">Consultorio 2</button>
+                    </a>
+                    
+                    <a href="{{route('calendar.index',3) }}">
+                        <button form="" class="font-medium text-base text-blue-300">Consultorio 3</button>
+                    </a>
+                </div>
+
                 <section class="content">
                     <div class="container-fluid">
                     <div class="row">
+                    <!-- Eventos externos -->
                     <div class="col-md-2">
                         <div class="sticky-top mb-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Pacientes pendientes</strong>
+                                    <strong class="card-title ">Pacientes pendientes</strong>
                                 </div>
                                 <div class="card-body">
                                     <div id='external-events'>
@@ -124,8 +144,8 @@
                                                         break;
                                                 }
                                             @endphp
-                                                <div id="draggable" class='fc-event' style="background-color:{{$rowColor}}" 
-                                                    data-value='{ "cliente_id":"{{$clasi->cliente_id}}", "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
+                                                <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
+                                                    data-value='{ "cliente_id":"{{$clasi->cliente_id}}", "consultorio": {{1}}, "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
                                                     >{{$clasi->codigo}}: {{$clasi->horario}}</div>
                                             @endforeach
                                         </p>
@@ -134,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <!-- Calendario -->
                     <div class="col-md-10">
                         <div class="card card-primary">
                             <div id='calendar-container'>
@@ -194,6 +214,7 @@
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay',
                 },
+                
                 // Traduccion
                 buttonText: {
                 today: 'hoy',
@@ -232,15 +253,16 @@
                     var title = event.title;
                     var color = event.color;
                     var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
-
-                    //var start_date = moment(info.event.start).format('YYYY-MM-DD, HH:mm:ss');
+                    // asigna el consultorio
+                    var consultorio = {{$consultorio}};
                     $.ajax({
                         url:"{{ route('calendar.storeCita') }}",
                         type:"POST",
                         dataType:'json',
-                        data:{ title, start_date },
+                        data:{ title, start_date, consultorio },
                         success:function(response)
                         {
+                            { console.log("storeCita regresa"); }
                             { console.log(response); }
                             event.id= response.id;
                             swal("Good job!", "Cita agendada!", "success").then(function() {
@@ -317,8 +339,6 @@
                             dataType:'json',
                             success:function(response)
                             {
-                                const idDiv = ['modal-pasiente','modal-codigo','modal-correo','modal-edad','modal-telefono','modal-descripcion',
-                                        'modal-expectativa','modal-horario','modal-clasificacion','modal-secciones','modal-nacimiento' ];
                                 $('#infoCita').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
                                 swal("Good job!", "Cita eliminada!", "success").then(function() {
