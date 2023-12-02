@@ -16,6 +16,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->integer('cliente_id');
             $table->integer('usuario_id')->nullable();
+            $table->integer('consultorio')->nullable();
             $table->datetime('fecha');
             $table->boolean('atendido');
             $table->timestamps();
