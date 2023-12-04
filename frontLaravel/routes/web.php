@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\ContrasenaRecover;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -172,4 +173,11 @@ Route::get('/correoMM',function() {
 
 Route::get('/generar-cita/{id}/{horario}/{email}', [CitaController::class, 'GenerarCita']);
 Route::post('/generar-manual', [CitaController::class, 'citaManual'])->name('GenerarManual');
+
+//generacion de PDF
+Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('pdfTest');
+Route::get('/generate-semana', [PdfController::class, 'pdfSemana'])->name('pdfSemanal');
+Route::get('/generate-mensual', [PdfController::class, 'pdfMes'])->name('pdfMensual');
+
+//direccion directa para la pruab de estilos
 
