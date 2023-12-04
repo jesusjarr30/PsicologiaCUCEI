@@ -78,16 +78,18 @@
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{$Paciente->edad}}
                     </td>
                     
-                    <td class="flex"> 
+                    <td class="flex px-4 py-4"> 
                         
-                        <a href="{{ route('verNotas', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-green-800
-                             bg-green-800 rounded-lg w-16 text-white hover:bg-green-500">Notas</a>
+                        <a href="{{ route('verNotas', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
+                            hover:bg-green-800 hover:text-white px-6 py-2">Notas</a>
                         
                            
                         <a href="{{ route('showPacienteEditar', ['id' => $Paciente->id]) }}" 
-                            class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
+                            class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
+                         hover:bg-yellow-800 px-5 py-2">Editar</a>
                         <a onclick="return confirmarEliminar()"
-                            class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                        class="mr-2 mt-2 text-center
+                        border-red-800 bg-red-800 rounded-lg  text-white hover:bg-red-500 px-4 py-2">Eliminar</a>
                             <script>
                                 function confirmarEliminar() {
                                     return confirm('¿Estás seguro de que deseas eliminar este registro?');
@@ -138,9 +140,9 @@
                 <div>tel: {{ $Paciente->telefono }}</div>
                 
                 <div >
-                    <button class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white hover:bg-green-500">Ver</button>
-                    <button class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20 text-white hover:bg-yellow-500">Editar<button>
-                    <button class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar<button>
+                    <a href="{{ route('verNotas', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white hover:bg-green-500 px-2 py-2">Notas</a>
+                    <a href="{{ route('showPacienteEditar', ['id' => $Paciente->id]) }}"  class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20 text-white hover:bg-yellow-500 px-2 py-2">Editar<a>
+                    <a onclick="return confirmarEliminar()" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500 px-2 py-2">Eliminar<a>
                         
                 </div>
             </div>
