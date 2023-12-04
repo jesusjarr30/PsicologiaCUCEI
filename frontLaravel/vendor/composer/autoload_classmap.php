@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\LinksController' => $baseDir . '/app/Http/Controllers/LinksController.php',
+    'App\\Http\\Controllers\\PdfController' => $baseDir . '/app/Http/Controllers/PdfController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\citaController' => $baseDir . '/app/Http/Controllers/citaController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
