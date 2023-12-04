@@ -6,6 +6,7 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Cita;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -15,6 +16,9 @@ class CalendarController extends Controller
     public function index($num)
     {
     // citas
+    if($num > 3 or $num < 1){
+        return back()->withErrors("Consultorio invalido");
+    }
         //info('citas index');
         $citas = Cita::with('cliente')
                         ->where('atendido','=',"%0%")
@@ -48,13 +52,21 @@ class CalendarController extends Controller
             ];
         }
 
+        //Psicologos
+        $psicologos = Usuario::where('role','USER')
+                                ->where('activo',1)
+                                ->get();
+
+        // Pasientes pendientes
         $clasificacion  = Cliente::whereNotNull('clasificacion')
                                 ->whereNotIn( 'id', Cita::select('cliente_id') )
                                 ->orderBy('clasificacion', 'desc')
                                 ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
                                 ->get();
 
-        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'consultorio' => $num]);
+        info("clasificacion");
+        info($clasificacion);
+        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
     }
 
     public function storeCita(Request $request)
@@ -134,12 +146,14 @@ class CalendarController extends Controller
         $cita->delete();
         return $id;
     }
-    public function getPasiente($id)
+    public function getPasienteCita($id)
     {
-        info('getPasiente');
+        info('getPasienteCita');
+        info($id);
         $cita = Cita::with('cliente')
         ->where('cliente_id', $id)
         ->get();
+
         info($cita);
         if(! $cita) {
             return response()->json([
@@ -159,6 +173,34 @@ class CalendarController extends Controller
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $cita[0]->cliente->secciones,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,
+        ]);
+    }
+
+    public function getPasiente($id)
+    {
+        info('getPasiente');
+        info($id);
+        $cliente = Cliente::where('id',$id)
+                ->get();
+
+        info($cliente);
+        if(! $cliente) {
+            return response()->json([
+                'error' => 'Unable to locate the event'
+            ], 404);
+        }
+        return response()->json([
+            'modal-pasiente-infoPasiente'   => $cliente[0]->nombre .' '. $cliente[0]->apellidos,
+            'modal-codigo-infoPasiente' => $cliente[0]->codigo,
+            'modal-correo-infoPasiente' => $cliente[0]->correo,
+            'modal-edad-infoPasiente' => $cliente[0]->edad,
+            'modal-telefono-infoPasiente' => $cliente[0]->telefono,
+            'modal-descripcion-infoPasiente' => $cliente[0]->descripcion,
+            'modal-expectativa-infoPasiente' => $cliente[0]->expectativas,
+            'modal-horario-infoPasiente' =>  $cliente[0]->horario,
+            'modal-clasificacion-infoPasiente' =>  $cliente[0]->clasificacion,
+            'modal-secciones-infoPasiente' => $cliente[0]->secciones,
+            'modal-nacimiento-infoPasiente' => $cliente[0]->nacimiento,
         ]);
     }
 }

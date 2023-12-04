@@ -57,10 +57,10 @@ class ClientesSeeder extends Seeder
         $cliente3 = new Cliente();
         $cliente3->nombre = "Paciente3";
         $cliente3->apellidos = "cita3";
-        $cliente3->codigo = '23793103';
+        $cliente3->codigo = '23723403';
         $cliente3->correo = "Paciente3@Cita3.com";
         $cliente3->edad = 23;
-        $cliente3->telefono = '3724879382';
+        $cliente3->telefono = '3724234382';
         $cliente3->descripcion = "toy tiste 3";
         $cliente3->expectativas = "ya no estar tiste 3";
         $cliente3->horario = "12:00";

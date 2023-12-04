@@ -84,7 +84,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     //Calendario
     //vistas
     Route::get('Admin/calendar/consultorio/{num}', [CalendarController::class, 'index'])->name('calendar.index');
-    Route::post('Admin/calendar/infoEvent/{id}', [CalendarController::class, 'getPasiente'])->name('calendar.info');
+    //modal
+    Route::post('Admin/calendar/infoEventPC/{id}', [CalendarController::class, 'getPasienteCita'])->name('calendar.infoPasienteCita');
+    Route::post('Admin/calendar/infoEventP/{id}', [CalendarController::class, 'getPasiente'])->name('calendar.infoPasiente');
     //Funciones
     Route::post('Admin/calendar', [CalendarController::class, 'storeCita'])->name('calendar.storeCita');
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
