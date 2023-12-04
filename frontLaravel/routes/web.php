@@ -179,3 +179,5 @@ Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('pdfTes
 Route::get('/generate-semana', [PdfController::class, 'pdfSemana'])->name('pdfSemanal');
 Route::get('/generate-mensual', [PdfController::class, 'pdfMes'])->name('pdfMensual');
 
+//direccion directa para la pruab de estilos
+

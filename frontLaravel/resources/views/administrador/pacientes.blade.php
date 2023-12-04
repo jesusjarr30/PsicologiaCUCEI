@@ -1,6 +1,7 @@
 @extends('layouts.BaseAdmin')
 
 @section('contentAdmin')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <div class="p-5 h-screen bg-gray-100">
     @if(session('success'))
@@ -83,8 +84,34 @@
                              bg-green-800 rounded-lg w-16 text-white hover:bg-green-500">Notas</a>
                         
                            
-                        <a href="{{ route('showPacienteEditar', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
-                        <a href="{{ route('eliminar-Paciente', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                        <a href="{{ route('showPacienteEditar', ['id' => $Paciente->id]) }}" 
+                            class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
+                        <a onclick="return confirmarEliminar()"
+                            class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                            <script>
+                                function confirmarEliminar() {
+                                    return confirm('¿Estás seguro de que deseas eliminar este registro?');
+                                }
+                            </script>
+                            <script>
+                                function confirmarEliminar() {
+                                    return Swal.fire({
+                                        title: '¿Estás seguro?',
+                                        text: 'No podrás revertir esto',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'Sí, eliminarlo'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                        window.location.href ="{{ route('eliminar-Paciente', ['id' => $Paciente->id]) }}";
+                                        }
+                                        return result.isConfirmed;
+                                    });
+                                }
+                            </script>
+                            
                     </td>
                 </tr>
                 @php

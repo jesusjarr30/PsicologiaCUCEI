@@ -45,11 +45,11 @@ class PdfController extends Controller
         ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
         ->join('clientes', 'citas.cliente_id', '=', 'clientes.id')
         ->whereBetween('citas.fecha', [$fechaInicioSemana, $fechaFinSemana])
+        ->orderByRaw('citas.fecha, FIELD(citas.consultorio, 1, 2, 3)')
         ->get();
-
+        
         $pdf =PDF::loadView('PDF.reporteSemana',compact('citas'));
         return $pdf->download();
-
 
     }
     public function pdfParaMes(){
