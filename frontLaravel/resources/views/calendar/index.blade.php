@@ -98,7 +98,7 @@
                     <div style="display: inline" id="modal-expectativa"> </div>
                     <div></div>
 
-                    <span class="font-bold"> Horario: </span>
+                    <span class="font-bold"> Horario esperado: </span>
                     <div style="display: inline" id="modal-horario"> </div>
                     <div></div>
 
@@ -181,7 +181,7 @@
                 <div style="display: inline" id="modal-expectativa-infoPasiente"> </div>
                 <div></div>
 
-                <span class="font-bold"> Horario: </span>
+                <span class="font-bold"> Horario esperado: </span>
                 <div style="display: inline" id="modal-horario-infoPasiente"> </div>
                 <div></div>
 
@@ -363,11 +363,11 @@
                 events: citas,
                 selectable: true,
                 selectHelper: true,
-                defaultView: 'agendaWeek',
+                //defaultView: 'agendaWeek',
                 nowIndicator: true,
                 allDaySlot: false,
                 slotDuration: '01:00:00',
-                //weekends:false,
+                weekends:false,
                 minTime: "08:00",
                 maxTime: "19:00",
                 eventDurationEditable: false,
@@ -386,6 +386,7 @@
                     var title = event.title;
                     var color = event.color;
                     var start_date = moment(event.start).format('YYYY-MM-DD, HH:mm:ss');
+                    {console.log(moment(start_date).format('HH:mm:ss'))}
                     // asigna el consultorio
                     var consultorio = {{$consultorio}};
                     $.ajax({

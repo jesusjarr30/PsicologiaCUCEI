@@ -15,10 +15,10 @@ class CalendarController extends Controller
 {
     public function index($num)
     {
-    // citas
-    if($num > 3 or $num < 1){
-        return back()->withErrors("Consultorio invalido");
-    }
+        // citas
+        if($num > 3 or $num < 1){
+            return back()->withErrors("Consultorio invalido");
+        }
         //info('citas index');
         $citas = Cita::with('cliente')
                         ->where('atendido','=',"%0%")
@@ -73,24 +73,33 @@ class CalendarController extends Controller
     {
         info("storeCita");
 
-        $request->validate([
-            'title' => 'required|string'
-        ]);
-
         $cliente = Cliente::where('codigo','like',"%$request->title%")->get();
         
-        if( $cliente->count() == 0){
-            throw ValidationException::withMessages(['title' => 'No se encontro el paciente con el codigo']);
-        }
-
         info("request->consultorio");
         info("$request->consultorio");
-        $cita = Cita::create([
-            'cliente_id' => $cliente[0]->id,
-            'consultorio' => $request->consultorio,
-            'fecha' => $request->start_date,
-            'atendido' => false,
-        ]);
+        
+        $fecha = $request->start_date;
+        $hora = date("H:i:s", strtotime( $fecha ));
+        info($hora);
+        if(date("H:i:s", strtotime( $fecha )) == '00:00:00'){
+            $fecha = date("Y-m-d H:i:s", strtotime( $fecha.'+8 hours' ));
+        }
+        $i = 1;
+        while ($i <= $cliente[0]->secciones) {
+            $cita = Cita::create([
+                'cliente_id' => $cliente[0]->id,
+                'consultorio' => $request->consultorio,
+                'fecha' => $fecha,
+                'atendido' => false,
+            ]);
+            $fecha = date("Y-m-d H:i:s", strtotime( $fecha.'+7 day' ));
+            $i++; 
+        }
+
+        
+
+        
+
         info($cita );
         info("cita->consultorio");
         info($cita->consultorio);
@@ -137,18 +146,16 @@ class CalendarController extends Controller
 
     public function asigPsi(Request $request ,$id)
     {
-        info("asigPsi");
         $cita = Cita::find($id);
-        info("cita");
-        info($cita);
+
         if(! $cita) {
             return response()->json([
                 'error' => 'Error al actualizar cita'
             ], 404);
         }
         $pasiente = Cliente::find($cita->cliente_id);
-        info("pasiente");
-        info($pasiente);
+        $demasCitas = Cita::where('cliente_id', $cita->cliente_id)
+                            ->get();
 
         if(! $pasiente) {
             return response()->json([
@@ -156,10 +163,13 @@ class CalendarController extends Controller
             ], 404);
         }
 
-        $cita->update([
-            'usuario_id' => $request->usuario_id,
-        ]);
-
+        // Actualiza todas las citas del pasiente
+        foreach ($demasCitas as $citaActual){
+            $citaActual->update([
+                'usuario_id' => $request->usuario_id,
+            ]);
+        }
+        // Actualiza el pasiente
         $pasiente -> update([
             'usuario_id' => $request->usuario_id,
         ]);
