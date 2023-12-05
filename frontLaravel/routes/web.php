@@ -78,6 +78,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
     Route::get('Admin/Clasificacion',[AdminMainController::class,'clasificacionShow'] )->name('verClasificacion');
+    //Route::get('Admin/showUsuarios/Editar/{id}',[AdminMainController::class,'EditarUsuariosAdmin'] )->name('EditarUsuariosAdmin');
+
     
 
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');

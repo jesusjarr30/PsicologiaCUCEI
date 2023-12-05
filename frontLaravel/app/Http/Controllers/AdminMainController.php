@@ -224,6 +224,12 @@ class AdminMainController extends Controller
         return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
     }
 
+    public function EditarUsuariosAdmin($id){
+        $usuario = Usuario::find($id);
+        return view('administrador.EditarUsuario',['usuario'=> $usuario]);
+        
+    }
+
     const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
     public function ActualizarPaciente(Request $request, $id){
         
