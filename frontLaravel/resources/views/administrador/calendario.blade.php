@@ -359,7 +359,6 @@
                 
                 // Propiedades del fc
                 events: citas,
-                selectable: true,
                 selectHelper: true,
                 //defaultView: 'agendaWeek',
                 nowIndicator: true,
