@@ -66,7 +66,52 @@ class CalendarController extends Controller
 
         info("clasificacion");
         info($clasificacion);
-        return view('administrador.calendarioAdmin', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
+        return view('administrador.calendario', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
+    }
+
+    public function indexPsi($userId,$num)
+    {
+        info("indexPsi");
+        // citas
+        if($num > 3 or $num < 1){
+            return back()->withErrors("Consultorio invalido");
+        }
+        //info('citas index');
+        $citas = Cita::with('cliente')
+                        ->where('usuario_id',$userId)
+                        ->where('atendido','=',"%0%")
+                        ->where('consultorio',$num)
+                        ->get();
+        info("citas");
+        info($citas);
+        $eventsCitas = array();
+        foreach($citas as $cita) {
+            $color = null;
+            if($cita->cliente->clasificacion == 'suicidio') {
+                $color = '#dc3545';
+            }
+            if($cita->cliente->clasificacion == 'depresion') {
+                $color = '#ffc107';
+            }
+            if($cita->cliente->clasificacion == 'ansiedad') {
+                $color = '#198754';
+            }
+            if($cita->cliente->clasificacion == 'otros') {
+                $color = '#0dcaf0';
+            }
+            $fechaEnd = date("Y-m-d H:i:s", strtotime($cita->fecha.'+1 hours'));
+            $eventsCitas[] = [
+                'id'   => $cita->id,
+                'cliente_id' => $cita->cliente_id,
+                'consultorio' => $cita->consultorio,
+                'title' => $cita->cliente->codigo,
+                'start' => $cita->fecha,
+                'end' => $fechaEnd,
+                'color' => $color
+            ];
+        }
+
+        return view('psicologo.calendario', ['eventsCitas' => $eventsCitas, 'consultorio' => $num]);
     }
 
     public function storeCita(Request $request)
