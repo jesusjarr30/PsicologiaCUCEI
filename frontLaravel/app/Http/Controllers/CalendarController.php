@@ -66,7 +66,7 @@ class CalendarController extends Controller
 
         info("clasificacion");
         info($clasificacion);
-        return view('calendar.index', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
+        return view('administrador.calendarioAdmin', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
     }
 
     public function storeCita(Request $request)
@@ -187,6 +187,27 @@ class CalendarController extends Controller
             ], 404);
         }
         $cita->delete();
+        return $id;
+    }
+    public function destroyDemasCitas($id)
+    {
+        $cita = Cita::find($id);
+        if(! $cita) {
+            return response()->json([
+                'error' => 'No se pudo encontra su cita'
+            ], 404);
+        }
+        $demasCitas = Cita::where("cliente_id",$cita->cliente_id)
+                            ->get();
+        if(! $demasCitas) {
+            return response()->json([
+                'error' => 'No se pudo eliminar todas las citas'
+            ], 404);
+        }
+
+        foreach ($demasCitas as $citaActual){
+            $citaActual->delete();
+        }
         return $id;
     }
     public function getPasienteCita($id)

@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
     Route::patch('Admin/calendar/updatePsi/{id}', [CalendarController::class, 'asigPsi'])->name('calendar.asigPsi');
     Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroyCita'])->name('calendar.destroyCita');
+    Route::delete('Admin/calendar/destroys/{id}', [CalendarController::class, 'destroyDemasCitas'])->name('calendar.destroyDemasCitas');
+
 });
 
 Route::get('/developers',function() {

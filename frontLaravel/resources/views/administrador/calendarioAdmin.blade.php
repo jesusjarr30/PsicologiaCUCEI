@@ -128,16 +128,14 @@
                             <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
                         @endforeach
                     </select>
-                    
-
-                    
-
+        
                     <span id="titleError" class="text-danger"></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psicologo</button>
-                    <button type="button" id="saveBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
+                    <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psico</button>
+                    <button type="button" id="eliminaBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
+                    <button type="button" id="eliminaDemasBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar VariasCitas</button>
                 </div>
 
                 
@@ -465,10 +463,29 @@
                     });
 
                     $('#infoCitaPasiente').modal('toggle');
-
-                    $('#saveBtn').click(function() {  
+                // Botones de infoCitaPasiente
+                    $('#eliminaBtn').click(function() {  
                          $.ajax({
                             url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
+                            type:"DELETE",
+                            dataType:'json',
+                            success:function(response)
+                            {
+                                $('#infoCitaPasiente').modal('hide')
+                                $('#calendar').fullCalendar('removeEvents', response);
+                                swal("Good job!", "Cita eliminada!", "success").then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error:function(error)
+                            {
+                                console.log(error)
+                            },
+                        });
+                    });
+                    $('#eliminaDemasBtn').click(function() {  
+                         $.ajax({
+                            url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
                             type:"DELETE",
                             dataType:'json',
                             success:function(response)
