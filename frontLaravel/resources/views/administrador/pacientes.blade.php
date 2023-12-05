@@ -6,8 +6,6 @@
 <div class="p-5 h-screen bg-gray-100">
     @if(session('success'))
     <div class="alert alert-success">
-
-        
         <div class="bg-green-100 border-t-4 border-green-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
               <div class="text-green-700">
@@ -64,6 +62,7 @@
                     <th class="p-3 text-sm font-sm font-semibold tracking-wide text-left">correo</th>
                     <th class="w-10 p-3 text-sm font-sm font-semibold tracking-wide text-left">edad</th>
                     <th class="p-3 text-sm font-sm font-semibold tracking-wide text-left">telefono</th>
+                    <th class="p-3 text-sm font-sm font-semibold tracking-wide text-left">Acciones</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 ">
@@ -76,6 +75,7 @@
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $Paciente->codigo }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $Paciente->correo }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{$Paciente->edad}}
+                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{$Paciente->telefono}}
                     </td>
                     
                     <td class="flex px-4 py-4"> 

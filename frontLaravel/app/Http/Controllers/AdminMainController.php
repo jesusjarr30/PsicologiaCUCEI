@@ -36,6 +36,7 @@ class AdminMainController extends Controller
     public function showCitas(){
 
         $citasHoy = Cita::with('cliente', 'usuario')
+        ->whereNotNull('usuario_id')
         ->whereDate('fecha', '=', Carbon::today()->toDateString())
         ->get();
         info(Carbon::today()->toDateString());
@@ -43,6 +44,7 @@ class AdminMainController extends Controller
         // Obtener citas de mañana y posteriores
         $citasMananaEnAdelante = Cita::with('cliente', 'usuario')
         ->whereDate('fecha', '>=', Carbon::tomorrow())
+        ->whereNotNull('usuario_id')
         ->get();
         info("regreso de la query");
         info($citasHoy);

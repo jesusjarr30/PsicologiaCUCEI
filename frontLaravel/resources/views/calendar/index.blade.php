@@ -118,12 +118,29 @@
                     <div style="display: inline" id="modal-nacimiento"> </div>
                     <div></div>
 
+                    <span class="font-bold"> Psicologo asignado: </span>
+                    <div style="display: inline" id="modal-psicologo"> </div>
+                    <div></div>
+                    <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
+                        <option value="none" selected disabled hidden>Asignar Psicologo</option> 
+                        <option  value='null'  >Sin asignar</option>
+                        @foreach ( $psicologos as $psi )
+                            <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
+                        @endforeach
+                    </select>
+                    
+
+                    
+
                     <span id="titleError" class="text-danger"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psicologo</button>
                     <button type="button" id="saveBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -251,27 +268,6 @@
                                     <div id='calendar'></div>
                                 </div>
                         </div>
-                        <!-- Eventos externos Psicologos-->
-                        <div class="row-end-3 row-span-2">
-                            <div class="sticky-top mb-3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong class="card-title ">Asignar Psicologo</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id='external-events-psi'>
-                                            <p>
-                                            @foreach($psicologos as $psi)
-                                                <div id="draggable" class='fc-event text-center' style="background-color:#fbbf24" 
-                                                    data-value='{ "id":"{{$psi->id}}", "nombre":"{{$psi->nombre}}", "email":"{{$psi->email}}", "telefono":"{{$psi->telefono}}", "horario":"{{$psi->horario}}"  }' 
-                                                    >{{$psi->nombre}}</div>
-                                            @endforeach
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     
                 
@@ -289,7 +285,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        //----------------------------------------------------
+    //--------------Evento Pasientes/Citas----------------------
         $("#external-events .fc-event").click(function() {
             //alert("Button code executed.");
             var data = $.parseJSON($(this).attr('data-value'));
@@ -318,9 +314,7 @@
                             { console.log('calendar.info - error'); }
                         },
                     });
-
                     $('#infoPasiente').modal('toggle');
-
         });
 
         $('#external-events .fc-event').each(function() {
@@ -481,6 +475,30 @@
                                 $('#infoCitaPasiente').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
                                 swal("Good job!", "Cita eliminada!", "success").then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error:function(error)
+                            {
+                                console.log(error)
+                            },
+                        });
+                    });
+                    $('#psiUpdateBtn').click(function() {  
+                        
+                        var usuario_id = document.getElementById('modal-select-psicologo').value;
+
+                        {console.log("psicologo-asignado");}
+                        {console.log(usuario_id);}
+                        $.ajax({
+                            url:"{{ route('calendar.asigPsi', '') }}" +'/'+ id,
+                            type:"PATCH",
+                            dataType:'json',
+                            data:{ usuario_id },
+                            success:function(response)
+                            {
+                                $('#infoCitaPasiente').modal('hide')
+                                swal("Good job!", "Psicologo asignado", "success").then(function() {
                                     location.reload();
                                 });
                             },

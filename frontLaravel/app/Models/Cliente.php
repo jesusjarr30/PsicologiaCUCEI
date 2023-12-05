@@ -11,6 +11,8 @@ class Cliente extends Model
     use HasFactory, SoftDeletes;
 
     protected $table="clientes";
+    protected $fillable = ['usuario_id'];
+
 
     //relacion con los comentarios 
     public function comentarios()

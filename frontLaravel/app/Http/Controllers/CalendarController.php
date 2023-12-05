@@ -135,6 +135,39 @@ class CalendarController extends Controller
         return response()->json('Event updated');
     }
 
+    public function asigPsi(Request $request ,$id)
+    {
+        info("asigPsi");
+        $cita = Cita::find($id);
+        info("cita");
+        info($cita);
+        if(! $cita) {
+            return response()->json([
+                'error' => 'Error al actualizar cita'
+            ], 404);
+        }
+        $pasiente = Cliente::find($cita->cliente_id);
+        info("pasiente");
+        info($pasiente);
+
+        if(! $pasiente) {
+            return response()->json([
+                'error' => 'Error al actualizar pasiente'
+            ], 404);
+        }
+
+        $cita->update([
+            'usuario_id' => $request->usuario_id,
+        ]);
+
+        $pasiente -> update([
+            'usuario_id' => $request->usuario_id,
+        ]);
+        info('update');
+        info($pasiente);
+        return response()->json('Event updated');
+    }
+
     public function destroyCita($id)
     {
         $cita = Cita::find($id);
@@ -160,6 +193,16 @@ class CalendarController extends Controller
                 'error' => 'Unable to locate the event'
             ], 404);
         }
+
+        $psi = Usuario::find($cita[0]->usuario_id);
+        
+        if(! $psi) {
+            $psiAsignado = 'Sin asignar';
+        }
+        else{
+            $psiAsignado = $psi->nombre;
+        }
+        
         return response()->json([
             'modal-pasiente'   => $cita[0]->cliente->nombre .' '. $cita[0]->cliente->apellidos,
             'modal-codigo' => $cita[0]->cliente->codigo,
@@ -173,6 +216,7 @@ class CalendarController extends Controller
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $cita[0]->cliente->secciones,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,
+            'modal-psicologo' => $psiAsignado,
         ]);
     }
 
