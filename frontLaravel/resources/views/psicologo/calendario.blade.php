@@ -130,13 +130,13 @@
     <div class="container-fluid">
         <div class="text-center mt-5">
             <h3 >Citas del psicologo, Consultorio - {{$consultorio}} -</h3>
-            <a href="{{route('calendar.indexPsi',[Auth::user()->id,1]) }}">
+            <a href="{{route('calendar.indexPsi',1) }}">
                 <button form="" class="font-medium text-base hover:text-blue-600 text-blue-300">Consultorio 1</button>
             </a>
-            <a href="{{route('calendar.indexPsi',[Auth::user()->id,2]) }}">
+            <a href="{{route('calendar.indexPsi',2) }}">
                 <button form="" class="font-medium text-base hover:text-blue-600 text-blue-300">Consultorio 2</button>
             </a>
-            <a href="{{route('calendar.indexPsi',[Auth::user()->id,3]) }}">
+            <a href="{{route('calendar.indexPsi',3) }}">
                 <button form="" class="font-medium text-base hover:text-blue-600 text-blue-300">Consultorio 3</button>
             </a>
         </div>

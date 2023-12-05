@@ -9,6 +9,7 @@ use App\Models\Cita;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 
 class CalendarController extends Controller
@@ -69,8 +70,9 @@ class CalendarController extends Controller
         return view('administrador.calendario', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
     }
 
-    public function indexPsi($userId,$num)
+    public function indexPsi($num)
     {
+        
         info("indexPsi");
         // citas
         if($num > 3 or $num < 1){
@@ -78,7 +80,7 @@ class CalendarController extends Controller
         }
         //info('citas index');
         $citas = Cita::with('cliente')
-                        ->where('usuario_id',$userId)
+                        ->where('usuario_id',Auth::user()->id)
                         ->where('atendido','=',"%0%")
                         ->where('consultorio',$num)
                         ->get();
