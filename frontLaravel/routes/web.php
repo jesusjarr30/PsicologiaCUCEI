@@ -116,8 +116,10 @@ Route::group(['middleware' => ['auth','user']], function () {
 
     Route::put('/Piscologo/Pacientes/EditarPaciente/{id}',[AdminPsicologoController::class,'ActualizarPaciente'] )->name('actualizar-PacientePSI');
 
+    //Calendario
     Route::get('Piscologo/calendar/consultorio/{num}', [CalendarController::class, 'indexPsi'])->name('calendar.indexPsi');
     Route::post('Piscologo/calendar/infoEventPC/{id}', [CalendarController::class, 'getPasienteCita'])->name('calendar.infoPasienteCitaPsi');
+    Route::post('Piscologo/calendar/citaAtendida/{id}', [CalendarController::class, 'citaAtendida'])->name('calendar.citaAtendida');
 
     Route::get('/Piscologo/VerCita',[AdminPsicologoController::class,'VerCita'] )->name('verCitaPS');
     

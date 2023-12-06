@@ -110,12 +110,20 @@
                     <div style="display: inline" id="modal-secciones"> </div>
                     <div></div>
 
+                    <span class="font-bold"> Nacimiento: </span>
+                    <div style="display: inline" id="modal-nacimiento"> </div>
+                    <div></div>
+                    
+                    <span class="font-bold"> Fecha: </span>
+                    <div style="display: inline" id="modal-fecha"> </div>
+                    <div></div>
+
                     <span class="font-bold"> Consultorio: </span>
                     <div style="display: inline" id="modal-consultorio"> </div>
                     <div></div>
 
-                    <span class="font-bold"> Nacimiento: </span>
-                    <div style="display: inline" id="modal-nacimiento"> </div>
+                    <span class="font-bold"> Atendido: </span>
+                    <div style="display: inline" id="modal-atendido"> </div>
                     <div></div>
 
                     <span class="font-bold"> Psicologo asignado: </span>
@@ -442,7 +450,7 @@
                     {console.log(event);}
 
                     $.ajax({
-                        url:"{{ route('calendar.infoPasienteCita', '') }}" +'/'+ cliente_id,
+                        url:"{{ route('calendar.infoPasienteCita', '') }}" +'/'+ id,
                         type:"POST",
                         dataType:'json',
                         success:function(response)

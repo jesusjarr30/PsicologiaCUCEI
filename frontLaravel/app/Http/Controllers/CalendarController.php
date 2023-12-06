@@ -22,7 +22,7 @@ class CalendarController extends Controller
         }
         //info('citas index');
         $citas = Cita::with('cliente')
-                        ->where('atendido','=',"%0%")
+                        //->where('atendido','=',"%0%")
                         ->where('consultorio',$num)
                         ->get();
         //info($citas);
@@ -81,7 +81,7 @@ class CalendarController extends Controller
         //info('citas index');
         $citas = Cita::with('cliente')
                         ->where('usuario_id',Auth::user()->id)
-                        ->where('atendido','=',"%0%")
+                        //->where('atendido','=',"%0%")
                         ->where('consultorio',$num)
                         ->get();
         info("citas");
@@ -262,7 +262,7 @@ class CalendarController extends Controller
         info('getPasienteCita');
         info($id);
         $cita = Cita::with('cliente')
-        ->where('cliente_id', $id)
+        ->where('id', $id)
         ->get();
 
         info($cita);
@@ -290,12 +290,31 @@ class CalendarController extends Controller
             'modal-descripcion' => $cita[0]->cliente->descripcion,
             'modal-expectativa' => $cita[0]->cliente->expectativas,
             'modal-horario' =>  $cita[0]->cliente->horario,
-            'modal-consultorio' =>  $cita[0]->consultorio,
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $cita[0]->cliente->secciones,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,
+            // Info de la cita
+            'modal-fecha' =>  $cita[0]->fecha,
+            'modal-consultorio' =>  $cita[0]->consultorio,
+            'modal-atendido' => ($cita[0]->atendido ? "Atendido" : "Sin Atender"),
             'modal-psicologo' => $psiAsignado,
         ]);
+    }
+    public function citaAtendida($id)
+    {
+        info("citaAtendida");
+        $cita = Cita::find($id);
+        
+        info($cita);
+        if(! $cita) {
+            return response()->json([
+                'error' => 'Unable to locate the event'
+            ], 404);
+        }
+        $cita->update([
+            'atendido' => 1,
+        ]);
+        return response()->json('Event updated');
     }
 
     public function getPasiente($id)

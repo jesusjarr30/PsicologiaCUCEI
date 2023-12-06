@@ -110,17 +110,30 @@
                     <div style="display: inline" id="modal-secciones"> </div>
                     <div></div>
 
+                    <span class="font-bold"> Nacimiento: </span>
+                    <div style="display: inline" id="modal-nacimiento"> </div>
+                    <div></div>
+                    
+                    <span class="font-bold"> Fecha: </span>
+                    <div style="display: inline" id="modal-fecha"> </div>
+                    <div></div>
+
                     <span class="font-bold"> Consultorio: </span>
                     <div style="display: inline" id="modal-consultorio"> </div>
                     <div></div>
 
-                    <span class="font-bold"> Nacimiento: </span>
-                    <div style="display: inline" id="modal-nacimiento"> </div>
+                    <span class="font-bold"> Atendido: </span>
+                    <div style="display: inline" id="modal-atendido"> </div>
                     <div></div>
 
                     <span class="font-bold"> Psicologo asignado: </span>
                     <div style="display: inline" id="modal-psicologo"> </div>
                     <div></div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="citaAtendidaBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Marcar como atendido</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,12 +210,11 @@
 
                 eventClick: function(event){
                     var id = event.id;
-                    var cliente_id = event.cliente_id;
                     {console.log('eventClick');}
                     {console.log(event);}
 
                     $.ajax({
-                        url:"{{ route('calendar.infoPasienteCitaPsi', '') }}" +'/'+ cliente_id,
+                        url:"{{ route('calendar.infoPasienteCitaPsi', '') }}" +'/'+ id,
                         type:"POST",
                         dataType:'json',
                         success:function(response)
@@ -223,6 +235,25 @@
 
                     $('#infoCitaPasiente').modal('toggle');
                 // Botones de infoCitaPasiente
+                    $('#citaAtendidaBtn').click(function() { 
+                        {console.log('citaAtendidaBtn');}     
+                        $.ajax({
+                            url:"{{ route('calendar.citaAtendida', '') }}" +'/'+ id,
+                            type:"POST",
+                            dataType:'json',
+                            success:function(response)
+                            {
+                                $('#infoCitaPasiente').modal('hide')
+                                swal("Good job!", "Cita atendida", "success").then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error:function(error)
+                            {
+                                console.log(error)
+                            },
+                        });
+                    });
                 },
 
             });
