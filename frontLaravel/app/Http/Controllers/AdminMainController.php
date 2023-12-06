@@ -165,6 +165,60 @@ class AdminMainController extends Controller
     {
         //
     }
+    public function update2(Request $request){
+        
+        $id = $request->input('id');
+        $user = Usuario::find($id);
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'string|max:255',
+            'telefono' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator);
+        }
+        $actualizado = "profile-updated";
+        if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre'); $actualizado .=", nombre";}
+        if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono'); $actualizado .=", telefono";}
+        if($request->input('password') != null && $request->input('password_Old') != null){ 
+            $validator2 = Validator::make($request->all(), [
+                'password' => 'string|min:8|confirmed',
+            ]);
+            if ($validator2->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator2);
+            }
+            
+            if (Hash::check($request->input('password_Old'),$user->password ) ){
+                $user->password = Hash::make($request->input('password'));
+                $actualizado .=", password";
+            }else{
+                return redirect()->back()->withErrors('No coincide contraseña antigua');
+            }
+        }
+        
+        $horario = array(
+            'Lun_I'=>$request->input("Lun-horario-Inicio"),
+            'Lun_F'=>$request->input("Lun-horario-Final"),
+            'Mar_I'=>$request->input("Mar-horario-Inicio"),
+            'Mar_F'=>$request->input("Mar-horario-Final"),
+            'Mie_I'=>$request->input("Mie-horario-Inicio"),
+            'Mie_F'=>$request->input("Mie-horario-Final"),
+            'Jue_I'=>$request->input("Jue-horario-Inicio"),
+            'Jue_F'=>$request->input("Jue-horario-Final"),
+            'Vie_I'=>$request->input("Vie-horario-Inicio"),
+            'Vie_F'=>$request->input("Vie-horario-Final"),
+            'Sab_I'=>$request->input("Sab-horario-Inicio"),
+            'Sab_F'=>$request->input("Sab-horario-Final")
+            );
+        $horario_json = json_encode($horario);
+        $user->horario = $horario_json;
+            
+        $user->save();
+        
+        return redirect()->route('EditarUsuariosAdmin', ['id' => $id])->with('success', $actualizado);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -228,6 +282,13 @@ class AdminMainController extends Controller
         $usuario = Usuario::find($id);
         return view('administrador.EditarUsuario',['usuario'=> $usuario]);
         
+    }
+    public function VerUsuarios($id){
+
+        $usuario = Usuario::find($id);
+        //debeos hacer aqui la busqueda de horas del usuario para poder imprimirlas
+
+        return view('administrador.VerUsuarios',['usuario'=>$usuario]);
     }
 
     const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];

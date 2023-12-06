@@ -84,9 +84,10 @@
                     </td>
                     
                     <td class="flex px-4 py-4"> 
-                        <a class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
+                        <a href="{{route('VerUsuarios',['id' => $Usuario->id])}}" class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
                          hover:bg-green-800 hover:text-white px-6 py-2">Ver</a>
-                        <a class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
+
+                        <a href="{{ route('EditarUsuariosAdmin', ['id' => $Usuario->id]) }}" class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
                          hover:bg-yellow-800 px-5 py-2">Editar</a>
 
                         <a onclick="return confirmarEliminar()" class="mr-2 mt-2 text-center
