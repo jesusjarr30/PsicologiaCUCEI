@@ -77,14 +77,17 @@
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $Usuario->email }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{ $Usuario->telefono }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
-                        <span class="whitespace-nowrap py-1.5 p-1.5 text-xs font-medium uppercase tracking-wider rounded-lg @if($Usuario->role === 'ADMIN') px-3.5 text-blue-800 bg-blue-200 @else px-5 text-red-800 bg-red-200 @endif">{{ $Usuario->role }}</span>
+                        <span class="whitespace-nowrap py-1.5 p-1.5 text-xs font-medium uppercase tracking-wider rounded-lg
+                         @if($Usuario->role === 'ADMIN') px-3.5 text-blue-800 bg-blue-200 @else px-5 text-red-800
+                          bg-red-200 @endif">{{ $Usuario->role }}</span>
 
                     </td>
                     
                     <td class="flex px-4 py-4"> 
-                        <a class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
+                        <a href="{{route('VerUsuarios',['id' => $Usuario->id])}}" class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
                          hover:bg-green-800 hover:text-white px-6 py-2">Ver</a>
-                        <a class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
+
+                        <a href="{{ route('EditarUsuariosAdmin', ['id' => $Usuario->id]) }}" class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
                          hover:bg-yellow-800 px-5 py-2">Editar</a>
 
                         <a onclick="return confirmarEliminar()" class="mr-2 mt-2 text-center
@@ -117,19 +120,19 @@
                 <div class="flex items-center space-x-2 text-sm">
                     <div>
                         <span class="whitespace-nowrap py-1.5 p-1.5 text-xs font-medium uppercase tracking-wider rounded-lg @if($Usuario->role === 'ADMIN') px-3.5 text-blue-800 bg-blue-200 @else px-5 text-red-800 bg-red-200 @endif">{{ $Usuario->role }}</span>
-
                     </div>
-                    
-                  
                 </div>
                 <div class="flex">
-                    <button class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white hover:bg-green-500">Ver</button>
-                    <button class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20 text-white hover:bg-yellow-500">Editar<button>
-                        <form action="{{route('eliminarRegistro',$Usuario)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type = "submit" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-20 text-white hover:bg-red-500">Eliminar<button>
-                        </form>
+                    <a class="mr-2 mt-2 border border-green-800 bg-green-800 rounded-lg w-20 text-white 
+                    hover:bg-green-500 px-2 py-2">Ver</a>
+
+                    <a href="{{ route('EditarUsuariosAdmin', ['id' => $Usuario->id]) }}" 
+                         class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-20
+                          text-white hover:bg-yellow-500 px-2 py-2">Editar</a>
+
+                    <a onclick="return confirmarEliminar()" type = "submit" 
+                    class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-20 text-white
+                     hover:bg-red-500 px-2 py-2">Eliminar</a>
                 </div>
             </div>
             

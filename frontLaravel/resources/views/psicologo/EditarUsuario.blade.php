@@ -206,8 +206,6 @@
                         <option value="16:00">04:00 pm</option>
                         <option value="17:00">05:00 pm</option>
                         <option value="18:00">06:00 pm</option>
-
-
                     </select>
                   </div>
                 </div>                

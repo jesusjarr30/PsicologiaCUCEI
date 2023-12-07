@@ -78,6 +78,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Pacientes/eliminar/{id}',[AdminMainController::class,'EliminarPaciente'] )->name('eliminar-Paciente');
     Route::get('Admin/Pacientes/VerNotas/{id}',[AdminMainController::class,'VerNotas'] )->name('verNotas');
     Route::get('Admin/Clasificacion',[AdminMainController::class,'clasificacionShow'] )->name('verClasificacion');
+    Route::get('Admin/showUsuarios/Editar/{id}',[AdminMainController::class,'EditarUsuariosAdmin'] )->name('EditarUsuariosAdmin');
+    Route::get('Admin/showUsuarios/ver/{id}',[AdminMainController::class,'VerUsuarios'] )->name('VerUsuarios');
+
     
 
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
@@ -139,6 +142,8 @@ Route::post('/ContrasenaRecover',[ContrasenaRecover::class, 'enviarCorreo'])->na
 Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->name('ingresarNuevaPass');
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
 Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
+Route::put('/EditarUsario2',[AdminMainController::class, 'update2'])->name('editar-usuario2');
+Route::put('/GuardarHora',[AdminMainController::class, 'guardarHora'])->name('guardarHora');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 Route::put('/clasificarClientes',[AdminMainController::class, 'ClasificarCli'])->name('ClasificarCli');

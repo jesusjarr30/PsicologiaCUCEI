@@ -15,6 +15,7 @@ use App\Mail\confirmarCorreoMailable;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Cita;
 use Carbon\Carbon;
+use App\Models\Hora;
 
 
 class AdminMainController extends Controller
@@ -100,6 +101,39 @@ class AdminMainController extends Controller
         return view('administrador.estadisticas', compact('citas', 'pacientes', 'admin', 'psicologo'));
 
     }
+    public function guardarHora(Request $request){
+        info("Si llega a la parte del registro de horas");
+        $id = $request->input('id');
+        $horas = $request->input('horas');
+
+        $fechaActual = Carbon::now()->toDateString();
+
+        $registroExistente = Hora::where('usuario_id', $id)
+        ->whereDate('created_at', $fechaActual)
+        ->first();
+
+        if ($registroExistente) {
+            // Actualizar horas si ya hay un registro para hoy
+            $registroExistente->horasRegistradas += $horas;
+            $registroExistente->save();
+        } else {
+            // Crear un nuevo registro si no existe uno para hoy
+            Hora::create([
+                'usuario_id' => $id,
+                'horasRegistradas' => $horas,
+            ]);
+        }
+        
+        return redirect()->back()->with('success', 'Horas agregadas correctamente.');
+
+       /* $id = $request->input('id');
+        $hora = new Hora;
+        $hora->usuario_id = $id; // O puedes obtener el ID del usuario de alguna manera
+        $hora->horasRegistradas = $request->input('horas');
+        $hora->save();*/
+        
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -167,6 +201,60 @@ class AdminMainController extends Controller
     {
         //
     }
+    public function update2(Request $request){
+        
+        $id = $request->input('id');
+        $user = Usuario::find($id);
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'string|max:255',
+            'telefono' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator);
+        }
+        $actualizado = "profile-updated";
+        if($user->nombre != $request->input('nombre')){ $user->nombre = $request->input('nombre'); $actualizado .=", nombre";}
+        if($user->telefono != $request->input('telefono')){ $user->telefono = $request->input('telefono'); $actualizado .=", telefono";}
+        if($request->input('password') != null && $request->input('password_Old') != null){ 
+            $validator2 = Validator::make($request->all(), [
+                'password' => 'string|min:8|confirmed',
+            ]);
+            if ($validator2->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator2);
+            }
+            
+            if (Hash::check($request->input('password_Old'),$user->password ) ){
+                $user->password = Hash::make($request->input('password'));
+                $actualizado .=", password";
+            }else{
+                return redirect()->back()->withErrors('No coincide contraseña antigua');
+            }
+        }
+        
+        $horario = array(
+            'Lun_I'=>$request->input("Lun-horario-Inicio"),
+            'Lun_F'=>$request->input("Lun-horario-Final"),
+            'Mar_I'=>$request->input("Mar-horario-Inicio"),
+            'Mar_F'=>$request->input("Mar-horario-Final"),
+            'Mie_I'=>$request->input("Mie-horario-Inicio"),
+            'Mie_F'=>$request->input("Mie-horario-Final"),
+            'Jue_I'=>$request->input("Jue-horario-Inicio"),
+            'Jue_F'=>$request->input("Jue-horario-Final"),
+            'Vie_I'=>$request->input("Vie-horario-Inicio"),
+            'Vie_F'=>$request->input("Vie-horario-Final"),
+            'Sab_I'=>$request->input("Sab-horario-Inicio"),
+            'Sab_F'=>$request->input("Sab-horario-Final")
+            );
+        $horario_json = json_encode($horario);
+        $user->horario = $horario_json;
+            
+        $user->save();
+        
+        return redirect()->route('EditarUsuariosAdmin', ['id' => $id])->with('success', $actualizado);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -224,6 +312,26 @@ class AdminMainController extends Controller
         
         $cliente = Cliente::find($id);
         return view('administrador.pacientes.EditarPaciente',['cliente' => $cliente]);
+    }
+
+    public function EditarUsuariosAdmin($id){
+        $usuario = Usuario::find($id);
+        return view('administrador.EditarUsuario',['usuario'=> $usuario]);
+        
+    }
+    public function VerUsuarios($id){
+
+        $usuario = Usuario::find($id);
+        $result = DB::table('horas')
+            ->select(DB::raw('SUM(horasRegistradas) as total_horas'))
+            ->where('usuario_id', $id)
+            ->first();
+        $totalHoras = $result->total_horas ?? 0;
+
+        info("Aqui va el resultado de la base de datos");
+        info($totalHoras);
+        //debeos hacer aqui la busqueda de horas del usuario para poder imprimirlas
+        return view('administrador.VerUsuarios',['usuario'=>$usuario, 'horas'=>$totalHoras]);
     }
 
     const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];

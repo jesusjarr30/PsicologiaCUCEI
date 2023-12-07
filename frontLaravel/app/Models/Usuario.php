@@ -26,5 +26,10 @@ class Usuario extends Model
         );
     }
 
+    public function horas()
+    {
+        return $this->hasMany(Hora::class, 'usuario_id');
+    }
+
     
 }

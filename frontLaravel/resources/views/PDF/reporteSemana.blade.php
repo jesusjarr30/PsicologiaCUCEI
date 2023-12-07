@@ -8,6 +8,8 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    <div>Reportes</div>
+
 
 <h1 class="fond-bold text-2xl">Reporte semanal</h1>
 
