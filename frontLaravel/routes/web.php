@@ -136,6 +136,7 @@ Route::get('/ingresarNuevaPass',[ContrasenaRecover::class, 'modificarPass'])->na
 Route::post('/cambiarPass',[ContrasenaRecover::class, 'cambioPass'])->name('cambiarPass');
 Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('editar-usuario');
 Route::put('/EditarUsario2',[AdminMainController::class, 'update2'])->name('editar-usuario2');
+Route::put('/GuardarHora',[AdminMainController::class, 'guardarHora'])->name('guardarHora');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
 Route::put('/clasificarClientes',[AdminMainController::class, 'ClasificarCli'])->name('ClasificarCli');

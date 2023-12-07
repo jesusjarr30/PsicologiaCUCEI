@@ -3,7 +3,7 @@
 @section('contentAdmin')
 
 
-<form action="{{ route('editar-usuario2' ) }}" method="POST">
+<form action="{{ route('guardarHora' ) }}" method="POST">
     @csrf
     @method('put')
     <div>
@@ -61,12 +61,14 @@
               <input
                   name="nombre"
                   type="text"
+                  readonly
                   class="border-none outline-none bg-transparent w-full"
                   value="{{ $usuario->nombre }}"
                   />
                   <input class="hidden" 
                   name="id"
                   type="text"
+                  readonly
                   value={{$usuario->id}}
                   />
             </dd>
@@ -83,23 +85,21 @@
             </dd>
           </div>
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt class="text-sm font-medium leading-6 text-gray-900">telefono</dt>
+            <dt class="text-sm font-medium leading-6 text-gray-900">Horas totales</dt>
             <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               <input
-              name="telefono"
+              name="Horas Registradas"
               type="text"
+              readonly
               class="border-none outline-none bg-transparent w-full"
-              value="{{ $usuario->telefono }}"
+              value="{{$horas}}"
               />
         </dd>
             </dd>
-          </div>
-          
-  
-                        
+          </div>     
         
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm font-medium leading-6 text-gray-900">Agregar Horas</dt>
+        <dt class="text-sm font-medium leading-6 text-gray-900">Agregar Horas Manual</dt>
         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 ">
             <input
               name="horas"
@@ -126,7 +126,7 @@
   
     <div class="ml-4">
       <a href="{{route('EditUser')}}">
-        <button form="" class="px-4 py-2 rounded-full bg-red-600 text-white border-2 border-red-800 hover:bg-red-800"><strong>Cancelar</strong></Button>
+        <button class="px-4 py-2 rounded-full bg-red-600 text-white border-2 border-red-800 hover:bg-red-800"><strong>Cancelar</strong></Button>
       </a>
       <button class="ml-6 px-4 py-2 rounded-full bg-green-600 text-white border-2 border-green-800 hover:bg-green-800"><strong>Guardar</strong></button>
     </div>

@@ -15,6 +15,7 @@ use App\Mail\confirmarCorreoMailable;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Cita;
 use Carbon\Carbon;
+use App\Models\Hora;
 
 
 class AdminMainController extends Controller
@@ -96,6 +97,39 @@ class AdminMainController extends Controller
         $consulta4 = DB::select('SELECT COUNT(*) as count FROM usuarios where role="USER"');
         $psicologo = $consulta4[0]->count;
         return view('administrador.estadisticas', compact('citas', 'pacientes', 'admin', 'psicologo'));
+
+    }
+    public function guardarHora(Request $request){
+        info("Si llega a la parte del registro de horas");
+        $id = $request->input('id');
+        $horas = $request->input('horas');
+
+        $fechaActual = Carbon::now()->toDateString();
+
+        $registroExistente = Hora::where('usuario_id', $id)
+        ->whereDate('created_at', $fechaActual)
+        ->first();
+
+        if ($registroExistente) {
+            // Actualizar horas si ya hay un registro para hoy
+            $registroExistente->horasRegistradas += $horas;
+            $registroExistente->save();
+        } else {
+            // Crear un nuevo registro si no existe uno para hoy
+            Hora::create([
+                'usuario_id' => $id,
+                'horasRegistradas' => $horas,
+            ]);
+        }
+        
+        return redirect()->back()->with('success', 'Horas agregadas correctamente.');
+
+       /* $id = $request->input('id');
+        $hora = new Hora;
+        $hora->usuario_id = $id; // O puedes obtener el ID del usuario de alguna manera
+        $hora->horasRegistradas = $request->input('horas');
+        $hora->save();*/
+        
 
     }
 
@@ -286,9 +320,16 @@ class AdminMainController extends Controller
     public function VerUsuarios($id){
 
         $usuario = Usuario::find($id);
-        //debeos hacer aqui la busqueda de horas del usuario para poder imprimirlas
+        $result = DB::table('horas')
+            ->select(DB::raw('SUM(horasRegistradas) as total_horas'))
+            ->where('usuario_id', $id)
+            ->first();
+        $totalHoras = $result->total_horas ?? 0;
 
-        return view('administrador.VerUsuarios',['usuario'=>$usuario]);
+        info("Aqui va el resultado de la base de datos");
+        info($totalHoras);
+        //debeos hacer aqui la busqueda de horas del usuario para poder imprimirlas
+        return view('administrador.VerUsuarios',['usuario'=>$usuario, 'horas'=>$totalHoras]);
     }
 
     const FIELDS = ['nombre', 'apellidos', 'codigo', 'correo', 'edad', 'telefono', 'nacimiento'];
