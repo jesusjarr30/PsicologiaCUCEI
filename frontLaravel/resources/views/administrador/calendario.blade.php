@@ -62,82 +62,93 @@
     </div>
     @endif
 <!-- Modal Pasiente con Cita-->
-    <div class="modal fade" id="infoCitaPasiente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" 
+            id="infoCitaPasiente" 
+            tabindex="-1" 
+            aria-labelledby="exampleModalLabel" 
+            aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Informacion de la cita</h5>
+                    <h5 class="modal-title text-xl font-medium leading-normal text-neutral-800" id="exampleModalLabel">Informacion de la cita</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <span class="font-bold"> Pasiente: </span>
-                    <div style="display: inline" id="modal-pasiente"> </div>
-                    <div></div>
+                <div class="modal-body grid grid-cols-1 divide-y">
+                    <div>
+                        <span class="font-bold"> Pasiente: </span>
+                        <div style="display: inline" id="modal-pasiente"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Codigo: </span>
-                    <div style="display: inline" id="modal-codigo"> </div>
-                    <div></div>
+                        <span class="font-bold"> Codigo: </span>
+                        <div style="display: inline" id="modal-codigo"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Correo: </span>
-                    <div style="display: inline" id="modal-correo"> </div>
-                    <div></div>
+                        <span class="font-bold"> Nacimiento: </span>
+                        <div style="display: inline" id="modal-nacimiento"> </div>
 
-                    <span class="font-bold"> Edad: </span>
-                    <div style="display: inline" id="modal-edad"> </div>
-                    <div></div>
+                        <span class="font-bold"> Edad: </span>
+                        <div style="display: inline" id="modal-edad"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Telefono: </span>
-                    <div style="display: inline" id="modal-telefono"> </div>
-                    <div></div>
+                        <span class="font-bold"> Correo: </span>
+                        <div style="display: inline" id="modal-correo"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Descripcion: </span>
-                    <div style="display: inline" id="modal-descripcion"> </div>
-                    <div></div>
+                        <span class="font-bold"> Telefono: </span>
+                        <div style="display: inline" id="modal-telefono"> </div>
+                        <div></div>
+                    </div>
 
-                    <span class="font-bold"> Expectativas: </span>
-                    <div style="display: inline" id="modal-expectativa"> </div>
-                    <div></div>
+                    <div>
+                        <h3 class="font-bold"> Descripcion: </h3>
+                        <div style="display: inline" id="modal-descripcion"> </div>
+                        <div></div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold"> Expectativas: </h3>
+                        <div style="display: inline" id="modal-expectativa"> </div>
+                        <div></div>
+                    </div>
 
-                    <span class="font-bold"> Horario esperado: </span>
-                    <div style="display: inline" id="modal-horario"> </div>
-                    <div></div>
+                    <div>
+                        <span class="font-bold"> Horario esperado: </span>
+                        <div style="display: inline" id="modal-horario"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Clasificacion: </span>
-                    <div style="display: inline" id="modal-clasificacion"> </div>
-                    <div></div>
+                        <span class="font-bold"> Clasificacion: </span>
+                        <div style="display: inline" id="modal-clasificacion"> </div>
+                        <div></div>
 
-                    <span class="font-bold"> Secciones: </span>
-                    <div style="display: inline" id="modal-secciones"> </div>
-                    <div></div>
+                        <span class="font-bold"> Secciones: </span>
+                        <div style="display: inline" id="modal-secciones"> </div>
+                        <div></div>
+                    </div>
 
-                    <span class="font-bold"> Nacimiento: </span>
-                    <div style="display: inline" id="modal-nacimiento"> </div>
-                    <div></div>
+                    <div>
+                        <span class="font-bold"> Fecha: </span>
+                        <div style="display: inline" id="modal-fecha"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Consultorio: </span>
+                        <div style="display: inline" id="modal-consultorio"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Atendido: </span>
+                        <div style="display: inline" id="modal-atendido"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Psicologo asignado: </span>
+                        <div style="display: inline" id="modal-psicologo"> </div>
+                        <div></div>
                     
-                    <span class="font-bold"> Fecha: </span>
-                    <div style="display: inline" id="modal-fecha"> </div>
-                    <div></div>
-
-                    <span class="font-bold"> Consultorio: </span>
-                    <div style="display: inline" id="modal-consultorio"> </div>
-                    <div></div>
-
-                    <span class="font-bold"> Atendido: </span>
-                    <div style="display: inline" id="modal-atendido"> </div>
-                    <div></div>
-
-                    <span class="font-bold"> Psicologo asignado: </span>
-                    <div style="display: inline" id="modal-psicologo"> </div>
-                    <div></div>
-                    <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
-                        <option value="none" selected disabled hidden>Asignar Psicologo</option> 
-                        <option  value='null'  >Sin asignar</option>
-                        @foreach ( $psicologos as $psi )
-                            <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
-                        @endforeach
-                    </select>
-        
-                    <span id="titleError" class="text-danger"></span>
+                        <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
+                            <option value="none" selected disabled hidden>Asignar Psicologo</option> 
+                            <option  value='null'  >Sin asignar</option>
+                            @foreach ( $psicologos as $psi )
+                                <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
@@ -145,72 +156,81 @@
                     <button type="button" id="eliminaBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
                     <button type="button" id="eliminaDemasBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar VariasCitas</button>
                 </div>
-
-                
             </div>
         </div>
     </div>
 <!-- Modal Pasiente-->
-<div class="modal fade" id="infoPasiente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade"
+        id="infoPasiente" 
+        tabindex="-1" 
+        aria-labelledby="exampleModalLabel" 
+        aria-hidden="true">
+        
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Informacion del pasiente</h5>
+                <h5 class="modal-title text-xl font-medium leading-normal text-neutral-800" id="exampleModalLabel">Informacion del pasiente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <span class="font-bold"> Pasiente: </span>
-                <div style="display: inline" id="modal-pasiente-infoPasiente"> </div>
-                <div></div>
+            <div class="modal-body grid grid-cols-1 divide-y">
+                <div>
+                    <span class="font-bold"> Pasiente: </span>
+                    <div style="display: inline" id="modal-pasiente-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Codigo: </span>
-                <div style="display: inline" id="modal-codigo-infoPasiente"> </div>
-                <div></div>
+                    <span class="font-bold"> Codigo: </span>
+                    <div style="display: inline" id="modal-codigo-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Correo: </span>
-                <div style="display: inline" id="modal-correo-infoPasiente"> </div>
-                <div></div>
+                    <span class="font-bold"> Nacimiento: </span>
+                    <div style="display: inline" id="modal-nacimiento-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Edad: </span>
-                <div style="display: inline" id="modal-edad-infoPasiente"> </div>
-                <div></div>
+                    <span class="font-bold"> Edad: </span>
+                    <div style="display: inline" id="modal-edad-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Telefono: </span>
-                <div style="display: inline" id="modal-telefono-infoPasiente"> </div>
-                <div></div>
+                    <span class="font-bold"> Correo: </span>
+                    <div style="display: inline" id="modal-correo-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Descripcion: </span>
-                <div style="display: inline" id="modal-descripcion-infoPasiente"> </div>
-                <div></div>
+                    <span  class="font-bold"> Telefono: </span >
+                    <div style="display: inline" id="modal-telefono-infoPasiente"> </div>
+                    <div></div>
+                </div>
+                
+                <div>
+                    <h3  class="font-bold"> Descripcion: </h3 >
+                    <div style="display: inline" id="modal-descripcion-infoPasiente"> </div>
+                    <div></div>
+                </div>
+                <div>
+                    <h3  class="font-bold"> Expectativas: </h3 >
+                    <div style="display: inline" id="modal-expectativa-infoPasiente"> </div>
+                    <div></div>
+                </div>
 
-                <span class="font-bold"> Expectativas: </span>
-                <div style="display: inline" id="modal-expectativa-infoPasiente"> </div>
-                <div></div>
+                <div>
+                    <span class="font-bold"> Horario esperado: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Horario esperado: </span>
-                <div style="display: inline" id="modal-horario-infoPasiente"> </div>
-                <div></div>
+                    <span class="font-bold"> Clasificacion: </span>
+                    <div style="display: inline" id="modal-clasificacion-infoPasiente"> </div>
+                    <div></div>
 
-                <span class="font-bold"> Clasificacion: </span>
-                <div style="display: inline" id="modal-clasificacion-infoPasiente"> </div>
-                <div></div>
-
-                <span class="font-bold"> Secciones: </span>
-                <div style="display: inline" id="modal-secciones-infoPasiente"> </div>
-                <div></div>
-
-                <span class="font-bold"> Nacimiento: </span>
-                <div style="display: inline" id="modal-nacimiento-infoPasiente"> </div>
-                <div></div>
-
-                <span id="titleError" class="text-danger"></span>
+                    <span class="font-bold"> Secciones: </span>
+                    <div style="display: inline" id="modal-secciones-infoPasiente"> </div>
+                    <div></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Body -->
     <div class="container-fluid">
-
+                        <!-- Botones de consultorios-->
                     <div class="text-center mt-5">
                         <h3 >Gestionar citas, Consultorio - {{$consultorio}} -</h3>
                         <a href="{{route('calendar.index',1) }}">
@@ -226,9 +246,9 @@
                         </a>
                     </div>
 
-                    <div class="grid grid-rows-2 grid-flow-col gap-4">
+                    <div class="grid grid-rows-3 grid-flow-col gap-4">
                         <!-- Eventos externos Pasientes-->
-                        <div class="row-end-3 row-span-2">
+                        <div class="row-span-3">
                             <div class="sticky-top mb-3">
                                 <div class="card">
                                     <div class="card-header">
@@ -269,7 +289,7 @@
                             </div>
                         </div>
                         <!-- Calendario -->
-                        <div class="row-start-1 row-end-4">
+                        <div class="row-span-2 col-span-2 ">
                                 <div id='calendar-container'>
                                     <div id='calendar'></div>
                                 </div>

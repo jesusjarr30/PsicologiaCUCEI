@@ -89,18 +89,12 @@ class CalendarController extends Controller
         $eventsCitas = array();
         foreach($citas as $cita) {
             $color = null;
-            if($cita->cliente->clasificacion == 'suicidio') {
-                $color = '#dc3545';
-            }
-            if($cita->cliente->clasificacion == 'depresion') {
+            if($cita->atendido == 0) {
+                $color = '#64748b';
+            }else{
                 $color = '#ffc107';
             }
-            if($cita->cliente->clasificacion == 'ansiedad') {
-                $color = '#198754';
-            }
-            if($cita->cliente->clasificacion == 'otros') {
-                $color = '#0dcaf0';
-            }
+            
             $fechaEnd = date("Y-m-d H:i:s", strtotime($cita->fecha.'+1 hours'));
             $eventsCitas[] = [
                 'id'   => $cita->id,
