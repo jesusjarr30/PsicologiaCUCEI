@@ -118,10 +118,10 @@ class AdminMainController extends Controller
             $registroExistente->save();
         } else {
             // Crear un nuevo registro si no existe uno para hoy
-            Hora::create([
-                'usuario_id' => $id,
-                'horasRegistradas' => $horas,
-            ]);
+            $hora = new Hora;
+        $hora->usuario_id = $id; // O puedes obtener el ID del usuario de alguna manera
+        $hora->horasRegistradas = $request->input('horas');
+        $hora->save();
         }
         
         return redirect()->back()->with('success', 'Horas agregadas correctamente.');

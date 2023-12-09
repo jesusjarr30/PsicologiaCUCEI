@@ -80,7 +80,6 @@
                         <span class="whitespace-nowrap py-1.5 p-1.5 text-xs font-medium uppercase tracking-wider rounded-lg
                          @if($Usuario->role === 'ADMIN') px-3.5 text-blue-800 bg-blue-200 @else px-5 text-red-800
                           bg-red-200 @endif">{{ $Usuario->role }}</span>
-
                     </td>
                     
                     <td class="flex px-4 py-4"> 

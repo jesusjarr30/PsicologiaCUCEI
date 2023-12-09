@@ -42,7 +42,6 @@
                 <img class="w-32 object-cover object-center rounded-lg mb-4" 
                 src="{{ asset('Imagenes/iconosEstadistica/reporte.png') }}" alt="step"/>
                 <a class="text-white hover:text-yellow-400 font-bold"href="{{ route('pdfSemanal') }}">Reporte Semanal</a>
-                
             </div>
         
         

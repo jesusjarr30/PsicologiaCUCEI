@@ -77,15 +77,22 @@
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">{{$Paciente->edad}}
                     </td>
                     
-                    <td class="flex"> 
+                    <td class="flex px-4 py-4"> 
                         
-                        <a href="{{ route('verNotasPSI', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-green-800
-                             bg-green-800 rounded-lg w-16 text-white hover:bg-green-500">Notas</a>
+                        <a href="{{ route('verNotasPSI', ['id' => $Paciente->id]) }}" 
+                            class="mr-2 mt-2 text-center font-bold text-green-900  bg-green-600 rounded-lg  
+                            hover:bg-green-800 hover:text-white px-6 py-2">Notas</a>
                         
                            
-                        <a href="{{ route('showPacienteEditarPSI', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-yellow-800 bg-yellow-800 rounded-lg w-16 text-white hover:bg-yellow-500">Editar</a>
-                        <a href="{{ route('eliminar-PacientePSI', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-red-800 bg-red-800 rounded-lg w-16 text-white hover:bg-red-500">Eliminar</a>
+                        <a href="{{ route('showPacienteEditarPSI', ['id' => $Paciente->id]) }}"
+                            class="mr-2 mt-2 text-center font-bold bg-yellow-600 rounded-lg text-yellow-900 hover:text-white
+                            hover:bg-yellow-800 px-5 py-2">Editar</a>
+                        <a href="{{ route('eliminar-PacientePSI', ['id' => $Paciente->id]) }}" 
+                            class="mr-2 mt-2 text-center
+                         border-red-800 bg-red-800 rounded-lg  text-white hover:bg-red-500 px-4 py-2">Eliminar</a>
+                        <!--
                         <a href="{{ route('AgregarCita', ['id' => $Paciente->id]) }}" class="mr-2 mt-2 border border-orange-800 bg-orange-800 rounded-lg w-16 text-white hover:bg-orange-500">Cita</a>
+                        -->
                     </td>
                 </tr>
                 @php

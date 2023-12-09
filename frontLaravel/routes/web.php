@@ -124,7 +124,7 @@ Route::group(['middleware' => ['auth','user']], function () {
     Route::post('Piscologo/calendar/infoEventPC/{id}', [CalendarController::class, 'getPasienteCita'])->name('calendar.infoPasienteCitaPsi');
     Route::post('Piscologo/calendar/citaAtendida/{id}', [CalendarController::class, 'citaAtendida'])->name('calendar.citaAtendida');
 
-    Route::get('/Piscologo/VerCita',[AdminPsicologoController::class,'VerCita'] )->name('verCitaPS');
+    Route::get('/Piscologo/VerCita',[AdminPsicologoController::class,'VerCita'])->name('verCitaPS');
     
     
 });
@@ -145,7 +145,7 @@ Route::put('/EditarUsario',[AdminPsicologoController::class, 'update'])->name('e
 Route::put('/EditarUsario2',[AdminMainController::class, 'update2'])->name('editar-usuario2');
 Route::put('/GuardarHora',[AdminMainController::class, 'guardarHora'])->name('guardarHora');
 Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
-Route::post('/GuardarNota',[AdminMainController::class, 'GuardarNota'])->name('GuardarNota');
+
 Route::put('/clasificarClientes',[AdminMainController::class, 'ClasificarCli'])->name('ClasificarCli');
 
 //Delte
