@@ -155,11 +155,21 @@ class AdminPsicologoController extends Controller
     public function EliminarPaciente($id){
         
         $cliente = Cliente::find($id);
-        $cita = Cita::find($id);
+        if(! $cliente) {
+            return response()->json([
+                'error' => 'No se encontro el pasiente'
+            ], 404);
+        }
+        // Si el pasiente cuenta con cita se comifica el horario y se elimina
+        $cita = Cita::where( 'cliente_id', $id);
+        if($cita) {
+            $cita->update([
+                'fecha' => date("Y-m-d", strtotime('1969-12-31')),
+            ]);
 
-        $cita->fecha = date('Y-m-d 00:00:00', strtotime('0001-01-01'));
-        $cita->save();
-        $cita->delete();
+            $cita->delete();
+        }
+
         $cliente->delete();
 
         return  back()->with('success', 'Se elimino el paciente con éxito.');

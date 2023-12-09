@@ -100,7 +100,7 @@ class CalendarController extends Controller
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
                 'consultorio' => $cita->consultorio,
-                'title' => $cita->cliente->codigo,
+                'title' => $cita->cliente->codigo.' : '. ($cita->atendido ? "Atendido" : "Sin Atender"),
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
                 'color' => $color

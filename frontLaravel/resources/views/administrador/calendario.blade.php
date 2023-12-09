@@ -248,7 +248,6 @@
 
                     <div class="grid grid-rows-3 grid-flow-col gap-4">
                         <!-- Eventos externos Pasientes-->
-                       
                         <div class="row-span-3">
                             <div class="sticky-top mb-3">
                                 <div class="card">
@@ -258,21 +257,40 @@
                                     <div class="card-body">
                                         <div id='external-events'>
                                             <p>
+                                            @php 
+                                                $clasiflag= array(1,1,1,1); 
+                                                $rowColor= '';
+                                            @endphp
                                             @foreach($clasificacion as $clasi)
                                                 @php
-                                                    $rowColor= 'bg-white';
                                                     switch($clasi->clasificacion){
                                                         case 'suicidio':
                                                             $rowColor= '#dc3545';
+                                                            if($clasiflag[0]){
+                                                                echo "<div class='text-center' style='background-color:$rowColor'> Suicidio</div> ";
+                                                                $clasiflag[0] = 0;
+                                                            }
                                                             break;
                                                         case 'depresion':
                                                             $rowColor= '#ffc107';
+                                                            if($clasiflag[1]){
+                                                                echo "<div class='text-center' style='background-color:$rowColor'> Depresion</div> ";
+                                                                $clasiflag[1] = 0;
+                                                            }
                                                             break;
                                                         case 'ansiedad':
                                                             $rowColor= '#198754';
+                                                            if($clasiflag[2]){
+                                                                echo "<div class='text-center' style='background-color:$rowColor'> Ansiedad</div> ";
+                                                                $clasiflag[2] = 0;
+                                                            }
                                                             break;
                                                         case 'otros':
                                                             $rowColor= '#0dcaf0';
+                                                            if($clasiflag[3]){
+                                                                echo "<div class='text-center' style='background-color:$rowColor'> Otros</div> ";
+                                                                $clasiflag[3] = 0;
+                                                            }
                                                             break;
                                                         default:
                                                             $rowColor= '#dce4e6';
