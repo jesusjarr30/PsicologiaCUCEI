@@ -249,7 +249,7 @@
                     <div class="grid grid-rows-3 grid-flow-col gap-4">
                         <!-- Eventos externos Pasientes-->
                        
-                        <div class="row-start-1 row-end-4 ">
+                        <div class="row-span-3">
                             <div class="sticky-top mb-3">
                                 <div class="card">
                                     <div class="card-header">
@@ -290,7 +290,7 @@
                             </div>
                         </div>
                         <!-- Calendario -->
-                        <div class="row-end-3 row-span-2">
+                        <div class="row-span-2 col-span-2 ">
                                 <div id='calendar-container'>
                                     <div id='calendar'></div>
                                 </div>

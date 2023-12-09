@@ -85,7 +85,11 @@
                     <div class="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:dark:bg-violet-400">
 						<h3 class="text-xl font-semibold tracki">{{$nota->titulo}} </h3>
 						<time class="text-xs tracki uppercase dark:text-gray-400">{{$nota->created_at}}</time>
-						<p class="mt-3">{{$nota->description}}</p>
+						@php
+                                // Limita la descripción a 50 caracteres y agrega un salto de línea si es necesario
+                                $wrappedDescription = wordwrap($nota->description, 50, "\n", true);
+                            @endphp
+                            {!! nl2br(e($wrappedDescription)) !!}
 					</div>
 					
 					@endforeach
