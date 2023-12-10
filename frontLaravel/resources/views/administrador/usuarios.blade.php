@@ -147,11 +147,6 @@
 
 <script>
     function confirmarEliminar() {
-        return confirm('¿Estás seguro de que deseas eliminar este registro?');
-    }
-</script>
-<script>
-    function confirmarEliminar() {
         return Swal.fire({
             title: '¿Estás seguro?',
             text: 'No podrás revertir esto',

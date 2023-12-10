@@ -371,14 +371,14 @@ class AdminMainController extends Controller
         $nota->description=$descripcion;
         // Definir reglas de validación
         $reglas = [
-            'titulo' => 'required|string|max:150',
-            'descripcion' => 'required|string|max:300',
+            'titulo' => 'required|string',
+            'descripcion' => 'required|string',
         ];
 
         // Definir mensajes de error personalizados si es necesario
         $mensajes = [
-            'titulo.max' => 'El título no puede tener más de 150 caracteres.',
-            'descripcion.max' => 'La descripción no puede tener más de 300 caracteres.',
+            'titulo' => 'Ingrese un titulo antes de guarda su nota',
+            'descripcion' => 'No se puede guardar una nota sin descripcion',
         ];
 
         // Validar los datos del formulario
@@ -392,6 +392,7 @@ class AdminMainController extends Controller
         $nota->save();
 
         // Resto de la lógica
+        
     
         return back()->with('success', 'Nota creada con éxito.');
 
@@ -429,6 +430,18 @@ class AdminMainController extends Controller
         $cliente->save();
 
         return back();
+
+    }
+    public function eliminarNota($id){
+
+        $nota = Nota::find($id);
+        if (!$nota) {
+            // Manejar el caso en que la nota no existe
+            return back()->with('ErrorNota', 'Error la nota no se puede eliminar');
+        }
+        $nota->delete();
+        // Redireccionar o devolver una respuesta según tus necesidades
+        return back()->with('successNota', 'La nota ha sido eliminada con éxito.');
 
     }
 }

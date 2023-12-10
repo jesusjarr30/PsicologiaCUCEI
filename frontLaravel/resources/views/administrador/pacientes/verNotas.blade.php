@@ -1,7 +1,7 @@
 @extends('layouts.BaseAdmin')
 
 @section('contentAdmin')
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- editar_cliente.blade.php -->
 <div class="h-screen w-auto bg-cyan-800">
 
@@ -45,12 +45,64 @@
           </div>
       </div>
       @endif
+      @if(Session::has('successNota'))
+      <div class="max-w-lg mx-auto">
+        <div class="bg-blue-100 border-t-4 border-blue-500 rounded-b px-4 py-3 shadow-md my-4">
+            <div class="flex items-center">
+                <div class="text-blue-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mx-3">
+                    <span class="font-semibold text-blue-700">Exito</span>
+                    <p class="text-sm text-blue-700">Nota Eliminada correctamente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    @error('titulo')
+    <div class="max-w-lg mx-auto">
+        <div class="bg-yellow-100 border-t-4 border-yellow-500 rounded-b px-4 py-3 shadow-md my-4">
+            <div class="flex items-center">
+                <div class="text-yellow-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mx-3">
+                    <span class="font-semibold text-yellow-700">Warning alert!</span>
+                    <p class="text-sm text-yellow-700">{{ $message }}</p>
+                </div>
+            </div>
+        </div>
+  </div>
+  @enderror
+   @error('descripcion')
+    <div class="max-w-lg mx-auto">
+        <div class="bg-yellow-100 border-t-4 border-yellow-500 rounded-b px-4 py-3 shadow-md my-4">
+            <div class="flex items-center">
+                <div class="text-yellow-700">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mx-3">
+                    <span class="font-semibold text-yellow-700">Warning alert!</span>
+                    <p class="text-sm text-yellow-700">{{ $message }}</p>
+                </div>
+            </div>
+        </div>
+  </div>
+  @enderror
 
    <form method="POST" action="{{ route('GuardarNota') }}">
     @csrf
         <h2 class="ml-4">Ingrese Nueva Nota </h2>
         <input 
         name="titulo"
+        maxlength="30"
         class=" mt-4 w-3/4 md:w-full sm:w-full xs-full block p-2.5  text-sm text-gray-800 bg-gray-50 rounded-lg border 
     border-gray-300 focus:ring-blue-500 focus:border-blue-500"
     placeholder="Titulo de la Nota"
@@ -83,8 +135,31 @@
 				<div class="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:dark:bg-gray-700">
 					@foreach ($notas as $nota)
                     <div class="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:dark:bg-violet-400">
-						<h3 class="text-xl font-semibold tracki">{{$nota->titulo}} </h3>
-						<time class="text-xs tracki uppercase dark:text-gray-400">{{$nota->created_at}}</time>
+						
+                        <h3 class="text-xl font-semibold tracki">{{$nota->titulo}} </h3>
+                        
+                        <div class="flex">
+                        <time class="text-xs tracki uppercase dark:text-gray-400">{{$nota->created_at}}</time>
+                        <a onclick="return confirmarEliminar({{$nota->id}})"class ="flex ml-8 px-1 py-1 bg-red-700 font-bold text-white rounded-md  hover:bg-red-800">Eliminar </a>
+                        <script>
+                            function confirmarEliminar(notaId) {
+                                return Swal.fire({
+                                    title: '¿Estás seguro?',
+                                    text: 'No podrás revertir esto',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Sí, eliminarlo'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = `{{ route('eliminarNota', ['id' => ':notaId']) }}`.replace(':notaId', notaId);
+                                    }
+                                    return result.isConfirmed;
+                                });
+                            }
+                        </script>
+                    </div>
 						@php
                                 // Limita la descripción a 50 caracteres y agrega un salto de línea si es necesario
                                 $wrappedDescription = wordwrap($nota->description, 50, "\n", true);
@@ -100,6 +175,8 @@
 		</div>
 	</div>
 </section>
+
+
 
 </div>	
 @endsection

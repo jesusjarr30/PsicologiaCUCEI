@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/Clasificacion',[AdminMainController::class,'clasificacionShow'] )->name('verClasificacion');
     Route::get('Admin/showUsuarios/Editar/{id}',[AdminMainController::class,'EditarUsuariosAdmin'] )->name('EditarUsuariosAdmin');
     Route::get('Admin/showUsuarios/ver/{id}',[AdminMainController::class,'VerUsuarios'] )->name('VerUsuarios');
+    Route::get('Admin/Pacientes/VerNotas/borrar/{id}',[AdminMainController::class,'eliminarNota'] )->name('eliminarNota');
 
     
 
@@ -114,10 +115,9 @@ Route::group(['middleware' => ['auth','user']], function () {
     Route::get('/Piscologo/Pacientes/{id}',[AdminPsicologoController::class,'EditarPaciente'] )->name('showPacienteEditarPSI');
     Route::get('/Piscologo/Pacientes/eliminar/{id}',[AdminPsicologoController::class,'EliminarPaciente'] )->name('eliminar-PacientePSI');
     Route::get('/Piscologo/Pacientes/VerNotas/{id}',[AdminPsicologoController::class,'VerNotas'] )->name('verNotasPSI');
-
     Route::get('/Piscologo/Pacientes/AgregarCita/{id}',[AdminPsicologoController::class,'AgregarCita'] )->name('AgregarCita');
-
     Route::put('/Piscologo/Pacientes/EditarPaciente/{id}',[AdminPsicologoController::class,'ActualizarPaciente'] )->name('actualizar-PacientePSI');
+    Route::get('/Piscologo/Pacientes/VerNotas/borrar/{id}',[AdminMainController::class,'eliminarNota'] )->name('eliminarNota2');
 
     //Calendario
     Route::get('Piscologo/calendar/consultorio/{num}', [CalendarController::class, 'indexPsi'])->name('calendar.indexPsi');
