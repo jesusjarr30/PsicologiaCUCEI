@@ -192,6 +192,7 @@ Route::post('/generar-manual', [CitaController::class, 'citaManual'])->name('Gen
 Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('pdfTest');
 Route::get('/generate-semana', [PdfController::class, 'pdfSemana'])->name('pdfSemanal');
 Route::get('/generate-mensual', [PdfController::class, 'pdfMes'])->name('pdfMensual');
+Route::get('/generate-historico', [PdfController::class, 'pdfHistorico'])->name('pdfHistorico');
 
 //direccion directa para la pruab de estilos
 

@@ -71,11 +71,26 @@ class PdfController extends Controller
             ->orderByRaw('citas.fecha, FIELD(citas.consultorio, 1, 2, 3)')
             ->get();
             
-            $pdf =PDF::loadView('PDF.reporteSemana',compact('citas'));
+            $pdf =PDF::loadView('PDF.reporteMes',compact('citas'));
             return $pdf->download();
         
     }
     public function pdfHistorico(){
+        $citas = Cita::select(
+            'citas.id',
+            'usuarios.nombre as nombre_usuario',
+            'clientes.nombre as nombre_cliente',
+            'citas.consultorio',
+            'citas.fecha',
+        )
+        ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
+        ->join('clientes', 'citas.cliente_id', '=', 'clientes.id')
+        ->orderByRaw('citas.fecha, FIELD(citas.consultorio, 1, 2, 3)')
+        ->get();
+
+    
+    $pdf =PDF::loadView('PDF.reporteHistorico',compact('citas'));
+            return $pdf->download();
 
     }
     
