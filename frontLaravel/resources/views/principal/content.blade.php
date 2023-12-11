@@ -23,7 +23,8 @@
           
 
           <p>
-            Generar una plataforma para que los alumnos que necesitan ayuda psicológica en nuestro CUCIE puedan contar con las herramientas para pedir apoyo y continuar siendo parte de nuestra institución.
+            Generar una plataforma para que los alumnos que necesitan ayuda psicológica en nuestro CUCEI puedan 
+            contar con las herramientas para solicitar apoyo y seguir siendo parte de nuestra institución.
           </p>
         </div>
         </div>
@@ -49,7 +50,7 @@
 
               <div class="flex-grow pl-4">
                   <h2 class="font-medium title-font text-sm text-white mb-1 tracking-wider"><strong>Paso 1</strong></h2>
-                  <p class="leading-relaxed text-white">Dar click en "agendar Cita" y llenar el formulario que se te pide</p>
+                  <p class="leading-relaxed text-white">Dar click en "Agendar Cita" y llenar el formulario que se te pide</p>
               </div>
               </div>
               <div class="flex relative pb-12">
@@ -63,7 +64,7 @@
               </div>
               <div class="flex-grow pl-4">
                   <h2 class="font-medium title-font text-sm text-white mb-1 tracking-wider">Paso 2</h2>
-                  <p class="leading-relaxed text-white">Cuando se asigne una psicologo a tu caso te enviaremos un correo con los detalles</p>
+                  <p class="leading-relaxed text-white">Cuando se asigne un psicólogo a tu caso, te enviaremos un correo con los detalles.</p>
               </div>
               </div>
               <div class="flex relative pb-12">
