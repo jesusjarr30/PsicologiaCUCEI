@@ -122,19 +122,19 @@ class AdminPsicologoController extends Controller
     }
     public function VerCita(){
 
-        $userEmail = Auth::user()->id;
+        $user = Auth::user()->id;
         info("El id del usaurio con el que me estoy loogeando es el siguient ");
-        info($userEmail);
+        info($user);
 
         $citasHoy = Cita::with('cliente', 'usuario')
-        ->where('usuario_id', 2)
+        ->where('usuario_id', $user)
         ->whereDate('fecha', '=', Carbon::today()->toDateString())
         ->get();
     
 
         // Obtener citas de mañana y posteriores
         $citasMananaEnAdelante = Cita::with('cliente', 'usuario')
-        ->where('usuario_id', 2)
+        ->where('usuario_id', $user)
         ->whereDate('fecha', '>=', Carbon::tomorrow())
         
         ->get();
