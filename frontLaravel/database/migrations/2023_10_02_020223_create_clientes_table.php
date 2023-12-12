@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->text('descripcion');
             $table->text('expectativas');
-            $table->string('horario')->nullable();
+            $table->json('horario')->nullable();
             $table->string('clasificacion')->nullable();
             $table->date('nacimiento')->nullable();
             $table->string('usuario_id')->nullable();
