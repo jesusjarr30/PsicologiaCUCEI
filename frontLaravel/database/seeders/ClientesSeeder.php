@@ -23,7 +23,7 @@ class ClientesSeeder extends Seeder
         $cliente->telefono = "3310611795";
         $cliente->descripcion = "toy tiste";
         $cliente->expectativas = "ya no estar tiste";
-        $cliente->horario = "10:00";
+        $cliente->horario = json_encode("10:00");
         $cliente->nacimiento = '1997-03-11';
         $cliente->save();
 
@@ -37,7 +37,7 @@ class ClientesSeeder extends Seeder
         $cliente1->telefono = '3724879382';
         $cliente1->descripcion = "toy tiste 1";
         $cliente1->expectativas = "ya no estar tiste 1";
-        $cliente1->horario = "13:00";
+        $cliente1->horario = json_encode("13:00");
         $cliente1->nacimiento = '2001-05-13';
         $cliente1->save();
 
@@ -50,7 +50,7 @@ class ClientesSeeder extends Seeder
         $cliente2->telefono = '3314811782';
         $cliente2->descripcion = "toy tiste 2";
         $cliente2->expectativas = "ya no estar tiste 2";
-        $cliente2->horario = "11:00";
+        $cliente2->horario = json_encode("11:00");
         $cliente2->nacimiento = '1997-06-14';
         $cliente2->save();
 
@@ -63,7 +63,7 @@ class ClientesSeeder extends Seeder
         $cliente3->telefono = '3724234382';
         $cliente3->descripcion = "toy tiste 3";
         $cliente3->expectativas = "ya no estar tiste 3";
-        $cliente3->horario = "12:00";
+        $cliente3->horario = json_encode("12:00");
         $cliente3->nacimiento = '2000-03-23';
         $cliente3->save();
 
@@ -76,7 +76,7 @@ class ClientesSeeder extends Seeder
         $cliente4->telefono = '3724399358';
         $cliente4->descripcion = "toy tiste 4";
         $cliente4->expectativas = "ya no estar tiste 4";
-        $cliente4->horario = "14:00";
+        $cliente4->horario = json_encode("14:00");
         $cliente4->nacimiento = '2001-10-22';
         $cliente4->save();
 
@@ -89,7 +89,7 @@ class ClientesSeeder extends Seeder
         $cliente5->telefono = '3724318398';
         $cliente5->descripcion = "toy tiste 5";
         $cliente5->expectativas = "ya no estar tiste 5";
-        $cliente5->horario = "16:00";
+        $cliente5->horario = json_encode("16:00");
         $cliente5->nacimiento = '2001-12-03';
         $cliente5->save();
 
@@ -102,7 +102,7 @@ class ClientesSeeder extends Seeder
         $cliente6->telefono = '3724838311';
         $cliente6->descripcion = "toy tiste 6";
         $cliente6->expectativas = "ya no estar tiste 6";
-        $cliente6->horario = "17:00";
+        $cliente6->horario = json_encode("17:00");
         $cliente6->nacimiento = '2000-03-23';
         $cliente6->save();
 
@@ -115,7 +115,7 @@ class ClientesSeeder extends Seeder
         $cliente7->telefono = '3724588305';
         $cliente7->descripcion = "toy tiste 7";
         $cliente7->expectativas = "ya no estar tiste 7";
-        $cliente7->horario = "18:00";
+        $cliente7->horario = json_encode("18:00");
         $cliente7->nacimiento = '2000-03-23';
         $cliente7->save();
 
@@ -128,7 +128,7 @@ class ClientesSeeder extends Seeder
         $cliente8->telefono = '3724818373';
         $cliente8->descripcion = "toy tiste 8";
         $cliente8->expectativas = "ya no estar tiste 8";
-        $cliente8->horario = "15:00";
+        $cliente8->horario = json_encode("15:00");
         $cliente8->nacimiento = '2000-03-23';
         $cliente8->save();
 
@@ -141,7 +141,7 @@ class ClientesSeeder extends Seeder
         $cliente9->telefono = '3310451715';
         $cliente9->descripcion = "toy tiste 9";
         $cliente9->expectativas = "ya no estar tiste 9";
-        $cliente9->horario = "14:00";
+        $cliente9->horario = json_encode("14:00");
         $cliente9->nacimiento = '2000-03-23';
         $cliente9->save();
 
@@ -154,7 +154,7 @@ class ClientesSeeder extends Seeder
         $cliente10->telefono = '3310131791';
         $cliente10->descripcion = "toy tiste 10";
         $cliente10->expectativas = "ya no estar tiste 10";
-        $cliente10->horario = "13:00";
+        $cliente10->horario = json_encode("13:00");
         $cliente10->nacimiento = '2000-03-23';
         $cliente10->save();
 
@@ -167,7 +167,7 @@ class ClientesSeeder extends Seeder
         $cliente11->telefono = '3319731707';
         $cliente11->descripcion = "toy tiste 11";
         $cliente11->expectativas = "ya no estar tiste 11";
-        $cliente11->horario = "12:00";
+        $cliente11->horario = json_encode("12:00");
         $cliente11->nacimiento = '2000-03-23';
         $cliente11->save();
 
@@ -180,7 +180,7 @@ class ClientesSeeder extends Seeder
         $cliente12->telefono = '3319711759';
         $cliente12->descripcion = "toy tiste 12";
         $cliente12->expectativas = "ya no estar tiste 12";
-        $cliente12->horario = "11:00";
+        $cliente12->horario = json_encode("11:00");
         $cliente12->nacimiento = '2000-03-23';
         $cliente12->save();
 
@@ -193,7 +193,7 @@ class ClientesSeeder extends Seeder
         $cliente13->telefono = '3319703798';
         $cliente13->descripcion = "toy tiste 13";
         $cliente13->expectativas = "ya no estar tiste 13";
-        $cliente13->horario = "10:00";
+        $cliente13->horario = json_encode("10:00");
         $cliente13->nacimiento = '2000-03-23';
         $cliente13->save();
 
