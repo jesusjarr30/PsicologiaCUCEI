@@ -17,13 +17,39 @@
     </header>
 
     <main class="mt-8">
-        <h2 class="mt-6 text-gray-700 dark:text-gray-200">Hola, {{$correo}}</h2>
-
+        @php
+            setlocale(LC_TIME, 'es_VE.UTF-8','esp');
+            $marca = strtotime($fecha);
+            $hoy =  date('Y-m-d H:i:s', time());
+            $fechaLimite = strtotime(date("Y-m-d H:i:s", strtotime( $hoy.'+1 day' )) );
+        @endphp
         <p class="mt-6 leading-loose text-gray-600 dark:text-gray-300">
-            Hemos recibido tu solicitud de cita y ya tenemos una fecha para ti. Tu cita es el día {{$fecha}}. 
+            Buenos dias, te escribimos del programa de Psicologia de la Unidad de Salud Interal-Cucei.
+            Contamos con un espacio disponibloe para que inicies tu acompañamiento los dias 
+            @php 
+             echo strftime('%A a las %R', $marca) ; /* dia de la semana*/
+            @endphp.
+            Estarias Iniciando el 
+            @php 
+             echo strftime('%d de %B del %Y', $marca);  /*Fecha inicial*/
+            @endphp.
+            <br>
+            <br>
+            De estar interesado, te pedimos nos respondas de 
+            <span class="font-bold">"infomado y de acuerdo con el dia y horario"</span>
+            mas tardar a las 15:00 hrs el 
+            @php 
+             echo strftime('%d %B %Y.', $fechaLimite); /*Fecha limite de respuesta*/
+            @endphp
+            Para que quede registrada tu cita formalmente en la agenda.
+            <br>
+            <br>
             Tendrás que presentarte en la parte posterior del módulo L, en la unidad médica. La psicólog@ que atenderá tu 
             caso es {{$psicologoNombre}}. Si tienes algún inconveniente con tu horario o la fecha, recuerda contactarnos. 
             Si necesitas atención inmediata por urgencia, puedes acudir a la unidad para una valoración.
+            <br>
+            Saludos.
+
             <br>
             <br>
         </p>

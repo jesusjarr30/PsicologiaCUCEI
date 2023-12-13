@@ -10,6 +10,10 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\confirmarCorreoMailable;
+use App\Mail\DatosCita;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CitaRegistradaMailable;
 
 
 class CalendarController extends Controller
@@ -136,11 +140,6 @@ class CalendarController extends Controller
             $fecha = date("Y-m-d H:i:s", strtotime( $fecha.'+7 day' ));
             $i++; 
         }
-
-        
-
-        
-
         info($cita );
         info("cita->consultorio");
         info($cita->consultorio);
@@ -158,7 +157,9 @@ class CalendarController extends Controller
         if($cliente[0]->clasificacion == 'otros') {
             $color = '#0dcaf0';
         }
+
         
+
         $fechaEnd = date("Y-m-d H:i:s", strtotime( $request->start_date.'+ 1 hours' ));
         return response()->json([
             'id'   => $cita->id,
@@ -210,13 +211,45 @@ class CalendarController extends Controller
                 'usuario_id' => $request->usuario_id,
             ]);
         }
+
         // Actualiza el pasiente
         $pasiente -> update([
             'usuario_id' => $request->usuario_id,
         ]);
+        
         info('update');
         info($pasiente);
         return response()->json('Event updated');
+    }
+
+    public function enviarCorreo($cita_id)
+    {
+        info("enviarCorreo");
+        $cita = Cita::find($cita_id);
+        info($cita);
+
+        if(! $cita) {
+            return response()->json([
+                'error' => 'Error al buscar la cita'
+            ], 404);
+        }elseif(! $cita->usuario_id){
+            return response()->json([
+                'error' => 'Error, cita sin Psicologo asignado'
+            ], 404);
+        }
+
+        $pasiente = Cliente::find($cita->cliente_id);
+        if(! $pasiente) {
+            return response()->json([
+                'error' => 'Error al buscar al pasiente'
+            ], 404);
+        }
+
+        $email = $pasiente->correo;
+        info("Mail - sale");
+        Mail::to($email)->send(new DatosCita($email,$cita->fecha,$cita->usuario_id));
+        info("Mail - regresa");
+        return response()->json('Correo enviado');
     }
 
     public function destroyCita($id)

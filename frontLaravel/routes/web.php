@@ -33,11 +33,8 @@ use App\Http\Controllers\PdfController;
 
 //principal
 Route::get('/', HomeController::class)->name("home");
+
 ///links para el login 
-
-Route::get('books', [BookController::class, 'index'])->name('books.index');
-Route::post('books', [BookController::class, 'store'])->name('books.store');
-
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -82,8 +79,6 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('Admin/showUsuarios/ver/{id}',[AdminMainController::class,'VerUsuarios'] )->name('VerUsuarios');
     Route::get('Admin/Pacientes/VerNotas/borrar/{id}',[AdminMainController::class,'eliminarNota'] )->name('eliminarNota');
 
-    
-
     Route::put('Admin/Pacientes/EditarPaciente/{id}',[AdminMainController::class,'ActualizarPaciente'] )->name('actualizar-Paciente');
 
     //Calendario
@@ -96,6 +91,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::post('Admin/calendar', [CalendarController::class, 'storeCita'])->name('calendar.storeCita');
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
     Route::patch('Admin/calendar/updatePsi/{id}', [CalendarController::class, 'asigPsi'])->name('calendar.asigPsi');
+    Route::patch('Admin/calendar/correo/{id}', [CalendarController::class, 'enviarCorreo'])->name('calendar.enviarCorreo');
     Route::delete('Admin/calendar/destroy/{id}', [CalendarController::class, 'destroyCita'])->name('calendar.destroyCita');
     Route::delete('Admin/calendar/destroys/{id}', [CalendarController::class, 'destroyDemasCitas'])->name('calendar.destroyDemasCitas');
 

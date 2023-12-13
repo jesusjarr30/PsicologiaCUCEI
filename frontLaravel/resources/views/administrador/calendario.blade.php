@@ -17,6 +17,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta/lib/draggable.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
   @vite('resources/css/app.css')
 </head>
 <body>
@@ -139,6 +142,7 @@
 
                         <span class="font-bold"> Psicologo asignado: </span>
                         <div style="display: inline" id="modal-psicologo"> </div>
+                        
                         <div></div>
                     
                         <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
@@ -148,13 +152,14 @@
                                 <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
                             @endforeach
                         </select>
+                        <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psico</button>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psico</button>
-                    <button type="button" id="eliminaBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
-                    <button type="button" id="eliminaDemasBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar VariasCitas</button>
+                    <button type="button" id="correoBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Enviar confirmacion</button>
+                    <button type="button" id="eliminaBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar</button>
                 </div>
             </div>
         </div>
@@ -443,7 +448,7 @@
                             { console.log("storeCita regresa"); }
                             { console.log(response); }
                             event.id= response.id;
-                            swal("Good job!", "Cita agendada!", "success").then(function() {
+                            Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
                                 location.reload();
                             });
 
@@ -472,7 +477,7 @@
                             success:function(response)
                             {
                                 { console.log(response); }
-                                swal("Good job!", "Cita actualizada!", "success").then(function() {
+                                Swal.fire("Good job!", "Cita actualizada!", "success").then(function() {
                                     location.reload();
                                 });
                             },
@@ -511,15 +516,34 @@
                     $('#infoCitaPasiente').modal('toggle');
                 // Botones de infoCitaPasiente
                     $('#eliminaBtn').click(function() {  
-                         $.ajax({
-                            url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
+                        { console.log('eliminaBtn'); }
+                        Swal.fire({
+                            title: 'Eliminar Cita',
+                            text: 'Quieres eliminar solo una o todas?',
+                            icon: 'warning',
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'Todas',
+                            denyButtonText: 'Solo una',
+                            confirmButtonColor: '#d33',
+                            denyButtonColor: '#3085d6',
+                            customClass: {
+                            actions: 'my-actions',
+                            cancelButton: 'order-1 right-gap',
+                            confirmButton: 'order-2',
+                            denyButton: 'order-3',
+                          },
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                            url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
                             type:"DELETE",
                             dataType:'json',
                             success:function(response)
                             {
                                 $('#infoCitaPasiente').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
-                                swal("Good job!", "Cita eliminada!", "success").then(function() {
+                                Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
                                     location.reload();
                                 });
                             },
@@ -528,19 +552,40 @@
                                 console.log(error)
                             },
                         });
-                    });
-                    $('#eliminaDemasBtn').click(function() {  
-                         $.ajax({
-                            url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
+                            } else if (result.isDenied) {
+                                $.ajax({
+                            url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
                             type:"DELETE",
                             dataType:'json',
                             success:function(response)
                             {
                                 $('#infoCitaPasiente').modal('hide')
                                 $('#calendar').fullCalendar('removeEvents', response);
-                                swal("Good job!", "Cita eliminada!", "success").then(function() {
+                                Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
                                     location.reload();
                                 });
+                            },
+                            error:function(error)
+                            {
+                                console.log(error)
+                            },
+                        });
+
+                          }
+                        })
+
+                         
+                    });
+                    $('#correoBtn').click(function() {  
+                        {console.log("correoeBtn");}
+                        $.ajax({
+                            url:"{{ route('calendar.enviarCorreo', '') }}" +'/'+ id,
+                            type:"PATCH",
+                            dataType:'json',
+                            success:function(response)
+                            {
+                                $('#infoCitaPasiente').modal('hide')
+                                Swal.fire("Good job!", "Se a enviado el correo", "success");
                             },
                             error:function(error)
                             {
@@ -562,7 +607,7 @@
                             success:function(response)
                             {
                                 $('#infoCitaPasiente').modal('hide')
-                                swal("Good job!", "Psicologo asignado", "success").then(function() {
+                                Swal.fire("Good job!", "Psicologo asignado", "success").then(function() {
                                     location.reload();
                                 });
                             },
