@@ -304,7 +304,7 @@
                                                 @endphp
                                                     <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
                                                         data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
-                                                        >{{$clasi->codigo}}: {{$clasi->horario}}</div>
+                                                        >{{$clasi->nombre}} {{$clasi->apellidos}} : {{$clasi->horario}}</div>
                                                 @endforeach
                                             </p>
                                         </div>
@@ -626,7 +626,6 @@
                 
 
             });
-            $('.fc-event').css('font-size', '18px');
 
         });
     </script>

@@ -46,11 +46,12 @@ class CalendarController extends Controller
                 $color = '#0dcaf0';
             }
             $fechaEnd = date("Y-m-d H:i:s", strtotime($cita->fecha.'+1 hours'));
+            // Cargar citas ya asignadas
             $eventsCitas[] = [
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
                 'consultorio' => $cita->consultorio,
-                'title' => $cita->cliente->codigo,
+                'title' => $cita->cliente->nombre .' '. $cita->cliente->apellidos,
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
                 'color' => $color
@@ -104,7 +105,7 @@ class CalendarController extends Controller
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
                 'consultorio' => $cita->consultorio,
-                'title' => $cita->cliente->codigo.' : '. ($cita->atendido ? "Atendido" : "Sin Atender"),
+                'title' => $cita->cliente->nombre .' '. $cita->cliente->apellidos.': '. ($cita->atendido ? "Atendido" : "Sin Atender"),
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
                 'color' => $color

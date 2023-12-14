@@ -267,7 +267,6 @@
                 },
 
             });
-            $('.fc-event').css('font-size', '18px');
 
         });
     </script>
