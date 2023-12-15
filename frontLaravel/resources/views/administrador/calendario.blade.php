@@ -521,7 +521,7 @@
 
                     $('#infoCitaPasiente').modal('toggle');
                 // Botones de infoCitaPasiente
-                    $('#eliminaBtn').click(function() {  
+                    $('#eliminaBtn').off('click').click(function() {  
                         { console.log('eliminaBtn'); }
                         Swal.fire({
                             title: 'Eliminar Cita',
@@ -582,7 +582,7 @@
 
                          
                     });
-                    $('#correoBtn').click(function() {  
+                    $('#correoBtn').off('click').click(function() {  
                         {console.log("correoeBtn");}
                         $.ajax({
                             url:"{{ route('calendar.enviarCorreo', '') }}" +'/'+ id,
@@ -599,7 +599,7 @@
                             },
                         });
                     });
-                    $('#psiUpdateBtn').click(function() {  
+                    $('#psiUpdateBtn').off('click').click(function() {  
                         
                         var usuario_id = document.getElementById('modal-select-psicologo').value;
 
@@ -623,7 +623,7 @@
                             },
                         });
                     });
-                    $('#agregarCitaBtn').click(function() {  
+                    $('#agregarCitaBtn').off('click').click(function() {  
                         
                         {console.log("agregarCitaBtn");}
                         {console.log(event);}

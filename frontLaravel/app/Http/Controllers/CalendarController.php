@@ -177,6 +177,7 @@ class CalendarController extends Controller
     public function storeCitaNueva(Request $request)
     {
         info("storeCitaNueva");
+        // Se busca obtener la ultima cita del pasiente
         $ultimaCita = Cita::where('cliente_id',$request->cliente_id)
         ->orderBy('fecha', 'desc') // Orden ascendente, puedes usar 'desc' para descendente
         ->get();

@@ -246,7 +246,7 @@
 
                     $('#infoCitaPasiente').modal('toggle');
                 // Botones de infoCitaPasiente
-                    $('#citaAtendidaBtn').click(function() { 
+                    $('#citaAtendidaBtn').off('click').click(function() { 
                         {console.log('citaAtendidaBtn');}     
                         $.ajax({
                             url:"{{ route('calendar.citaAtendida', '') }}" +'/'+ id,
