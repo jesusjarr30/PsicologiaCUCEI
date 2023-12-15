@@ -159,6 +159,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="agregarCitaBtn" class=" bg-yellow-600 hover:bg-yellow-800 text-white px-2 py-2  rounded-md">Nueva cita</button>
                     <button type="button" id="correoBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Enviar confirmacion</button>
                     <button type="button" id="eliminaBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar</button>
                 </div>
@@ -304,7 +305,7 @@
                                                     }
                                                 @endphp
                                                     <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
-                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
+                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "codigo":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
                                                         >{{$clasi->nombre}} {{$clasi->apellidos}} : {{$clasi->horario}}</div>
                                                 @endforeach
                                             </p>
@@ -374,7 +375,7 @@
             // store data so the calendar knows to render an event upon drop
             $(this).data('event', {
                 id: null,
-                title: data['title'], // use the element's text as the event title
+                title: data['codigo'], // use the element's text as the event title
                 duration : "01:00",
                 color: data['color'] ,
                 stick: true // maintain when user navigates (see docs on the renderEvent method)
@@ -491,6 +492,10 @@
                 eventClick: function(event){
                     var id = event.id;
                     var cliente_id = event.cliente_id;
+                    var usuario_id = event.usuario_id;
+                    var color = event.color;
+                    var consultorio = {{$consultorio}};
+
                     {console.log('eventClick');}
                     {console.log(event);}
 
@@ -618,6 +623,34 @@
                             },
                         });
                     });
+                    $('#agregarCitaBtn').click(function() {  
+                        
+                        {console.log("agregarCitaBtn");}
+                        {console.log(event);}
+                        
+                        $.ajax({
+                        url:"{{ route('calendar.storeCitaNueva') }}",
+                        type:"POST",
+                        dataType:'json',
+                        data:{ cliente_id, usuario_id, consultorio },
+                        success:function(response)
+                        {
+                            { console.log("storeCita regresa"); }
+                            { console.log(response); }
+                            event.id= response.id;
+                            Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
+                                location.reload();
+                            });
+                        },
+                        error:function(error)
+                        {
+                            if(error.responseJSON.errors) {
+                                $('#titleError').html(error.responseJSON.errors.title);
+                            }
+                        },
+                    });
+                    });
+
                 },
                 
                 selectAllow: function(event)

@@ -50,6 +50,7 @@ class CalendarController extends Controller
             $eventsCitas[] = [
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
+                'usuario_id' => $cita->usuario_id,
                 'consultorio' => $cita->consultorio,
                 'title' => $cita->cliente->nombre .' '. $cita->cliente->apellidos,
                 'start' => $cita->fecha,
@@ -170,6 +171,37 @@ class CalendarController extends Controller
             'start' => $cita->fecha,
             'end' => $fechaEnd,
             'color' => $color
+        ]);
+    }
+
+    public function storeCitaNueva(Request $request)
+    {
+        info("storeCitaNueva");
+        $ultimaCita = Cita::where('cliente_id',$request->cliente_id)
+        ->orderBy('fecha', 'desc') // Orden ascendente, puedes usar 'desc' para descendente
+        ->get();
+
+        info("Fecha de la ultima cita".$ultimaCita);
+        $fecha = date("Y-m-d H:i:s", strtotime( $ultimaCita[0]->fecha.'+7 day' )); ;
+        $cita = Cita::create([
+            'cliente_id' => $request->cliente_id,
+            'usuario_id' => $request->usuario_id,
+            'consultorio' => $request->consultorio,
+            'fecha' => $fecha,
+            'atendido' => false,
+        ]);
+
+        info("Cita nueva".$cita);
+        
+        $fechaEnd = date("Y-m-d H:i:s", strtotime( $request->start_date.'+ 1 hours' ));
+        return response()->json([
+            'id'   => $cita->id,
+            'cliente_id' => $cita->cliente_id,
+            'consultorio' => $cita->consultorio,
+            'title' => $cita->codigo,
+            'start' => $cita->fecha,
+            'end' => $fechaEnd,
+            'color' => $request->color
         ]);
     }
 
@@ -331,7 +363,7 @@ class CalendarController extends Controller
             'modal-expectativa' => $cita[0]->cliente->expectativas,
             'modal-horario' =>  $cita[0]->cliente->horario,
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
-            'modal-secciones' => $cita[0]->cliente->secciones,
+            'modal-secciones' => $contador,
             'modal-seccionesRestantes' => $citaContador,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,
             // Info de la cita

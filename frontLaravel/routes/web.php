@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::post('Admin/calendar/infoEventP/{id}', [CalendarController::class, 'getPasiente'])->name('calendar.infoPasiente');
     //Funciones
     Route::post('Admin/calendar', [CalendarController::class, 'storeCita'])->name('calendar.storeCita');
+    Route::post('Admin/calendar/nuevaCita', [CalendarController::class, 'storeCitaNueva'])->name('calendar.storeCitaNueva');
     Route::patch('Admin/calendar/update/{id}', [CalendarController::class, 'updateCita'])->name('calendar.updateCita');
     Route::patch('Admin/calendar/updatePsi/{id}', [CalendarController::class, 'asigPsi'])->name('calendar.asigPsi');
     Route::patch('Admin/calendar/correo/{id}', [CalendarController::class, 'enviarCorreo'])->name('calendar.enviarCorreo');
