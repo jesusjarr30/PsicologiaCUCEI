@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer('usuario_id')->nullable();
             $table->integer('consultorio')->nullable();
             $table->datetime('fecha');
-            $table->boolean('atendido');
+            $table->boolean('confirmado')->default(false);
+            $table->boolean('atendido')->default(false);
             $table->timestamps();
         });
     }

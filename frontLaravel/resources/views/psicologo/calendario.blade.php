@@ -135,6 +135,10 @@
                         <div style="display: inline" id="modal-atendido"> </div>
                         <div></div>
 
+                        <span class="font-bold"> Confirmado: </span>
+                        <div style="display: inline" id="modal-confirmado"> </div>
+                        <div></div>
+
                         <span class="font-bold"> Psicologo asignado: </span>
                         <div style="display: inline" id="modal-psicologo"> </div>
                         <div></div>

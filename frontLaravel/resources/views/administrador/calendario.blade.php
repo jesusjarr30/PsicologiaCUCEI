@@ -137,6 +137,10 @@
                         <div style="display: inline" id="modal-consultorio"> </div>
                         <div></div>
 
+                        <span class="font-bold"> Confirmado: </span>
+                        <div style="display: inline" id="modal-confirmado"> </div>
+                        <div></div>
+
                         <span class="font-bold"> Atendido: </span>
                         <div style="display: inline" id="modal-atendido"> </div>
                         <div></div>
@@ -148,7 +152,7 @@
                     
                         <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
                             <option value="none" selected disabled hidden>Asignar Psicologo</option> 
-                            <option  value='null'  >Sin asignar</option>
+                            <option  value=null  >Sin asignar</option>
                             @foreach ( $psicologos as $psi )
                                 <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
                             @endforeach
@@ -160,7 +164,7 @@
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" id="agregarCitaBtn" class=" bg-yellow-600 hover:bg-yellow-800 text-white px-2 py-2  rounded-md">Nueva cita</button>
-                    <button type="button" id="correoBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Enviar confirmacion</button>
+                    <button type='button' id='correoBtn' class=' bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md'>Enviar confirmacion</button>
                     <button type="button" id="eliminaBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar</button>
                 </div>
             </div>
@@ -306,7 +310,7 @@
                                                 @endphp
                                                     <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
                                                         data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "codigo":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
-                                                        >{{$clasi->nombre}} {{$clasi->apellidos}} : {{$clasi->horario}}</div>
+                                                        >{{$clasi->nombre}} {{$clasi->apellidos}}</div>
                                                 @endforeach
                                             </p>
                                         </div>
@@ -391,7 +395,7 @@
         });
 
         // initialize the calendar
-  // -----------------------------------------------------------------
+  // -----------------------Calendario--------------------------
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
@@ -414,7 +418,7 @@
                 // Propiedades del fc
                 events: citas,
                 selectHelper: true,
-                //defaultView: 'agendaWeek',
+                defaultView: 'agendaWeek',
                 nowIndicator: true,
                 allDaySlot: false,
                 slotDuration: '01:00:00',
@@ -511,6 +515,14 @@
                             for (let parametro in response) {
                                 var div = document.getElementById(parametro);
                                 div.innerHTML = response[parametro];
+                            }
+
+                            // Cambiar el estado del botton dependiendo si esta asignado un psicologo
+                            var correoBtn =  document.getElementById("correoBtn");
+                            if(document.getElementById("modal-psicologo").innerHTML == "Sin asignar")
+                            {
+                                correoBtn.setAttribute("disabled",true);
+                                correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }
                         },
                         error:function(error)

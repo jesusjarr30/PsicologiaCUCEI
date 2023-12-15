@@ -46,13 +46,14 @@ class CalendarController extends Controller
                 $color = '#0dcaf0';
             }
             $fechaEnd = date("Y-m-d H:i:s", strtotime($cita->fecha.'+1 hours'));
+
             // Cargar citas ya asignadas
             $eventsCitas[] = [
                 'id'   => $cita->id,
                 'cliente_id' => $cita->cliente_id,
                 'usuario_id' => $cita->usuario_id,
                 'consultorio' => $cita->consultorio,
-                'title' => $cita->cliente->nombre .' '. $cita->cliente->apellidos,
+                'title' => $cita->cliente->nombre .' '. $cita->cliente->apellidos.' - '.($cita->confirmado ? "✓" : "X"),
                 'start' => $cita->fecha,
                 'end' => $fechaEnd,
                 'color' => $color
@@ -137,7 +138,6 @@ class CalendarController extends Controller
                 'cliente_id' => $cliente[0]->id,
                 'consultorio' => $request->consultorio,
                 'fecha' => $fecha,
-                'atendido' => false,
             ]);
             $fecha = date("Y-m-d H:i:s", strtotime( $fecha.'+7 day' ));
             $i++; 
@@ -189,7 +189,6 @@ class CalendarController extends Controller
             'usuario_id' => $request->usuario_id,
             'consultorio' => $request->consultorio,
             'fecha' => $fecha,
-            'atendido' => false,
         ]);
 
         info("Cita nueva".$cita);
@@ -239,16 +238,22 @@ class CalendarController extends Controller
             ], 404);
         }
 
+        $usuario_id = null;
+        if($request->usuario_id != "null")
+        {
+            $usuario_id = $request->usuario_id;
+        }
+        info ('usuario_id: '.gettype($usuario_id));
         // Actualiza todas las citas del pasiente
         foreach ($demasCitas as $citaActual){
             $citaActual->update([
-                'usuario_id' => $request->usuario_id,
+                'usuario_id' => $usuario_id,
             ]);
         }
-
+        info($request->usuario_id);
         // Actualiza el pasiente
         $pasiente -> update([
-            'usuario_id' => $request->usuario_id,
+            'usuario_id' => $usuario_id,
         ]);
         
         info('update');
@@ -268,7 +273,7 @@ class CalendarController extends Controller
             ], 404);
         }elseif(! $cita->usuario_id){
             return response()->json([
-                'error' => 'Error, cita sin Psicologo asignado'
+                'psicologo' => 'Error, cita sin Psicologo asignado'
             ], 404);
         }
 
@@ -370,6 +375,7 @@ class CalendarController extends Controller
             // Info de la cita
             'modal-fecha' =>  $cita[0]->fecha,
             'modal-consultorio' =>  $cita[0]->consultorio,
+            'modal-confirmado' => ($cita[0]->confirmado ? "Confirmado" : "Sin Confirmar"),
             'modal-atendido' => ($cita[0]->atendido ? "Atendido" : "Sin Atender"),
             'modal-psicologo' => $psiAsignado,
         ]);
