@@ -123,6 +123,7 @@
                         <div></div>
 
                         <span class="font-bold"> Secciones: </span>
+                        <span style="display: inline" id='modal-seccionesRestantes'>  </span><span style="display: inline"> / </span>
                         <div style="display: inline" id="modal-secciones"> </div>
                         <div></div>
                     </div>

@@ -288,18 +288,29 @@ class CalendarController extends Controller
     public function getPasienteCita($id)
     {
         info('getPasienteCita');
-        info($id);
         $cita = Cita::with('cliente')
         ->where('id', $id)
         ->get();
 
-        info($cita);
         if(! $cita) {
             return response()->json([
                 'error' => 'Unable to locate the event'
             ], 404);
         }
-
+        info('Cita del pasiente'.$cita);
+        // obtiene todas las citas del pasiente
+        $citaActual = Cita::with('cliente')
+        ->where('cliente_id',$cita[0]->cliente_id)
+        ->get();
+        $citaContador = 0;
+        $contador = 0;
+        foreach ($citaActual as $actual) {
+            $contador++;
+            if($actual == $cita[0]){
+                $citaContador = $contador;
+            }
+        }
+        info("Contador: ".$citaContador);
         $psi = Usuario::find($cita[0]->usuario_id);
         
         if(! $psi) {
@@ -308,8 +319,9 @@ class CalendarController extends Controller
         else{
             $psiAsignado = $psi->nombre;
         }
-        
+        info('Info del psicologo asignado'.$psi);
         return response()->json([
+            // Info pasiente
             'modal-pasiente'   => $cita[0]->cliente->nombre .' '. $cita[0]->cliente->apellidos,
             'modal-codigo' => $cita[0]->cliente->codigo,
             'modal-correo' => $cita[0]->cliente->correo,
@@ -320,6 +332,7 @@ class CalendarController extends Controller
             'modal-horario' =>  $cita[0]->cliente->horario,
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $cita[0]->cliente->secciones,
+            'modal-seccionesRestantes' => $citaContador,
             'modal-nacimiento' => $cita[0]->cliente->nacimiento,
             // Info de la cita
             'modal-fecha' =>  $cita[0]->fecha,
