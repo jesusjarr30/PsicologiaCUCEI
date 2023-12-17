@@ -14,6 +14,10 @@ use App\Mail\confirmarCorreoMailable;
 use App\Mail\DatosCita;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CitaRegistradaMailable;
+use Carbon\Carbon;
+use App\Models\Hora;
+
+
 
 
 class CalendarController extends Controller
@@ -394,7 +398,30 @@ class CalendarController extends Controller
         $cita->update([
             'atendido' => 1,
         ]);
-        return response()->json('Event updated');
+        // Se agregan hora de servicio
+        info("Si llega a la parte del registro de horas");
+        $usuario_id = $cita->usuario_id;
+        $horas = 1;
+
+        $fechaActual = Carbon::now()->toDateString();
+
+        $registroExistente = Hora::where('usuario_id', $usuario_id)
+        ->whereDate('created_at', $fechaActual)
+        ->first();
+
+        if ($registroExistente) {
+            // Actualizar horas si ya hay un registro para hoy
+            $registroExistente->horasRegistradas += $horas;
+            $registroExistente->save();
+        } else {
+            // Crear un nuevo registro si no existe uno para hoy
+            $hora = new Hora;
+        $hora->usuario_id = $usuario_id; // O puedes obtener el ID del usuario de alguna manera
+        $hora->horasRegistradas = $horas;
+        $hora->save();
+        }
+        
+        return response()->json('Cita atendida correctamente');
     }
 
     public function getPasiente($id)

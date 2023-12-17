@@ -225,8 +225,9 @@
 
                 eventClick: function(event){
                     var id = event.id;
+                    var usuario_id = event.usuario_id;
                     {console.log('eventClick');}
-                    {console.log(event);}
+                    {console.log('Evento: '.event);}
 
                     $.ajax({
                         url:"{{ route('calendar.infoPasienteCitaPsi', '') }}" +'/'+ id,
@@ -241,6 +242,12 @@
                                 var div = document.getElementById(parametro);
                                 div.innerHTML = response[parametro];
                             }
+                            var correoBtn =  document.getElementById("citaAtendidaBtn");
+                            if(document.getElementById("modal-atendido").innerHTML == "Atendido")
+                            {
+                                correoBtn.setAttribute("disabled",true);
+                                correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                            }
                         },
                         error:function(error)
                         {
@@ -252,6 +259,7 @@
                 // Botones de infoCitaPasiente
                     $('#citaAtendidaBtn').off('click').click(function() { 
                         {console.log('citaAtendidaBtn');}     
+
                         $.ajax({
                             url:"{{ route('calendar.citaAtendida', '') }}" +'/'+ id,
                             type:"POST",
