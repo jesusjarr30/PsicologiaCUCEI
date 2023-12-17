@@ -247,6 +247,9 @@
                             {
                                 correoBtn.setAttribute("disabled",true);
                                 correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                            }else{
+                                correoBtn.setAttribute("disabled",false);
+                                correoBtn.setAttribute("class","bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }
                         },
                         error:function(error)
