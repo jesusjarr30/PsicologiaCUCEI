@@ -346,27 +346,161 @@
             >
             ¿En que horario podrías acudir a las sesiones de acompañamiento Psicológico? (Considera que las sesiones tienen una duración de 50 minutos y se realizan una vez a la semana)
             </label>
-            <select
-            value="{{ old('horario') }}"
-              type="time"
-              name="horario"
-              id="time"
-              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            >
-            <option value="10:00">08:00 am</option>
-            <option value="10:00">09:00 am</option>
-            <option value="10:00">10:00 am</option>
-            <option value="11:00">11:00 am</option>
-            <option value="12:00">12:00 pm</option>
-            <option value="13:00">01:00 pm</option>
-            <option value="14:00">02:00 pm</option>
-            <option value="15:00">03:00 pm</option>
-            <option value="16:00">04:00 pm</option>
-            <option value="17:00">05:00 pm</option>
-            <option value="18:00">06:00 pm</option>
             
-
-          </select>
+              
+              <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                  
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                    <div class="flex w-0 flex-1 items-center">
+    
+                      Lun
+                      <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                        <select
+                            type="time"
+                            name="Lun"
+                            id="time"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            >
+                           
+                            <option value="00:00">Sin asignar</option>
+                            <option value="08:00">08:00 am</option>
+                            <option value="09:00">09:00 am</option>
+                            <option value="10:00">10:00 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="13:00">01:00 pm</option>
+                            <option value="14:00">02:00 pm</option>
+                            <option value="15:00">03:00 pm</option>
+                            <option value="16:00">04:00 pm</option>
+                            <option value="17:00">05:00 pm</option>
+                            <option value="18:00">06:00 pm</option>
+                        </select>
+                      </div>
+                    </div>                
+                  </li>
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                    <div class="flex w-0 flex-1 items-center">
+    
+                      Mar
+                      <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                        <select
+                            type="time"
+                            name="Mar"
+                            id="time"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            >
+                            <option value="00:00">Sin asignar</option>
+                            <option value="08:00">08:00 am</option>
+                            <option value="09:00">09:00 am</option>
+                            <option value="10:00">10:00 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="13:00">01:00 pm</option>
+                            <option value="14:00">02:00 pm</option>
+                            <option value="15:00">03:00 pm</option>
+                            <option value="16:00">04:00 pm</option>
+                            <option value="17:00">05:00 pm</option>
+                            <option value="18:00">06:00 pm</option>
+    
+                        </select>
+                       
+                      </div>
+                    </div>                
+                  </li>
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                    <div class="flex w-0 flex-1 items-center">
+    
+                      Mie
+                      <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                        <select
+                            type="time"
+                            name="Mie"
+                            id="time"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 
+                            text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            >
+                            
+                            <option value="00:00">Sin asignar</option>
+                            <option value="08:00">08:00 am</option>
+                            <option value="09:00">09:00 am</option>
+                            <option value="10:00">10:00 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="13:00">01:00 pm</option>
+                            <option value="14:00">02:00 pm</option>
+                            <option value="15:00">03:00 pm</option>
+                            <option value="16:00">04:00 pm</option>
+                            <option value="17:00">05:00 pm</option>
+                            <option value="18:00">06:00 pm</option>
+    
+                        </select>
+                       
+                      </div>
+                    </div>                
+                  </li>
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                    <div class="flex w-0 flex-1 items-center">
+    
+                      Jue
+                      <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                        <select
+                            type="time"
+                            name="Jue"
+                            id="time"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            >
+                            <option value="00:00">Sin asignar</option>
+                            <option value="08:00">08:00 am</option>
+                            <option value="09:00">09:00 am</option>
+                            <option value="10:00">10:00 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="13:00">01:00 pm</option>
+                            <option value="14:00">02:00 pm</option>
+                            <option value="15:00">03:00 pm</option>
+                            <option value="16:00">04:00 pm</option>
+                            <option value="17:00">05:00 pm</option>
+                            <option value="18:00">06:00 pm</option>
+    
+                        </select>
+                       
+                      </div>
+                    </div>                
+                  </li>
+                  <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                    <div class="flex w-0 flex-1 items-center">
+    
+                      Vie
+                      <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                        <select
+                            type="time"
+                            name="Vie"
+                            id="time"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            >
+                            <option value="00:00">Sin asignar</option>
+                            <option value="08:00">08:00 am</option>
+                            <option value="09:00">09:00 am</option>
+                            <option value="10:00">10:00 am</option>
+                            <option value="11:00">11:00 am</option>
+                            <option value="12:00">12:00 pm</option>
+                            <option value="13:00">01:00 pm</option>
+                            <option value="14:00">02:00 pm</option>
+                            <option value="15:00">03:00 pm</option>
+                            <option value="16:00">04:00 pm</option>
+                            <option value="17:00">05:00 pm</option>
+                            <option value="18:00">06:00 pm</option>
+    
+                        </select>
+                        
+                      </div>
+                    </div>                
+                  </li>
+                  
+    
+                </ul>
+              </dd>
           @error('horario')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">

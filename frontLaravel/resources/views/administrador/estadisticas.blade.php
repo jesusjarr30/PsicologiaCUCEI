@@ -56,6 +56,16 @@
                 src="{{ asset('Imagenes/iconosEstadistica/historia.png') }}" alt="step"/>
                 <a class="text-white hover:text-yellow-400" href="{{ route('pdfHistorico') }}"><strong>Historial (todas la citas)</strong></a>
             </div>
+            <div class="bg-cyan-400 flex flex-col items-center justify-center p-6 text-2xl  border-2 border-cyan-600 rounded-xl">
+                <img class="w-32 object-cover object-center rounded-lg mb-4" 
+                src="{{ asset('Imagenes/iconosEstadistica/reporteUsuario.png') }}" alt="step"/>
+                <a class="text-white hover:text-yellow-400" href="{{ route('pdfHistorico') }}"><strong>Reporte por Psicologo (Semana)</strong></a>
+            </div>
+            <div class="bg-cyan-400 flex flex-col items-center justify-center p-6 text-2xl  border-2 border-cyan-600 rounded-xl">
+                <img class="w-32 object-cover object-center rounded-lg mb-4" 
+                src="{{ asset('Imagenes/iconosEstadistica/reporteConsultorio.png') }}" alt="step"/>
+                <a class="text-white hover:text-yellow-400" href="{{ route('pdfHistorico') }}"><strong>Reporte consultorio (semane)</strong></a>
+            </div>
         
             
         </div>

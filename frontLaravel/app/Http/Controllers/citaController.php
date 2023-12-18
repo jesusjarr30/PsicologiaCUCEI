@@ -58,10 +58,7 @@ class citaController extends Controller
     // Obtener los campos para generar la tabla de comentarios
     $descripcion = $request->input('descripcion');
     $expectativas = $request->input('expectativas');
-    $horario = $request->input('horario');
-
-    
-
+   
     // Validación
     $validator = Validator::make($request->all(), [
         'nombre' => 'required|string|max:255',
@@ -73,7 +70,7 @@ class citaController extends Controller
         'nacimiento' => 'required|date',
         'descripcion' => 'required|string|max:500',
         'expectativas' => 'required|string|max:500',
-        'horario' => 'required|string',
+        
     ]);
 
     if ($validator->fails()) {
@@ -81,6 +78,16 @@ class citaController extends Controller
        return redirect()->back()
            ->withErrors($validator);
     }
+    $horario = array(
+        'Lun'=>$request->input("Lun"),
+        'Mar'=>$request->input("Mar"),
+        'Mie'=>$request->input("Mie"),
+        'Jue'=>$request->input("Jue"),
+        'Vie'=>$request->input("Vie"),
+        );
+        info("El horario es el siguiente");
+        info($horario);
+        $horario_json = json_encode($horario);
 
     $tabla1 = new Cliente();
     $tabla1->nombre = $nombre;
@@ -92,7 +99,7 @@ class citaController extends Controller
     $tabla1->nacimiento = $nacimiento;
     $tabla1->descripcion = $descripcion;
     $tabla1->expectativas = $expectativas;
-    $tabla1->horario = $horario;
+    $tabla1->horario = $horario_json;
     $tabla1->clasificacion = null;
     $tabla1->secciones=null;
 
