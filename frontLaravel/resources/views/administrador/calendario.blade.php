@@ -114,10 +114,28 @@
                     </div>
 
                     <div>
-                        <span class="font-bold"> Horario esperado: </span>
-                        <div style="display: inline" id="modal-horario"> </div>
+                        <h3 class="font-bold"> Horario esperado: </h3>
+                        <span class="font-bold"> Lunes: </span>
+                        <div style="display: inline" id="modal-horario-Lun"> </div>
                         <div></div>
 
+                        <span class="font-bold"> Martes: </span>
+                        <div style="display: inline" id="modal-horario-Mar"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Miercoles: </span>
+                        <div style="display: inline" id="modal-horario-Mie"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Jueves: </span>
+                        <div style="display: inline" id="modal-horario-Jue"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Viernes: </span>
+                        <div style="display: inline" id="modal-horario-Vie"> </div>
+                        <div></div>
+                    </div>
+                    <div>
                         <span class="font-bold"> Clasificacion: </span>
                         <div style="display: inline" id="modal-clasificacion"> </div>
                         <div></div>
@@ -222,10 +240,28 @@
                 </div>
 
                 <div>
-                    <span class="font-bold"> Horario esperado: </span>
-                    <div style="display: inline" id="modal-horario-infoPasiente"> </div>
+                    <h3 class="font-bold"> Horario esperado: </h3>
+                    <span class="font-bold"> Lunes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Lun"> </div>
                     <div></div>
 
+                    <span class="font-bold"> Martes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Mar"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Miercoles: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Mie"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Jueves: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Jue"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Viernes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Vie"> </div>
+                    <div></div>
+                </div>
+                <div>
                     <span class="font-bold"> Clasificacion: </span>
                     <div style="display: inline" id="modal-clasificacion-infoPasiente"> </div>
                     <div></div>
@@ -309,7 +345,7 @@
                                                     }
                                                 @endphp
                                                     <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
-                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "codigo":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
+                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "codigo":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}" }' 
                                                         >{{$clasi->nombre}} {{$clasi->apellidos}}</div>
                                                 @endforeach
                                             </p>
@@ -524,7 +560,7 @@
                                 correoBtn.setAttribute("disabled",true);
                                 correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }else{
-                                correoBtn.setAttribute("disabled",false);
+                                correoBtn.removeAttribute("disabled");
                                 correoBtn.setAttribute("class","bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }
                         },
@@ -557,45 +593,43 @@
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 $.ajax({
-                            url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
-                            type:"DELETE",
-                            dataType:'json',
-                            success:function(response)
-                            {
-                                $('#infoCitaPasiente').modal('hide')
-                                $('#calendar').fullCalendar('removeEvents', response);
-                                Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
-                                    location.reload();
+                                    url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
+                                    type:"DELETE",
+                                    dataType:'json',
+                                    success:function(response)
+                                    {
+                                        $('#infoCitaPasiente').modal('hide')
+                                        $('#calendar').fullCalendar('removeEvents', response);
+                                        Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
+                                            location.reload();
+                                        });
+                                    },
+                                    error:function(error)
+                                    {
+                                        console.log(error)
+                                    },
                                 });
-                            },
-                            error:function(error)
-                            {
-                                console.log(error)
-                            },
-                        });
                             } else if (result.isDenied) {
                                 $.ajax({
-                            url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
-                            type:"DELETE",
-                            dataType:'json',
-                            success:function(response)
-                            {
-                                $('#infoCitaPasiente').modal('hide')
-                                $('#calendar').fullCalendar('removeEvents', response);
-                                Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
-                                    location.reload();
+                                    url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
+                                    type:"DELETE",
+                                    dataType:'json',
+                                    success:function(response)
+                                    {
+                                        $('#infoCitaPasiente').modal('hide')
+                                        $('#calendar').fullCalendar('removeEvents', response);
+                                        Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
+                                            location.reload();
+                                        });
+                                    },
+                                    error:function(error)
+                                    {
+                                        console.log(error)
+                                    },
                                 });
-                            },
-                            error:function(error)
-                            {
-                                console.log(error)
-                            },
-                        });
-
-                          }
+                            }
                         })
 
-                         
                     });
                     $('#correoBtn').off('click').click(function() {  
                         {console.log("correoeBtn");}
@@ -644,26 +678,26 @@
                         {console.log(event);}
                         
                         $.ajax({
-                        url:"{{ route('calendar.storeCitaNueva') }}",
-                        type:"POST",
-                        dataType:'json',
-                        data:{ cliente_id, usuario_id, consultorio },
-                        success:function(response)
-                        {
-                            { console.log("storeCita regresa"); }
-                            { console.log(response); }
-                            event.id= response.id;
-                            Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
-                                location.reload();
-                            });
-                        },
-                        error:function(error)
-                        {
-                            if(error.responseJSON.errors) {
-                                $('#titleError').html(error.responseJSON.errors.title);
-                            }
-                        },
-                    });
+                            url:"{{ route('calendar.storeCitaNueva') }}",
+                            type:"POST",
+                            dataType:'json',
+                            data:{ cliente_id, usuario_id, consultorio },
+                            success:function(response)
+                            {
+                                { console.log("storeCita regresa"); }
+                                { console.log(response); }
+                                event.id= response.id;
+                                Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error:function(error)
+                            {
+                                if(error.responseJSON.errors) {
+                                    $('#titleError').html(error.responseJSON.errors.title);
+                                }
+                            },
+                        });
                     });
 
                 },

@@ -28,12 +28,11 @@ class CalendarController extends Controller
         if($num > 3 or $num < 1){
             return back()->withErrors("Consultorio invalido");
         }
-        //info('citas index');
+        info('index');
         $citas = Cita::with('cliente')
-                        //->where('atendido','=',"%0%")
                         ->where('consultorio',$num)
                         ->get();
-        //info($citas);
+        info('citas: '.$citas);
         $eventsCitas = array();
         foreach($citas as $cita) {
             $color = null;
@@ -68,16 +67,14 @@ class CalendarController extends Controller
         $psicologos = Usuario::where('role','USER')
                                 ->where('activo',1)
                                 ->get();
-
+        info('psicologos: '.$psicologos);
         // Pasientes pendientes
         $clasificacion  = Cliente::whereNotNull('clasificacion')
                                 ->whereNotIn( 'id', Cita::select('cliente_id') )
                                 ->orderBy('clasificacion', 'desc')
-                                ->orderBy('horario', 'asc') // Orden ascendente, puedes usar 'desc' para descendente
                                 ->get();
 
-        info("clasificacion");
-        info($clasificacion);
+        info("clasificacion: ".$clasificacion);
         return view('administrador.calendario', ['eventsCitas' => $eventsCitas,'clasificacion' => $clasificacion, 'psicologos' => $psicologos, 'consultorio' => $num]);
     }
 
@@ -92,7 +89,6 @@ class CalendarController extends Controller
         //info('citas index');
         $citas = Cita::with('cliente')
                         ->where('usuario_id',Auth::user()->id)
-                        //->where('atendido','=',"%0%")
                         ->where('consultorio',$num)
                         ->get();
         info("citas");
@@ -362,6 +358,7 @@ class CalendarController extends Controller
             $psiAsignado = $psi->nombre;
         }
         info('Info del psicologo asignado'.$psi);
+        $horario = json_decode($cita[0]->cliente->horario);
         return response()->json([
             // Info pasiente
             'modal-pasiente'   => $cita[0]->cliente->nombre .' '. $cita[0]->cliente->apellidos,
@@ -371,7 +368,11 @@ class CalendarController extends Controller
             'modal-telefono' => $cita[0]->cliente->telefono,
             'modal-descripcion' => $cita[0]->cliente->descripcion,
             'modal-expectativa' => $cita[0]->cliente->expectativas,
-            'modal-horario' =>  $cita[0]->cliente->horario,
+            'modal-horario-Lun' =>  $horario->Lun,
+            'modal-horario-Mar' =>  $horario->Mar,
+            'modal-horario-Mie' =>  $horario->Mie,
+            'modal-horario-Jue' =>  $horario->Jue,
+            'modal-horario-Vie' =>  $horario->Vie,
             'modal-clasificacion' =>  $cita[0]->cliente->clasificacion,
             'modal-secciones' => $contador,
             'modal-seccionesRestantes' => $citaContador,
@@ -437,6 +438,7 @@ class CalendarController extends Controller
                 'error' => 'Unable to locate the event'
             ], 404);
         }
+        $horario = json_decode($cliente[0]->horario);
         return response()->json([
             'modal-pasiente-infoPasiente'   => $cliente[0]->nombre .' '. $cliente[0]->apellidos,
             'modal-codigo-infoPasiente' => $cliente[0]->codigo,
@@ -445,7 +447,11 @@ class CalendarController extends Controller
             'modal-telefono-infoPasiente' => $cliente[0]->telefono,
             'modal-descripcion-infoPasiente' => $cliente[0]->descripcion,
             'modal-expectativa-infoPasiente' => $cliente[0]->expectativas,
-            'modal-horario-infoPasiente' =>  $cliente[0]->horario,
+            'modal-horario-infoPasiente-Lun' =>  $horario->Lun,
+            'modal-horario-infoPasiente-Mar' =>  $horario->Mar,
+            'modal-horario-infoPasiente-Mie' =>  $horario->Mie,
+            'modal-horario-infoPasiente-Jue' =>  $horario->Jue,
+            'modal-horario-infoPasiente-Vie' =>  $horario->Vie,
             'modal-clasificacion-infoPasiente' =>  $cliente[0]->clasificacion,
             'modal-secciones-infoPasiente' => $cliente[0]->secciones,
             'modal-nacimiento-infoPasiente' => $cliente[0]->nacimiento,

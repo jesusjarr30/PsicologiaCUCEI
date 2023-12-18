@@ -106,11 +106,31 @@
                         <div style="display: inline" id="modal-expectativa"> </div>
                         <div></div>
                     </div>
+                    <div>
+                        <h3 class="font-bold"> Horario esperado: </h3>
+                        <span class="font-bold"> Lunes: </span>
+                        <div style="display: inline" id="modal-horario-Lun"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Martes: </span>
+                        <div style="display: inline" id="modal-horario-Mar"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Miercoles: </span>
+                        <div style="display: inline" id="modal-horario-Mie"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Jueves: </span>
+                        <div style="display: inline" id="modal-horario-Jue"> </div>
+                        <div></div>
+                        
+                        <span class="font-bold"> Viernes: </span>
+                        <div style="display: inline" id="modal-horario-Vie"> </div>
+                        <div></div>
+                    </div>
 
                     <div>
-                        <span class="font-bold"> Horario esperado: </span>
-                        <div style="display: inline" id="modal-horario"> </div>
-                        <div></div>
+                        
 
                         <span class="font-bold"> Clasificacion: </span>
                         <div style="display: inline" id="modal-clasificacion"> </div>
@@ -242,15 +262,18 @@
                                 var div = document.getElementById(parametro);
                                 div.innerHTML = response[parametro];
                             }
-                            var correoBtn =  document.getElementById("citaAtendidaBtn");
-                            if(document.getElementById("modal-atendido").innerHTML == "Atendido")
+                            // Cambiar el estado del botton dependiendo si esta asignado un psicologo
+                            var citaAtendidaBtn =  document.getElementById("citaAtendidaBtn");
+                            { console.log(document.getElementById("modal-atendido").innerHTML); }
+                            if(document.getElementById("modal-atendido").innerHTML != "Atendido")
                             {
-                                correoBtn.setAttribute("disabled",true);
-                                correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                                citaAtendidaBtn.removeAttribute("disabled");
+                                citaAtendidaBtn.setAttribute("class","bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }else{
-                                correoBtn.setAttribute("disabled",false);
-                                correoBtn.setAttribute("class","bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                                citaAtendidaBtn.setAttribute("disabled",true);
+                                citaAtendidaBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
                             }
+
                         },
                         error:function(error)
                         {
