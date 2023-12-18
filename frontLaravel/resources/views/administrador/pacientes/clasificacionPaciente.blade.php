@@ -32,15 +32,22 @@
                 <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{$cita->apellidos}}</p>
                 <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{$cita->correo}}</p>
                 <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{$cita->telefono}}</p>
-                </div>
-                <div class="xl:ml-20 lg:ml-20 md:ml-10 ">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">horario Preferido: {{$cita->horario}}
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$cita->codigo}}</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Edad: {{$cita->edad}}</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Nacimiento: {{$cita->nacimiento}}</p>
-                    
 
-                    
+                <p class="mt-1 truncate text-xs leading-5 text-gray-500">Codigo: {{$cita->codigo}}</p>
+                <p class="mt-1 truncate text-xs leading-5 text-gray-500">Edad: {{$cita->edad}}</p>
+                <p class="mt-1 truncate text-xs leading-5 text-gray-500">Nacimiento: {{$cita->nacimiento}}</p>
+                </div>
+                <div class="shrink-0 sm:flex sm:flex-col xl:ml-20 lg:ml-20 md:ml-10 ">
+                    <p class="text-sm font-semibold leading-6 text-gray-900">Horario Preferido: </p>
+                    @php
+                        $horario = json_decode($cita->horario);
+                    @endphp
+                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Lunes: {{$horario->Lun}} </p> 
+                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Martes: {{$horario->Mar}} </p> 
+                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Miercoles: {{$horario->Mie}} </p> 
+                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Jueves: {{$horario->Jue}} </p> 
+                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">Viernes: {{$horario->Vie}} </p> 
+
                 </div>
                 <div class="shrink-0 sm:flex sm:flex-col xl:ml-20 lg:ml-20 md:ml-10">
                     <p class="text-sm leading-6 text-gray-900"><strong>Descripcion: </strong>  </p>

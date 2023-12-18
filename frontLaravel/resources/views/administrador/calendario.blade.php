@@ -17,6 +17,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta/lib/draggable.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
   @vite('resources/css/app.css')
 </head>
 <body>
@@ -111,15 +114,34 @@
                     </div>
 
                     <div>
-                        <span class="font-bold"> Horario esperado: </span>
-                        <div style="display: inline" id="modal-horario"> </div>
+                        <h3 class="font-bold"> Horario esperado: </h3>
+                        <span class="font-bold"> Lunes: </span>
+                        <div style="display: inline" id="modal-horario-Lun"> </div>
                         <div></div>
 
+                        <span class="font-bold"> Martes: </span>
+                        <div style="display: inline" id="modal-horario-Mar"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Miercoles: </span>
+                        <div style="display: inline" id="modal-horario-Mie"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Jueves: </span>
+                        <div style="display: inline" id="modal-horario-Jue"> </div>
+                        <div></div>
+
+                        <span class="font-bold"> Viernes: </span>
+                        <div style="display: inline" id="modal-horario-Vie"> </div>
+                        <div></div>
+                    </div>
+                    <div>
                         <span class="font-bold"> Clasificacion: </span>
                         <div style="display: inline" id="modal-clasificacion"> </div>
                         <div></div>
 
                         <span class="font-bold"> Secciones: </span>
+                        <span style="display: inline" id='modal-seccionesRestantes'>  </span><span style="display: inline"> / </span>
                         <div style="display: inline" id="modal-secciones"> </div>
                         <div></div>
                     </div>
@@ -133,28 +155,35 @@
                         <div style="display: inline" id="modal-consultorio"> </div>
                         <div></div>
 
+                        <span class="font-bold"> Confirmado: </span>
+                        <div style="display: inline" id="modal-confirmado"> </div>
+                        <div></div>
+
                         <span class="font-bold"> Atendido: </span>
                         <div style="display: inline" id="modal-atendido"> </div>
                         <div></div>
 
                         <span class="font-bold"> Psicologo asignado: </span>
                         <div style="display: inline" id="modal-psicologo"> </div>
+                        
                         <div></div>
                     
                         <select id="modal-select-psicologo" class="border-0 px-2 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-3/6 ease-linear transition-all duration-150">
                             <option value="none" selected disabled hidden>Asignar Psicologo</option> 
-                            <option  value='null'  >Sin asignar</option>
+                            <option  value=null  >Sin asignar</option>
                             @foreach ( $psicologos as $psi )
                                 <option  value="{{$psi->id}}" > {{$psi->nombre}} </option>
                             @endforeach
                         </select>
+                        <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psico</button>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="bg-gray-600 hover:bg-gray-800 text-white px-2 py-2 rounded-md" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="psiUpdateBtn" class=" bg-green-600 hover:bg-green-800 text-white px-2 py-2  rounded-md">Asignar Psico</button>
-                    <button type="button" id="eliminaBtn" class=" bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md">Eliminar Cita</button>
-                    <button type="button" id="eliminaDemasBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar VariasCitas</button>
+                    <button type="button" id="agregarCitaBtn" class=" bg-yellow-600 hover:bg-yellow-800 text-white px-2 py-2  rounded-md">Nueva cita</button>
+                    <button type='button' id='correoBtn' class=' bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md'>Enviar confirmacion</button>
+                    <button type="button" id="eliminaBtn" class=" bg-red-600 hover:bg-red-800 text-white px-2 py-2  rounded-md">Eliminar</button>
                 </div>
             </div>
         </div>
@@ -211,10 +240,28 @@
                 </div>
 
                 <div>
-                    <span class="font-bold"> Horario esperado: </span>
-                    <div style="display: inline" id="modal-horario-infoPasiente"> </div>
+                    <h3 class="font-bold"> Horario esperado: </h3>
+                    <span class="font-bold"> Lunes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Lun"> </div>
                     <div></div>
 
+                    <span class="font-bold"> Martes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Mar"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Miercoles: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Mie"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Jueves: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Jue"> </div>
+                    <div></div>
+
+                    <span class="font-bold"> Viernes: </span>
+                    <div style="display: inline" id="modal-horario-infoPasiente-Vie"> </div>
+                    <div></div>
+                </div>
+                <div>
                     <span class="font-bold"> Clasificacion: </span>
                     <div style="display: inline" id="modal-clasificacion-infoPasiente"> </div>
                     <div></div>
@@ -298,8 +345,8 @@
                                                     }
                                                 @endphp
                                                     <div id="draggable" class='fc-event text-center' style="background-color:{{$rowColor}}" 
-                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "title":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}", "horario":"{{$clasi->horario}}" }' 
-                                                        >{{$clasi->codigo}}: {{$clasi->horario}}</div>
+                                                        data-value='{ "id":"{{$clasi->id}}", "consultorio": {{$consultorio}}, "codigo":"{{$clasi->codigo}}", "duration":"01:00", "color":"{{$rowColor}}" }' 
+                                                        >{{$clasi->nombre}} {{$clasi->apellidos}}</div>
                                                 @endforeach
                                             </p>
                                         </div>
@@ -368,7 +415,7 @@
             // store data so the calendar knows to render an event upon drop
             $(this).data('event', {
                 id: null,
-                title: data['title'], // use the element's text as the event title
+                title: data['codigo'], // use the element's text as the event title
                 duration : "01:00",
                 color: data['color'] ,
                 stick: true // maintain when user navigates (see docs on the renderEvent method)
@@ -384,7 +431,7 @@
         });
 
         // initialize the calendar
-  // -----------------------------------------------------------------
+  // -----------------------Calendario--------------------------
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
@@ -407,7 +454,7 @@
                 // Propiedades del fc
                 events: citas,
                 selectHelper: true,
-                //defaultView: 'agendaWeek',
+                defaultView: 'agendaWeek',
                 nowIndicator: true,
                 allDaySlot: false,
                 slotDuration: '01:00:00',
@@ -443,7 +490,7 @@
                             { console.log("storeCita regresa"); }
                             { console.log(response); }
                             event.id= response.id;
-                            swal("Good job!", "Cita agendada!", "success").then(function() {
+                            Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
                                 location.reload();
                             });
 
@@ -472,7 +519,7 @@
                             success:function(response)
                             {
                                 { console.log(response); }
-                                swal("Good job!", "Cita actualizada!", "success").then(function() {
+                                Swal.fire("Good job!", "Cita actualizada!", "success").then(function() {
                                     location.reload();
                                 });
                             },
@@ -485,6 +532,10 @@
                 eventClick: function(event){
                     var id = event.id;
                     var cliente_id = event.cliente_id;
+                    var usuario_id = event.usuario_id;
+                    var color = event.color;
+                    var consultorio = {{$consultorio}};
+
                     {console.log('eventClick');}
                     {console.log(event);}
 
@@ -501,6 +552,17 @@
                                 var div = document.getElementById(parametro);
                                 div.innerHTML = response[parametro];
                             }
+
+                            // Cambiar el estado del botton dependiendo si esta asignado un psicologo
+                            var correoBtn =  document.getElementById("correoBtn");
+                            if(document.getElementById("modal-psicologo").innerHTML == "Sin asignar")
+                            {
+                                correoBtn.setAttribute("disabled",true);
+                                correoBtn.setAttribute("class","bg-gray-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                            }else{
+                                correoBtn.removeAttribute("disabled");
+                                correoBtn.setAttribute("class","bg-blue-600 hover:bg-blue-800 text-white px-2 py-2  rounded-md");
+                            }
                         },
                         error:function(error)
                         {
@@ -510,18 +572,75 @@
 
                     $('#infoCitaPasiente').modal('toggle');
                 // Botones de infoCitaPasiente
-                    $('#eliminaBtn').click(function() {  
-                         $.ajax({
-                            url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
-                            type:"DELETE",
+                    $('#eliminaBtn').off('click').click(function() {  
+                        { console.log('eliminaBtn'); }
+                        Swal.fire({
+                            title: 'Eliminar Cita',
+                            text: 'Quieres eliminar solo una o todas?',
+                            icon: 'warning',
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'Todas',
+                            denyButtonText: 'Solo una',
+                            confirmButtonColor: '#d33',
+                            denyButtonColor: '#3085d6',
+                            customClass: {
+                            actions: 'my-actions',
+                            cancelButton: 'order-1 right-gap',
+                            confirmButton: 'order-2',
+                            denyButton: 'order-3',
+                          },
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
+                                    type:"DELETE",
+                                    dataType:'json',
+                                    success:function(response)
+                                    {
+                                        $('#infoCitaPasiente').modal('hide')
+                                        $('#calendar').fullCalendar('removeEvents', response);
+                                        Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
+                                            location.reload();
+                                        });
+                                    },
+                                    error:function(error)
+                                    {
+                                        console.log(error)
+                                    },
+                                });
+                            } else if (result.isDenied) {
+                                $.ajax({
+                                    url:"{{ route('calendar.destroyCita', '') }}" +'/'+ id,
+                                    type:"DELETE",
+                                    dataType:'json',
+                                    success:function(response)
+                                    {
+                                        $('#infoCitaPasiente').modal('hide')
+                                        $('#calendar').fullCalendar('removeEvents', response);
+                                        Swal.fire("Good job!", "Cita eliminada!", "success").then(function() {
+                                            location.reload();
+                                        });
+                                    },
+                                    error:function(error)
+                                    {
+                                        console.log(error)
+                                    },
+                                });
+                            }
+                        })
+
+                    });
+                    $('#correoBtn').off('click').click(function() {  
+                        {console.log("correoeBtn");}
+                        $.ajax({
+                            url:"{{ route('calendar.enviarCorreo', '') }}" +'/'+ id,
+                            type:"PATCH",
                             dataType:'json',
                             success:function(response)
                             {
                                 $('#infoCitaPasiente').modal('hide')
-                                $('#calendar').fullCalendar('removeEvents', response);
-                                swal("Good job!", "Cita eliminada!", "success").then(function() {
-                                    location.reload();
-                                });
+                                Swal.fire("Good job!", "Se a enviado el correo", "success");
                             },
                             error:function(error)
                             {
@@ -529,26 +648,7 @@
                             },
                         });
                     });
-                    $('#eliminaDemasBtn').click(function() {  
-                         $.ajax({
-                            url:"{{ route('calendar.destroyDemasCitas', '') }}" +'/'+ id,
-                            type:"DELETE",
-                            dataType:'json',
-                            success:function(response)
-                            {
-                                $('#infoCitaPasiente').modal('hide')
-                                $('#calendar').fullCalendar('removeEvents', response);
-                                swal("Good job!", "Cita eliminada!", "success").then(function() {
-                                    location.reload();
-                                });
-                            },
-                            error:function(error)
-                            {
-                                console.log(error)
-                            },
-                        });
-                    });
-                    $('#psiUpdateBtn').click(function() {  
+                    $('#psiUpdateBtn').off('click').click(function() {  
                         
                         var usuario_id = document.getElementById('modal-select-psicologo').value;
 
@@ -562,7 +662,7 @@
                             success:function(response)
                             {
                                 $('#infoCitaPasiente').modal('hide')
-                                swal("Good job!", "Psicologo asignado", "success").then(function() {
+                                Swal.fire("Good job!", "Psicologo asignado", "success").then(function() {
                                     location.reload();
                                 });
                             },
@@ -572,6 +672,34 @@
                             },
                         });
                     });
+                    $('#agregarCitaBtn').off('click').click(function() {  
+                        
+                        {console.log("agregarCitaBtn");}
+                        {console.log(event);}
+                        
+                        $.ajax({
+                            url:"{{ route('calendar.storeCitaNueva') }}",
+                            type:"POST",
+                            dataType:'json',
+                            data:{ cliente_id, usuario_id, consultorio },
+                            success:function(response)
+                            {
+                                { console.log("storeCita regresa"); }
+                                { console.log(response); }
+                                event.id= response.id;
+                                Swal.fire("Good job!", "Cita agendada!", "success").then(function() {
+                                    location.reload();
+                                });
+                            },
+                            error:function(error)
+                            {
+                                if(error.responseJSON.errors) {
+                                    $('#titleError').html(error.responseJSON.errors.title);
+                                }
+                            },
+                        });
+                    });
+
                 },
                 
                 selectAllow: function(event)
@@ -581,7 +709,6 @@
                 
 
             });
-            $('.fc-event').css('font-size', '18px');
 
         });
     </script>

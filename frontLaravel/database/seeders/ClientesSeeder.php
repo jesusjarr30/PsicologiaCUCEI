@@ -66,7 +66,7 @@ class ClientesSeeder extends Seeder
         $cliente3->telefono = '3724234382';
         $cliente3->descripcion = "toy tiste 3";
         $cliente3->expectativas = "ya no estar tiste 3";
-        $cliente3->horario = json_encode(["Jue" => "12:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
+        $cliente3->horario = json_encode(["Jue" => "12:00", "Lun" => "00:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
 
         $cliente3->nacimiento = '2000-03-23';
         $cliente3->save();
@@ -80,7 +80,7 @@ class ClientesSeeder extends Seeder
         $cliente4->telefono = '3724399358';
         $cliente4->descripcion = "toy tiste 4";
         $cliente4->expectativas = "ya no estar tiste 4";
-        $cliente4->horario = json_encode(["Jue" => "12:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
+        $cliente4->horario = json_encode(["Jue" => "12:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "00:00", "Vie" => "12:00"]);
 
         $cliente4->nacimiento = '2001-10-22';
         $cliente4->save();
@@ -94,7 +94,7 @@ class ClientesSeeder extends Seeder
         $cliente5->telefono = '3724318398';
         $cliente5->descripcion = "toy tiste 5";
         $cliente5->expectativas = "ya no estar tiste 5";
-        $cliente5->horario = json_encode(["Jue" => "12:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
+        $cliente5->horario = json_encode(["Jue" => "00:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
 
         $cliente5->nacimiento = '2001-12-03';
         $cliente5->save();
@@ -136,7 +136,7 @@ class ClientesSeeder extends Seeder
         $cliente8->telefono = '3724818373';
         $cliente8->descripcion = "toy tiste 8";
         $cliente8->expectativas = "ya no estar tiste 8";
-        $cliente8->horario = json_encode(["Jue" => "12:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "11:00", "Vie" => "12:00"]);
+        $cliente8->horario = json_encode(["Jue" => "00:00", "Lun" => "11:00", "Mar" => "15:00", "Mie" => "00:00", "Vie" => "00:00"]);
 
         $cliente8->nacimiento = '2000-03-23';
         $cliente8->save();

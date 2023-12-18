@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Cliente;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -46,8 +47,9 @@ class DatosCita extends Mailable
      */
     public function content(): Content
     {
-        
+        info("datoscitas");
         $user = Usuario::find($this->usuario_id);
+        info($user);
         return new Content(
             view: 'MailMessages.DatosCita',
             with: [
