@@ -93,5 +93,60 @@ class PdfController extends Controller
             return $pdf->download();
 
     }
+    public function pdfHorarioConsultorio(){
+        $consulta = DB::table('citas')
+    ->selectRaw('
+        CASE
+            WHEN DAYOFWEEK(citas.fecha) = 1 THEN "Domingo"
+            WHEN DAYOFWEEK(citas.fecha) = 2 THEN "Lunes"
+            WHEN DAYOFWEEK(citas.fecha) = 3 THEN "Martes"
+            WHEN DAYOFWEEK(citas.fecha) = 4 THEN "Miércoles"
+            WHEN DAYOFWEEK(citas.fecha) = 5 THEN "Jueves"
+            WHEN DAYOFWEEK(citas.fecha) = 6 THEN "Viernes"
+            WHEN DAYOFWEEK(citas.fecha) = 7 THEN "Sábado"
+        END AS DiaSemana,
+        citas.fecha,
+        citas.atendido,
+        usuarios.nombre AS Psicologo,
+        citas.fecha,
+        citas.consultorio
+    ')
+    ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
+    ->whereRaw('WEEK(citas.fecha) = WEEK(CURDATE())')
+    ->orderByRaw('DAYOFWEEK(citas.fecha), citas.consultorio')
+    ->get();
+    info("Los datos de la consulta son los siguientes");
+    info($consulta);
+    
+    $pdf =PDF::loadView('PDF.horarioConsultorios',compact('consulta'));
+    return $pdf->download();
+    }
+    public function pdfPsicologoHorario(){
+        $consulta = DB::table('citas')
+        ->select('usuarios.nombre AS usuario', 'citas.fecha')
+        ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
+        ->whereRaw('YEARWEEK(citas.fecha, 1) = YEARWEEK(CURDATE(), 1)')
+        ->orderBy('usuarios.nombre')
+        ->orderBy('citas.fecha')
+        ->orderByRaw('TIME(JSON_UNQUOTE(JSON_EXTRACT(citas.fecha, "$.inicio")))')
+        ->get();
+
+    // Crear un array para organizar los resultados por día y usuario
+    $resultadosOrganizados = [];
+
+    foreach ($consulta as $fila) {
+        $diaSemana = date('l', strtotime($fila->fecha));
+
+        // Agregar entrada al array de resultados organizados
+        $resultadosOrganizados[$diaSemana][$fila->usuario][] = [
+            'hora' => json_decode($fila->horario)->inicio,
+        ];
+        }
+    $pdf =PDF::loadView('PDF.psicologoHorario',compact('resultadosOrganizados'));
+    return $pdf->download();
+
+    
+}
+    
     
 }

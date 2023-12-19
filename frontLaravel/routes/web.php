@@ -190,6 +190,7 @@ Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('pdfTes
 Route::get('/generate-semana', [PdfController::class, 'pdfSemana'])->name('pdfSemanal');
 Route::get('/generate-mensual', [PdfController::class, 'pdfMes'])->name('pdfMensual');
 Route::get('/generate-historico', [PdfController::class, 'pdfHistorico'])->name('pdfHistorico');
+Route::get('/generate-pdf-horario-consultorio',[PdfController::class, 'pdfHorarioConsultorio'])->name('pdfHorarioConsultorio');
+Route::get('/generate-pdf-horario-psicologo',[PdfController::class, 'pdfPsicologoHorario'])->name('pdfPsicologoHorario');
 
-//direccion directa para la pruab de estilos
 

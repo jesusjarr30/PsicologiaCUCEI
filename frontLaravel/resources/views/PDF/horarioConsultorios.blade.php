@@ -28,20 +28,7 @@ horario y consulotiro 1 nombre y horario;
         @php
             $rowColor = 'bg-white'; // Inicialmente, la primera fila es blanca
         @endphp
-        @foreach($citas as $cita)
-            <tr style="background-color: {{ $rowColor === 'bg-white' ? '#FFFFFF' : '#E5E5E5' }};">
-                
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->nombre_usuario }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->nombre_cliente }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->consultorio }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->fecha }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->atendido }}</td>
-            </tr>
-            @php
-                // Cambia el color de la fila para la siguiente iteración
-                $rowColor = ($rowColor === 'bg-white') ? 'bg-gray-200' : 'bg-white';
-            @endphp
-        @endforeach
+      
     </tbody>
 </table>
 

@@ -55,8 +55,6 @@ class UsuarioSeeder extends Seeder
         $usuario2->horario = json_encode($horario2);
         $usuario2->activo = true; // Utiliza un valor booleano en lugar de una cadena
         $usuario2->save();
-
-
         //Usuario::factory(10)->create();
 
 
