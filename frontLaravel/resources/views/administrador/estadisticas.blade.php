@@ -12,7 +12,6 @@
                 src="{{ asset('Imagenes/iconosEstadistica/admin.png') }}" alt="step"/>
                 <h2 class="text-white hover:text-yellow-400"><strong>Administradores: {{$admin}}</strong></h2>
             </div>
-        
             <div class="bg-blue-400 flex flex-col items-center justify-center p-6 text-2xl  border-2 border-blue-600 rounded-xl">
                 <img class="w-32 object-cover object-center rounded-lg mb-4" 
                 src="{{ asset('Imagenes/iconosEstadistica/psicologo.png') }}" alt="step"/>
@@ -59,12 +58,12 @@
             <div class="bg-cyan-400 flex flex-col items-center justify-center p-6 text-2xl  border-2 border-cyan-600 rounded-xl">
                 <img class="w-32 object-cover object-center rounded-lg mb-4" 
                 src="{{ asset('Imagenes/iconosEstadistica/reporteUsuario.png') }}" alt="step"/>
-                <a class="text-white hover:text-yellow-400" href="{{ route('pdfHistorico') }}"><strong>Reporte por Psicologo (Semana)</strong></a>
+                <a class="text-white hover:text-yellow-400" href="{{ route('pdfPsicologoHorario') }}"><strong>Reporte por Psicologo (Semana)</strong></a>
             </div>
             <div class="bg-cyan-400 flex flex-col items-center justify-center p-6 text-2xl  border-2 border-cyan-600 rounded-xl">
                 <img class="w-32 object-cover object-center rounded-lg mb-4" 
                 src="{{ asset('Imagenes/iconosEstadistica/reporteConsultorio.png') }}" alt="step"/>
-                <a class="text-white hover:text-yellow-400" href="{{ route('pdfHistorico') }}"><strong>Reporte consultorio (semane)</strong></a>
+                <a class="text-white hover:text-yellow-400" href="{{ route('pdfHorarioConsultorio') }}"><strong>Reporte consultorio (semane)</strong></a>
             </div>
         
             
