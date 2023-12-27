@@ -91,8 +91,24 @@ class PdfController extends Controller
     
     $pdf =PDF::loadView('PDF.reporteHistorico',compact('citas'));
             return $pdf->download();
+            
 
     }
+
+    public function traducirDiaSemana($diaEnIngles) {
+        $diasTraducidos = [
+            'Monday' => 'Lunes',
+            'Tuesday' => 'Martes',
+            'Wednesday' => 'Miércoles',
+            'Thursday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sábado',
+            'Sunday' => 'Domingo',
+        ];
+    
+        return $diasTraducidos[$diaEnIngles] ?? $diaEnIngles;
+    }
+
     public function pdfHorarioConsultorio(){
         $consulta = DB::table('citas')
     ->selectRaw('
@@ -122,30 +138,35 @@ class PdfController extends Controller
     return $pdf->download();
     }
     public function pdfPsicologoHorario(){
+      
+
         $consulta = DB::table('citas')
-        ->select('usuarios.nombre AS usuario', 'citas.fecha')
-        ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
-        ->whereRaw('YEARWEEK(citas.fecha, 1) = YEARWEEK(CURDATE(), 1)')
-        ->orderBy('usuarios.nombre')
-        ->orderBy('citas.fecha')
-        ->orderByRaw('TIME(JSON_UNQUOTE(JSON_EXTRACT(citas.fecha, "$.inicio")))')
-        ->get();
+    ->select('usuarios.nombre AS usuario', 'citas.fecha','clientes.nombre AS nombre', 'clientes.apellidos AS apellidos')
+    ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
+    ->join('clientes','cliente_id','=','clientes.id')
+    ->whereRaw('YEARWEEK(citas.fecha, 1) = YEARWEEK(CURDATE(), 1)')
+    ->orderBy('usuarios.nombre')
+    ->orderBy('citas.fecha')
+    ->orderBy('citas.fecha', 'ASC') // Cambio para ordenar también por fecha
+    ->get();
+    info($consulta);
 
     // Crear un array para organizar los resultados por día y usuario
     $resultadosOrganizados = [];
 
     foreach ($consulta as $fila) {
-        $diaSemana = date('l', strtotime($fila->fecha));
-
+        $diaSemana = $this->traducirDiaSemana(date('l', strtotime($fila->fecha)));
+    
         // Agregar entrada al array de resultados organizados
         $resultadosOrganizados[$diaSemana][$fila->usuario][] = [
-            'hora' => json_decode($fila->horario)->inicio,
+            'hora' => date('H:i:s', strtotime($fila->fecha)), // Obtener la hora directamente de la fecha
+            'nombre_cliente' => $fila->nombre,
+            'apellidos_cliente' => $fila->apellidos,
         ];
-        }
+    }
+        info($resultadosOrganizados);
     $pdf =PDF::loadView('PDF.psicologoHorario',compact('resultadosOrganizados'));
     return $pdf->download();
-
-    
 }
     
     

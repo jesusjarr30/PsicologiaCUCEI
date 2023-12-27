@@ -1,34 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Citas</title>
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    @vite('resources/css/app.css')
+    <title>Horario de Citas</title>
+    <!-- Puedes incluir aquí tus estilos CSS si es necesario -->
 </head>
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #0891b2;
+      color: white;
+    }
+    .titulo{
+        text-align: left;
+            font-weight: bold;
+            margin-top: 50px;
+        
+    }
+    .header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+        }
+        .header img {
+    width: 250px; /* Ajusta el valor según sea necesario */
+}
+
+    </style>
 <body>
+    <div class="header">
+        <img src="Imagenes/logoCUCEI.png" alt="Logo" width="100">
+        
+    </div>
+    <h2 class="titulo">Reporte de psicólogos (Semana)</h2>
+    <p>Semana del {{ \Carbon\Carbon::now()->startOfWeek()->formatLocalized('%d de %B') }} al {{ \Carbon\Carbon::now()->endOfWeek()->formatLocalized('%d de %B') }} de {{ \Carbon\Carbon::now()->year }}</p>
 
-<h1 class="fond-bold text-2xl">Psicologos Horario</h1>
-
-<table class="w-full">
-    <thead class="bg-gray-50 border-b-2 borde-gray-200">
-        <tr>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Psicologo</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left" >Cliente</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Consultorio</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Fecha</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Atendido</th>
-        </tr>
-    </thead>
-
-    <tbody class="divide-y divide-gray-100 ">
-        @php
-            $rowColor = 'bg-white'; // Inicialmente, la primera fila es blanca
-        @endphp
-       
-    </tbody>
-</table>
+@foreach ($resultadosOrganizados as $diaSemana => $usuarios)
+    <h2>{{ $diaSemana }}</h2>
+    
+    
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>Psicologo</th>
+                <th>Hora</th>
+                <th>Nombre del Cliente</th>
+                <th>Apellidos del Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($usuarios as $usuario => $citas)
+                @foreach ($citas as $cita)
+                    <tr>
+                        <td>{{ $usuario }}</td>
+                        <td>{{ $cita['hora'] }}</td>
+                        <td>{{ $cita['nombre_cliente'] }}</td>
+                        <td>{{ $cita['apellidos_cliente'] }}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+        </tbody>
+    </table>
+@endforeach
 
 </body>
 </html>
