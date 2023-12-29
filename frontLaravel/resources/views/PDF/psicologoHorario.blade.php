@@ -52,33 +52,34 @@
     <h2 class="titulo">Reporte de psicólogos (Semana)</h2>
     <p>Semana del {{ \Carbon\Carbon::now()->startOfWeek()->formatLocalized('%d de %B') }} al {{ \Carbon\Carbon::now()->endOfWeek()->formatLocalized('%d de %B') }} de {{ \Carbon\Carbon::now()->year }}</p>
 
-@foreach ($resultadosOrganizados as $diaSemana => $usuarios)
-    <h2>{{ $diaSemana }}</h2>
-    
-    
-    <table id="customers">
-        <thead>
-            <tr>
-                <th>Psicologo</th>
-                <th>Hora</th>
-                <th>Nombre del Cliente</th>
-                <th>Apellidos del Cliente</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($usuarios as $usuario => $citas)
-                @foreach ($citas as $cita)
+
+    @foreach($resultadosOrganizados as $dia => $doctores)
+<h2>{{ $dia }}</h2>
+    @foreach($doctores as $doctor => $citas)
+        <h3>{{ $doctor }}</h3>
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Nombre del Cliente</th>
+                    <th>Apellidos del Cliente</th>
+                    <th>Consultorio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($citas as $cita)
                     <tr>
-                        <td>{{ $usuario }}</td>
                         <td>{{ $cita['hora'] }}</td>
                         <td>{{ $cita['nombre_cliente'] }}</td>
                         <td>{{ $cita['apellidos_cliente'] }}</td>
+                        <td>{{ $cita['consultorio'] }}</td>
                     </tr>
                 @endforeach
-            @endforeach
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    @endforeach
 @endforeach
+ 
 
 </body>
 </html>

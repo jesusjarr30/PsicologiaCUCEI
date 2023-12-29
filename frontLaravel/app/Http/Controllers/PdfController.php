@@ -108,40 +108,57 @@ class PdfController extends Controller
     
         return $diasTraducidos[$diaEnIngles] ?? $diaEnIngles;
     }
+//aqui esta
+public function pdfHorarioConsultorio() {
+    $consulta = DB::table('citas')
+        ->selectRaw('
+            CASE
+                WHEN DAYOFWEEK(citas.fecha) = 1 THEN "Domingo"
+                WHEN DAYOFWEEK(citas.fecha) = 2 THEN "Lunes"
+                WHEN DAYOFWEEK(citas.fecha) = 3 THEN "Martes"
+                WHEN DAYOFWEEK(citas.fecha) = 4 THEN "Miércoles"
+                WHEN DAYOFWEEK(citas.fecha) = 5 THEN "Jueves"
+                WHEN DAYOFWEEK(citas.fecha) = 6 THEN "Viernes"
+                WHEN DAYOFWEEK(citas.fecha) = 7 THEN "Sábado"
+            END AS DiaSemana,
+            citas.fecha,
+            citas.atendido,
+            usuarios.nombre AS Psicologo,
+            citas.consultorio
+        ')
+        ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
+        ->whereRaw('WEEK(citas.fecha) = WEEK(CURDATE())')
+        ->orderByRaw('DAYOFWEEK(citas.fecha), usuarios.nombre, citas.consultorio')
+        ->get();
 
-    public function pdfHorarioConsultorio(){
-        $consulta = DB::table('citas')
-    ->selectRaw('
-        CASE
-            WHEN DAYOFWEEK(citas.fecha) = 1 THEN "Domingo"
-            WHEN DAYOFWEEK(citas.fecha) = 2 THEN "Lunes"
-            WHEN DAYOFWEEK(citas.fecha) = 3 THEN "Martes"
-            WHEN DAYOFWEEK(citas.fecha) = 4 THEN "Miércoles"
-            WHEN DAYOFWEEK(citas.fecha) = 5 THEN "Jueves"
-            WHEN DAYOFWEEK(citas.fecha) = 6 THEN "Viernes"
-            WHEN DAYOFWEEK(citas.fecha) = 7 THEN "Sábado"
-        END AS DiaSemana,
-        citas.fecha,
-        citas.atendido,
-        usuarios.nombre AS Psicologo,
-        citas.fecha,
-        citas.consultorio
-    ')
-    ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
-    ->whereRaw('WEEK(citas.fecha) = WEEK(CURDATE())')
-    ->orderByRaw('DAYOFWEEK(citas.fecha), citas.consultorio')
-    ->get();
     info("Los datos de la consulta son los siguientes");
-    info($consulta);
     
-    $pdf =PDF::loadView('PDF.horarioConsultorios',compact('consulta'));
-    return $pdf->download();
-    }
-    public function pdfPsicologoHorario(){
-      
+    $resultadosOrganizados = [];
 
+    foreach ($consulta as $fila) {
+        // Utilizar el día de la semana como clave del array
+        $diaSemana = $fila->DiaSemana;
+
+        // Agregar entrada al array de resultados organizados
+        $resultadosOrganizados[$diaSemana][$fila->Psicologo][] = [
+            'fecha' => $fila->fecha,
+            'atendido' => $fila->atendido,
+            'consultorio' => $fila->consultorio,
+        ];
+    }
+
+    info($resultadosOrganizados);
+    
+    $pdf = PDF::loadView('PDF.horarioConsultorios', compact('resultadosOrganizados'));
+    return $pdf->download();
+}
+
+    
+  
+    public function pdfPsicologoHorario(){
         $consulta = DB::table('citas')
-    ->select('usuarios.nombre AS usuario', 'citas.fecha','clientes.nombre AS nombre', 'clientes.apellidos AS apellidos')
+    ->select('usuarios.nombre AS usuario', 'citas.fecha','clientes.nombre AS nombre', 'clientes.apellidos AS apellidos',
+    'citas.consultorio')
     ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
     ->join('clientes','cliente_id','=','clientes.id')
     ->whereRaw('YEARWEEK(citas.fecha, 1) = YEARWEEK(CURDATE(), 1)')
@@ -149,7 +166,7 @@ class PdfController extends Controller
     ->orderBy('citas.fecha')
     ->orderBy('citas.fecha', 'ASC') // Cambio para ordenar también por fecha
     ->get();
-    info($consulta);
+    
 
     // Crear un array para organizar los resultados por día y usuario
     $resultadosOrganizados = [];
@@ -162,6 +179,7 @@ class PdfController extends Controller
             'hora' => date('H:i:s', strtotime($fila->fecha)), // Obtener la hora directamente de la fecha
             'nombre_cliente' => $fila->nombre,
             'apellidos_cliente' => $fila->apellidos,
+            'consultorio'=> $fila->consultorio,
         ];
     }
         info($resultadosOrganizados);

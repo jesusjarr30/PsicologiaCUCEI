@@ -4,21 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla de Citas</title>
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    @vite('resources/css/app.css')
 </head>
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #3730a3;
+      color: white;
+    }
+    .titulo{
+        text-align: left;
+            font-weight: bold;
+            margin-top: 50px;
+        
+    }
+    .header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+        }
+        .header img {
+    width: 250px; /* Ajusta el valor según sea necesario */
+}
+
+    </style>
 <body>
+    <div class="header">
+        <img src="Imagenes/logoCUCEI.png" alt="Logo" width="100">
+        
+    </div>
+    <h2 class="titulo">Reporte Mensual</h2>
+    <p>
+        <?php
+        \Carbon\Carbon::setLocale('es'); // Establecer el idioma a español
+        echo \Carbon\Carbon::now()->formatLocalized('%B de %Y');
+        ?>
+    </p>
+    
 
-<h1 class="fond-bold text-2xl">Reporte Mensual</h1>
 
-<table class="w-full">
+<table id="customers">
     <thead class="bg-gray-50 border-b-2 borde-gray-200">
         <tr>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Psicologo</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left" >Cliente</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Consultorio</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Fecha</th>
-            <th class="p-3 text-md font-md font-semibold tracking-wide text-left">Atendido</th>
+            <th >Psicologo</th>
+            <th  >Cliente</th>
+            <th >Consultorio</th>
+            <th >Fecha</th>
+            <th >Atendido</th>
         </tr>
     </thead>
 
@@ -29,11 +78,11 @@
         @foreach($citas as $cita)
             <tr style="background-color: {{ $rowColor === 'bg-white' ? '#FFFFFF' : '#E5E5E5' }};">
                 
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->nombre_usuario }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->nombre_cliente }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->consultorio }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->fecha }}</td>
-                <td class="p-3 text-sm text-gray-700 ">{{ $cita->atendido }}</td>
+                <td >{{ $cita->nombre_usuario }}</td>
+                <td >{{ $cita->nombre_cliente }}</td>
+                <td >{{ $cita->consultorio }}</td>
+                <td >{{ $cita->fecha }}</td>
+                <td >{{ $cita->atendido }}</td>
             </tr>
             @php
                 // Cambia el color de la fila para la siguiente iteración
