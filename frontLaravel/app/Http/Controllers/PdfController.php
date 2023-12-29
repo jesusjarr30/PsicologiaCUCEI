@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cita;
-
+use App\Models\Hora;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -27,30 +27,16 @@ class PdfController extends Controller
 
     //Reporte de la semana 
     //dar los detalles de la cita
-    public function pdfSemana(){
-
-        //obtener el dia de hoy
-        //$hoy = Carbon::now();
-
-        $fechaInicioSemana = Carbon::now()->startOfWeek(); 
-    // Obtener la fecha de fin de la semana (sábado)
-        $fechaFinSemana = Carbon::now()->endOfWeek();
-        $citas = Cita::select(
-            'citas.id',
-            'usuarios.nombre as nombre_usuario',
-            'clientes.nombre as nombre_cliente',
-            'citas.consultorio',
-            'citas.fecha',
-        )
-        ->join('usuarios', 'citas.usuario_id', '=', 'usuarios.id')
-        ->join('clientes', 'citas.cliente_id', '=', 'clientes.id')
-        ->whereBetween('citas.fecha', [$fechaInicioSemana, $fechaFinSemana])
-        ->orderByRaw('citas.fecha, FIELD(citas.consultorio, 1, 2, 3)')
+    public function pdfHoras(){
+        $resultados = Hora::select('usuarios.nombre as nombreUsuario', DB::raw('SUM(horas.horasRegistradas) as totalHorasRegistradas'))
+        ->join('usuarios', 'horas.usuario_id', '=', 'usuarios.id')
+        ->whereNull('horas.deleted_at')
+        ->groupBy('usuarios.id', 'usuarios.nombre')
         ->get();
-        
-        $pdf =PDF::loadView('PDF.reporteSemana',compact('citas'));
-        return $pdf->download();
+    
 
+    $pdf =PDF::loadView('PDF.reporteHoras',compact('resultados'));
+    return $pdf->download();
     }
 
     //todas las citas que han existido

@@ -187,7 +187,7 @@ Route::post('/generar-manual', [CitaController::class, 'citaManual'])->name('Gen
 
 //generacion de PDF
 Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('pdfTest');
-Route::get('/generate-semana', [PdfController::class, 'pdfSemana'])->name('pdfSemanal');
+Route::get('/generate-horas', [PdfController::class, 'pdfHoras'])->name('pdfHoras');
 Route::get('/generate-mensual', [PdfController::class, 'pdfMes'])->name('pdfMensual');
 Route::get('/generate-historico', [PdfController::class, 'pdfHistorico'])->name('pdfHistorico');
 Route::get('/generate-pdf-horario-consultorio',[PdfController::class, 'pdfHorarioConsultorio'])->name('pdfHorarioConsultorio');

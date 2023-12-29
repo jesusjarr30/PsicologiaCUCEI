@@ -40,7 +40,7 @@
             <div class="bg-cyan-400 flex flex-col items-center justify-center p-6 text-2xl border-2 border-cyan-600 rounded-xl">
                 <img class="w-32 object-cover object-center rounded-lg mb-4" 
                 src="{{ asset('Imagenes/iconosEstadistica/reporte.png') }}" alt="step"/>
-                <a class="text-white hover:text-yellow-400 font-bold"href="{{ route('pdfSemanal') }}">Reporte Semanal</a>
+                <a class="text-white hover:text-yellow-400 font-bold"href="{{ route('pdfHoras') }}">Reporte de horas</a>
             </div>
         
         
