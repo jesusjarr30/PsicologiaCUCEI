@@ -1,99 +1,66 @@
-# PsicologiaCUCEI
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Página web para la administración de los psicólogos de CUCEI. Tiene como objetivo desarrollar una página web con el uso de Laravel en la cual los alumnos pueden registrar una cita para acudir al psicólogo. El psicólogo, por su parte, contará con una variedad amplia de herramientas para gestionar la gran cantidad de consultas y archivos que necesite.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Requisitos
+## About Laravel
 
-Instalar PHP 8.1.2
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-Composer 2.6.2
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Se puede instalar tanto en Linux como en Windows, solo se recomienda que sean las versiones indicadas para evitar problemas de compatibilidad.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-Si no conoces las versiones que están instaladas en tu computadora, puedes usar los siguientes comandos para revisar cuáles estás utilizando:
+## Learning Laravel
 
-php -v
-composer -v
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-Pasos para instalar Composer en Linux en el siguiente enlace: https://getcomposer.org/download/
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-## Compilación
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-Muévete a la ruta del proyecto y ejecuta el siguiente comando:
+## Laravel Sponsors
 
-npm run dev
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-(Esto habilitará Vite, que es importante para mostrar los estilos de Tailwind CSS).
+### Premium Partners
 
-Luego, en otra terminal, debes ejecutar:
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
-php artisan serve
+## Contributing
 
-(Esto habilitará el servicio y podrás ver la aplicación en ejecución).
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Problemas comunes
+## Code of Conduct
 
-Si tienes problemas al clonar el proyecto, debes ejecutar los siguientes comandos dependiendo del caso:
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-En el caso del error: "vite" no se reconoce como comando interno o externo, programa o archivo por lotes.
+## Security Vulnerabilities
 
-Debe de ejecutar el siguiente comando:
-npm install --save-dev vite
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Tras eso, podras ya ejecutar el comando
-npm run dev
+## License
 
-## Contacto
-
-En caso de tener sugerencias o requerir soporte por parte de los desarrolladores, puedes contactar al siguiente correo electrónico para cualquier cosa que desees: jesus.jarr.30@gmail.com
-
-### English
-
-# PsicologiaCUCEI
-
-Website for the management of CUCEI psychologists. Its objective is to develop a website using Laravel in which students can schedule an appointment to see a psychologist. The psychologist, on the other hand, will have a wide variety of tools to manage the large number of consultations and files required.
-
-## Requirements
-
-Install PHP 8.1.2
-
-Composer 2.6.2
-
-It can be installed on both Linux and Windows; however, it is recommended to use the specified versions to avoid compatibility issues.
-
-If you are unsure about the installed versions on your computer, you can use the following commands to check which ones you are using:
-
-php -v
-composer -v
-
-You can find the steps to install Composer on Linux in the following link: https://getcomposer.org/download/
-
-## Compilation
-
-Navigate to the project's directory and run the following command:
-
-npm run dev
-
-(This will enable Vite, which is important for displaying Tailwind CSS styles).
-
-Then, in another terminal, you should run:
-
-php artisan serve
-
-(This will enable the service, and you will be able to see the application in execution).
-
-## Common Issues
-
-If you encounter problems when cloning the project, you should run the following commands depending on the case:
-
-In the case of the error: "vite" is not recognized as an internal or external command, program or batch file.
-
-You must execute the following command:
-npm install --save-dev vite
-
-After that, you can now execute the command
-npm run dev
-
-## Contact
-
-If you have any suggestions or need support from the developers, you can contact the following email for anything you need: jesus.jarr.30@gmail.com
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
