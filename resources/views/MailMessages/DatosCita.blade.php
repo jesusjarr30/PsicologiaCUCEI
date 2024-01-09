@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Eliminado el enlace a Taiwind CSS -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Documento</title>
+        <style>
+            /* Estilos CSS en línea para replicar los estilos de Tailwind CSS */
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #1f2937;
+                text-align: left;
+                background-color: #fff;
+            }
+    
+            section {
+                max-width: 2xl;
+                padding: 6px;
+                margin: auto;
+                background-color: #111827;
+            }
+    
+            header {
+                text-align: center;
+            }
+    
+            h1 {
+                color: white;
+            }
+    
+            main {
+                margin-top: 8px;
+            }
+    
+            h2 {
+                margin-top: 6px;
+                color: white;
+            }
+    
+            p {
+                margin-top: 6px;
+                line-height: loose;
+                color: white;
+            }
+    
+            form {
+                margin-top: 8px;
+            }
+    
+            button {
+                margin-top: 8px;
+                color: white;
+                font-size: 1.25rem; /* Equivalente a text-xl en Tailwind CSS */
+                padding: 16px 24px; /* Equivalente a px-4 py-4 en Tailwind CSS */
+                background-color: #16a34a; /* Equivalente a bg-green-500 en Tailwind CSS */
+                border-radius: 0.75rem; /* Equivalente a rounded-xl en Tailwind CSS */
+                transition: background-color 0.3s ease; 
+            }
+            .button-reset-password:hover {
+                background-color: #166534; /* Equivalente a hover:bg-green-700 en Tailwind CSS */
+    }
+    
+            footer {
+                margin-top: 8px;
+                text-align: center;
+            }
+    
+            img {
+                height: 56px;
+                width: 56px;
+                margin-right: 2px;
+            }
+    
+            p {
+                margin-top: 2px;
+                color: white;
+            }
+    
+            a {
+                color: white;
+                color: #3b82f6;
+                text-decoration: underline;
+                hover: #2563eb;
+            }
+    
+            p {
+                margin-top: 6px;
+                color: white;
+            }
+    
+            p {
+                margin-top: 3px;
+                color: white;
+            }
+            .mx-auto{
+                margin-left: auto;
+                margin-right: auto;
+                width: 46rem;
+            }
+        </style>
+    </head>
 <body class="">
     <!-- component -->
 <section class="max-w-2xl px-6 py-8 mx-auto bg-white dark:bg-gray-900">
