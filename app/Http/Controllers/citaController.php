@@ -46,6 +46,8 @@ class citaController extends Controller
 
     public function store(Request $request): RedirectResponse
 {
+
+    //validar este metodo
     $request->flash();
     //Aqui se registra la cita de un usuario.
     $nombre = $request->input('nombre');
@@ -58,11 +60,12 @@ class citaController extends Controller
     // Obtener los campos para generar la tabla de comentarios
     $descripcion = $request->input('descripcion');
     $expectativas = $request->input('expectativas');
-   
+    $aceptar = $request->input('aceptar');//validar la entrada
+    info($request->all());
     // Validación
     $validator = Validator::make($request->all(), [
-        'nombre' => 'required|string|max:255',
-        'apellidos' => 'required|string|max:255',
+        'nombre' => 'required|string|max:400',
+        'apellidos' => 'required|string|max:400',
         'codigo' => 'required|numeric',
         'correo' => 'required|email',
         'edad' => 'required|numeric', // Cambia 18 por el valor mínimo requerido
@@ -70,6 +73,7 @@ class citaController extends Controller
         'nacimiento' => 'required|date',
         'descripcion' => 'required|string|max:500',
         'expectativas' => 'required|string|max:500',
+        'aceptar' => 'required|in:on', // Asegura que el valor de 'aceptar'
         
     ]);
 
@@ -111,6 +115,8 @@ class citaController extends Controller
     //obtener el IDd del usuario que se registro
     //Mail::to($correo)->send(new CitaRegistradaMailable($correo,$nombre));
     //$this -> GenerarCita($tabla2Id,$tabla2->horario,$tabla1->correo);
+    //return redirect()->route('cita')->with(['success' => '¡El usuario se ha guardado exitosamente!'])->withoutInput();
+
 
     return redirect()->route('cita')->with('success', '¡El usuario se ha guardado exitosamente!');
     }
