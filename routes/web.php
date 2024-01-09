@@ -42,7 +42,7 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::post('/puta', 'logout')->name('logout')->middleware(['auth']);
+    Route::post('/logout', 'logout')->name('logout')->middleware(['auth']);
 });
 
 Route::get('/recoverP', [HomeController::class, 'recoverP'])->name('recoverP');
