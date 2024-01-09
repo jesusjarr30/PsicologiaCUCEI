@@ -131,7 +131,9 @@
           value="{{ old('codigo') }}"
           placeholder="Codigo de estudiante"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+          maxlength="15"
+          
         @error('codigo')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
@@ -193,6 +195,8 @@
           value="{{ old('edad') }}"
           placeholder="Solo numeros"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+          maxlength="2"
           />
           @error('edad')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
@@ -223,7 +227,9 @@
           value="{{ old('telefono') }}"
           placeholder="Celular o casa"
           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            />
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+          maxlength="14"  
+          />
             @error('telefono')
         <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
           <div class="flex items-center">
@@ -267,7 +273,7 @@
               </div>
               <div class="mx-3">
                   
-                  <p class="text-sm text-red-700">tiene que ser menor a 255 caracteres</p>
+                  <p class="text-sm text-red-700">tiene que ser menor a 400 caracteres</p>
               </div>
           </div>
       </div>
@@ -298,7 +304,7 @@
               </div>
               <div class="mx-3">
                   
-                  <p class="text-sm text-red-700">tiene que ser menot a 260 caracteeres</p>
+                  <p class="text-sm text-red-700">tiene que ser menot a 400 caracteeres</p>
               </div>
           </div>
       </div>
@@ -536,8 +542,8 @@
           <div class="flex items-center">
             <input
               type="radio"
-              name="radio1"
-              id="radioButton1"
+              name="aceptar" 
+              id="aceptar"
               class="h-5 w-5"
             />
             <label
@@ -550,6 +556,22 @@
           
         </div>
       </div>
+
+      @error('aceptar')
+        <div class="bg-red-100 border-t-4 border-red-500 rounded-b px-4 py-3 shadow-md my-4">
+          <div class="flex items-center">
+              <div class="text-red-700">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+              </div>
+              <div class="mx-3">
+                  
+                  <p class="text-sm text-red-700">Es necesario aceptar los terminos y condiciones</p>
+              </div>
+          </div>
+      </div>
+        @enderror
 
       <div>
         <button
