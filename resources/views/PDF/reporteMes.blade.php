@@ -82,7 +82,7 @@
                 <td >{{ $cita->nombre_cliente }}</td>
                 <td >{{ $cita->consultorio }}</td>
                 <td >{{ $cita->fecha }}</td>
-                <td >{{ $cita->atendido }}</td>
+                
             </tr>
             @php
                 // Cambia el color de la fila para la siguiente iteración
