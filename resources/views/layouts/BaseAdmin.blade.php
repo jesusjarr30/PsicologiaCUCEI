@@ -68,6 +68,54 @@
       </div>
       @yield('contentAdmin')
         </div>
+        <footer class="relative bg-blue-800 pt-8 pb-6">
+          <div class="container mx-auto px-4">
+            <div class="flex flex-wrap text-left lg:text-left">
+              <div class="w-full lg:w-6/12 px-4">
+                <img class="" alt="Logo CUCEI" src="{{ asset('Imagenes/logo_cucei-udg_blanco.png') }}">
+                <h4 class="text-3xl fonat-semibold text-yellow-500">Mantente en contacto.!</h4>
+                <h5 class="text-lg mt-0 mb-2 text-white">
+                  Plataforma diseñada pare el uso de los psicologos y estudiantes de cucei.
+                </h5>
+                <div class="mt-6 lg:mb-0 mb-6">
+                  <button class="bg-lightBlue-400 text-white shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                    <a href="https://www.facebook.com/ing.cucei" target="_blank" rel="noopener noreferrer">
+                      <i class="fab fa-facebook-square"></i>
+                    </a>
+                  </button>
+                  
+                </div>
+                
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="flex flex-wrap items-top mb-6">
+                  <div class="w-full lg:w-4/12 px-4 ml-auto">
+                    <span class="block uppercase text-yellow-500 text-sm font-semibold mb-2">Links</span>
+                    <ul class="list-unstyled">
+                      <li>
+                        <a class="text-white hover:text-yellow-500 font-semibold block pb-2 text-sm" href="{{route('acercaDe')}}">Acerca de nosotros</a>
+                      </li>
+                      <li>
+                        <a class="text-white hover:text-yellow-500 font-semibold block pb-2 text-sm" href="{{ route('des') }}">Desarrolladores</a>
+                      </li>
+                      <li>
+                        <a class="text-white hover:text-yellow-500 font-semibold block pb-2 text-sm" href="{{ route('cita')}}">Agenda tu cita</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-6 border-blueGray-300">
+            <div class="flex flex-wrap items-center md:justify-between justify-center">
+              <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+                <div class="text-sm text-blueGray-500 font-semibold py-1">
+                  Derechos reservados ©2022 - 2024. <span id="get-current-year">Universidad de Guadalajara.
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
         
     </body>
     
