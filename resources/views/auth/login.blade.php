@@ -13,7 +13,7 @@
         <style>
             body {
         margin: 0;
-        background: rgb(6, 182, 212);
+        background: rgb(30, 64, 175);
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
@@ -29,7 +29,7 @@
                 <form method="POST" action="{{ route('authenticate') }}">
                     @csrf
                 
-                <div class="bg-white px-8 py-10 rounded-3xl border-2 border-gray-200">
+                <div class="bg-white px-8 py-10 rounded-3xl border-4 border-gray-200">
             <h1 class="text-4xl font-semibold">Bienvenidos</h1>
             <div class="mt-8">
                 <div>
@@ -99,7 +99,7 @@
 
 
             <div class="hidden relative lg:flex h-full w-1/2 items-center justify-center bg-gray-200">
-            <div class="w-80 h-80 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-bounce">
+            <div class="w-80 h-80 bg-gradient-to-tr from-cyan-800 to-blue-800 rounded-full animate-bounce">
                 <div class="flex items-center justify-center h-full">
                     <img class="h-40 w-40 animate-bounce" src="{{ asset('Imagenes/login-icons/cerebroLogin.png') }}">
                 </div>
