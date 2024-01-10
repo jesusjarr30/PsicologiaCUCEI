@@ -31,7 +31,7 @@ class CitaRegistradaMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('jesus.jarr.30@gmail.com','Jesus Renteria'),
+            from: new Address('CitasPiscologia@outlook.com','Citas-Piscologia'),
             subject: 'Confirmacion de cita CUCEI',
         );
     }

@@ -37,7 +37,7 @@ class DatosCita extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('jesus.jarr.30@gmail.com','Jesus Renteria'),
+            from: new Address('CitasPiscologia@outlook.com','Citas-Piscologia'),
             subject: 'Registro cuenta Piscologia CUCEI',
         );
     }
