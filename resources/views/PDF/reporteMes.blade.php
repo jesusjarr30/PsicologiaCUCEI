@@ -67,7 +67,7 @@
             <th  >Cliente</th>
             <th >Consultorio</th>
             <th >Fecha</th>
-            <th >Atendido</th>
+            
         </tr>
     </thead>
 
