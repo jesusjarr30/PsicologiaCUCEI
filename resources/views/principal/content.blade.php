@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <section class="text-gray-600 body-font bg-cyan-400">
+    <section class="text-gray-600 body-font bg-gray-600">
       <div class="container px-5 py-24 mx-auto flex flex-wrap">
       <h1 class="text-2xl font-medium title-font mb-4 text-white tracking-widest">¿Cómo funciona?</h1>
           <div class="flex flex-wrap w-full">
