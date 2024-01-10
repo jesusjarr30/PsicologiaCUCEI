@@ -34,14 +34,16 @@
 
 
         <!-- Logos de iniciar sesión -->
-        <div class="flex flex-1 justify-end space-x-1 mr-2">
+        <div class="flex flex-1 justify-end space-x-4 mr-2">
           <!-- Autentificación para mostrar la opción "Iniciar sesión" o "Sistema" -->
           <a class="flex items-center text-white mr-1 sm:mr-5" href="{{route('login')}}">
-              <svg class="svg-inline--fa fa-right-to-bracket mr-0 sm:mr-2 text-xl" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="right-to-bracket" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M352 96h64c17.7 0 32 14.3 32 32V384c0 17.7-14.3 32-32 32H352c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c53 0 96-43 96-96V128c0-53-43-96-96-96H352c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-7.5 177.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H160v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path></svg><!-- <i class="mr-0 sm:mr-2 text-xl fas fa-right-to-bracket"></i> Font Awesome fontawesome.com -->
-              <span class="float-right sm:float-none invisible sm:visible text-[0px] sm:text-sm">Iniciar sesión</span>
+              <svg class="svg-inline--fa fa-right-to-bracket mr-6 sm:mr-2 text-xl " aria-hidden="true" focusable="false" data-prefix="fas" data-icon="right-to-bracket" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M352 96h64c17.7 0 32 14.3 32 32V384c0 17.7-14.3 32-32 32H352c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c53 0 96-43 96-96V128c0-53-43-96-96-96H352c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-7.5 177.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H160v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path></svg><!-- <i class="mr-0 sm:mr-2 text-xl fas fa-right-to-bracket"></i> Font Awesome fontawesome.com -->
+              
+              Iniciar Sesión
           </a>
           <div>
-            <a class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0" href="{{ route('cita')}}">Agendar Cita</a>
+            <a class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white 
+            hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0" href="{{ route('cita')}}">Agendar Cita</a>
           </div>
         </div>
 
